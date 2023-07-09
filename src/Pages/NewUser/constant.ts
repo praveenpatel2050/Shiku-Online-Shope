@@ -22,14 +22,14 @@ export const addUserFormField = [
       },
     },
     {
-      id: "4",
+      id: "3",
       label: "Email",
       name: "email",
       errorLabel: "Please enter valid email",
       type: "email",
     },
     {
-      id: "5",
+      id: "4",
       label: "Password",
       name: "password",
       errorLabel: "Please enter valid password",
@@ -40,7 +40,7 @@ export const addUserFormField = [
       },
     },
     {
-      id: "6",
+      id: "5",
       label: "Mobile Number",
       name: "mobileNumber",
       errorLabel: "Please enter valid Mobile Number",
@@ -51,7 +51,7 @@ export const addUserFormField = [
       },
     },
     {
-      id: "9",
+      id: "6",
       label: "Gender",
       name: "gender",
       errorLabel: "Please select enrollment number",
@@ -72,7 +72,7 @@ export const addUserFormField = [
       ],
     },
     {
-      id: "10",
+      id: "7",
       label: "Date Of Birth",
       name: "dob",
       errorLabel: "Please enter valid date",
@@ -82,7 +82,7 @@ export const addUserFormField = [
       },
     },
     {
-      id: "14",
+      id: "8",
       label: "Aadhar Number",
       name: "aadharNumber",
       errorLabel: "Please enter valid aadhar number",
@@ -93,7 +93,7 @@ export const addUserFormField = [
       },
     },
     {
-      id: "15",
+      id: "9",
       label: "Address",
       name: "address",
       errorLabel: "Please enter valid address",
@@ -103,6 +103,27 @@ export const addUserFormField = [
         minLength: 10,
       },
     },  
+    {
+      id: "10",
+      label: "Plan",
+      name: "plan",
+      errorLabel: "Please select Plan",
+      type: "select",
+      option: [
+        {
+          label: "Watch of ₹100",
+          value: "watch100",
+        },
+        {
+          label: "Belt of ₹100",
+          value: "belt100",
+        },
+        {
+          label: "Smart Watch of ₹1000",
+          value: "smartWatch1000",
+        },
+      ],
+    },
   ];
   
   export interface FormData {

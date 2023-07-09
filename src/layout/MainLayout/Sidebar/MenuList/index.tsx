@@ -21,6 +21,7 @@ const menuConfig: MenuProps[] = [
     { pathName: '/myearning', label: 'My Earning', icon: <ListAltOutlinedIcon /> },
     { pathName: '/wallet', label: 'Wallet', icon: <ListAltOutlinedIcon /> },
     { pathName: '/account', label: 'Account Info', icon: <ListAltOutlinedIcon /> },
+    { pathName: '/setting', label: 'Setting', icon: <ListAltOutlinedIcon /> },
 ];
 
 const CustomLink = React.forwardRef<HTMLAnchorElement, LinkProps>(

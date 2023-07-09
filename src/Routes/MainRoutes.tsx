@@ -7,6 +7,7 @@ import NewUser from "../Pages/NewUser";
 import AccountInfo from "../Pages/Account Info";
 import Wallet from "../Pages/Wallet";
 import MyEarning from "../Pages/MyEarning";
+import Setting from "../Pages/Setting";
 
 const MainRoutes = {
   path: "/",
@@ -35,6 +36,10 @@ const MainRoutes = {
     {
       path: "/myearning",
       element: <MyEarning />,
+    },
+    {
+      path: "/setting",
+      element: <Setting />,
     },
     {
       path: "*",
