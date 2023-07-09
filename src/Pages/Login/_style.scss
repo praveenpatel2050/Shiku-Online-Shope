@@ -1,0 +1,39 @@
+.login__page {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-image: url('../../../public/school-916678.jpg') ;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-size: 100%;
+    h1 {
+        font-size: 50px;
+        margin: 180px auto 10px auto;
+        color: aliceblue;
+    }
+    label {
+        font-size: 25px;
+        margin: 10px 0px 2px 0px;
+        color: aliceblue;
+    }
+    select {
+        padding: 5px 10px;
+        display: block;
+        margin: 10px 0px;
+        width: 370px;
+        height: 50px;
+        font-size: large;
+        border-radius: 5px;
+        background-color: cornflowerblue;
+        option {
+            background-color: aliceblue;
+            font-size: large;
+        }
+    }
+    .btn-login {
+        margin-top: 10px;
+        width: 150px;
+        background-color: cornflowerblue;
+    }
+ } 
