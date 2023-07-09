@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Footer from "../../_component/ui/footer"
 import ProductHero from '../../_component/ui/productHero';
 import AppAppBar from '../../_component/ui/AppBar';
