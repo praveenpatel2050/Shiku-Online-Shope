@@ -90,15 +90,7 @@ const AccountInfo: React.FC = () => {
                     <Typography variant="h4" marked="left" component="h2" sx={{ flexGrow: 1 }}>
                       Account Information:
                     </Typography>
-                    {/* <IconButton
-                      size="large"
-                      edge="start"
-                      color="inherit"
-                      aria-label="menu"
-                      sx={{ mr: 2 }}
-                    >
-                      <BorderColorIcon />
-                    </IconButton> */}
+                   
                     <Button
                       variant="contained"
                       color="primary"
