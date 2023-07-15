@@ -1,4 +1,4 @@
-import React, { useState, } from "react";
+import React, { useState, useEffect} from "react";
 import {
   Box,
   TextField,
@@ -9,11 +9,20 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  Container,
 } from "@mui/material";
 import Typography from "../../_component/ui/Typography"
 import { Link } from "react-router-dom";
 import { addUserFormField } from "./constant";
 import { FormData } from "./constant";
+declare global {
+  interface Window {
+    Razorpay: any;
+  }
+}
+interface RazorpayResponse {
+  razorpay_payment_id: string;
+}
 const NewUser = () => {
   const initialState = {
     _id: "",
@@ -26,18 +35,21 @@ const NewUser = () => {
     gender: "",
     dob: "",
     address: "",
+    plan: ''
   };
 
   const [formData, setFormData] = useState<FormData>(initialState);
   const [formErrors, setFormErrors] = useState<{ [key: string]: boolean }>({});
 
-  const handleChange = (event: any) => {
+  const handleChange = (name: keyof FormData, value: string) => {
     const updatedFormData = {
       ...formData,
-      [event.target.name]: event.target.value,
+      [name]: value,
     };
     setFormData(updatedFormData);
   };
+
+  let amount = 100
 
   const validateForm = () => {
     const errors: { [key: string]: boolean } = {};
@@ -65,11 +77,70 @@ const NewUser = () => {
     }
   };
 
+  function loadScript(src: string) {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = src;
+      script.onload = () => {
+        resolve(true);
+      };
+      script.onerror = () => {
+        resolve(false);
+      };
+      document.body.appendChild(script);
+    });
+  }
+
+  async function displayRazorpay(amount: number) {
+    const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js');
+
+    if (!res) {
+      alert('You are offline... Failed to load Razorpay SDK');
+      return;
+    }
+
+    const options = {
+      key: 'rzp_test_VdGdvprTKB8u1w',
+      currency: 'INR',
+      amount: amount * 100,
+      name: 'Code with akky',
+      description: 'Thanks for purchasing',
+      image: 'https://mern-blog-akky.herokuapp.com/static/media/logo.8c649bfa.png',
+      handler: function (response: RazorpayResponse) {
+        alert(response.razorpay_payment_id);
+        alert('Payment Successfully');
+      },
+      prefill: {
+        name: 'code with akky',
+      },
+    };
+
+    const paymentObject = new window.Razorpay(options);
+    paymentObject.open();
+  }
   return (
     <>
+    <Container
+      sx={{
+        // backgroundImage: `url(${BackgroundImage})`,
+        background: "#F5FFFA",// Average color of the background image.
+        backgroundPosition: "center",
+        marginBottom: "20px",
+        borderRadius: "5px", // Add a border radius to the container
+        display: "flex",
+        width: "auto",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center", 
+        margin: '10px',
+        boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
+        "@media (min-width: 200px)": {
+          maxWidth: "100%",
+        },// Ensure the container takes the full height of the viewport
+      }}
+    >
       <Box
         sx={{
-          width: "100%",
           padding: "10px",
           "& .MuiTextField-root": { m: 1, width: "25ch" },
           "@media (min-width: 200px) and (max-width: 560px)": {
@@ -139,7 +210,7 @@ const NewUser = () => {
                       name={name}
                       value={formData[name as keyof FormData]}
                       label={label}
-                      onChange={handleChange}
+                      onChange={(event) => handleChange(name as keyof FormData, event.target.value as string) }
                       sx={sx}
                       error={error}
                     >
@@ -171,7 +242,7 @@ const NewUser = () => {
                     value={formData[name as keyof FormData]}
                     inputProps={inputProps ?? {}}
                     InputLabelProps={InputLabelProps ?? {}}
-                    onChange={handleChange}
+                    onChange={(event) => handleChange(name as keyof FormData, event.target.value)}
                     sx={{
                       "@media (min-width: 200px) and (max-width: 560px)": {
                         marginBottom: '20px', width: '100%'
@@ -185,7 +256,8 @@ const NewUser = () => {
             <Button
               variant="contained"
               color="primary"
-              sx={{ width: '222px', margin: "8px" }}
+              sx={{ width: '228px', margin: "8px" }}
+              onClick={() => displayRazorpay(amount)}
             >
               Pay Now
             </Button>
@@ -217,6 +289,7 @@ const NewUser = () => {
           </Box>
         </Box>
       </Box>
+      </Container>
     </>
   );
 };

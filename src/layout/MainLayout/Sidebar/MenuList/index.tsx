@@ -8,20 +8,26 @@ import {
     ListItemIcon,
     ListItemText
 } from '@mui/material';
-import ListAltOutlinedIcon from '@mui/icons-material/ListAltOutlined';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import PaymentsIcon from '@mui/icons-material/Payments';
+import WalletIcon from '@mui/icons-material/Wallet';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import SettingsIcon from '@mui/icons-material/Settings';
 
 interface MenuProps {
     pathName: string;
-    label: string;
+    label: string;  
     icon: JSX.Element;
 }
 
 const menuConfig: MenuProps[] = [
-    { pathName: '/dashboard', label: 'Dashboard', icon: <ListAltOutlinedIcon /> },
-    { pathName: '/myearning', label: 'My Earning', icon: <ListAltOutlinedIcon /> },
-    { pathName: '/wallet', label: 'Wallet', icon: <ListAltOutlinedIcon /> },
-    { pathName: '/account', label: 'Account Info', icon: <ListAltOutlinedIcon /> },
-    { pathName: '/setting', label: 'Setting', icon: <ListAltOutlinedIcon /> },
+    { pathName: '/dashboard', label: 'Dashboard', icon: <DashboardIcon sx={{ fontSize: '1.8rem' }} /> },
+    { pathName: '/wallet', label: 'Wallet', icon: <WalletIcon sx={{ fontSize: '1.8rem' }} /> },
+    { pathName: '/account', label: 'Account Info', icon: <AccountBoxIcon sx={{ fontSize: '1.8rem' }} /> },
+    { pathName: '/referralusers', label: 'Refrral Users', icon: <PeopleAltIcon sx={{ fontSize: '1.8rem' }} /> },
+    { pathName: '/transactions', label: 'Transactions', icon: <PaymentsIcon sx={{ fontSize: '1.8rem' }} /> },
+    { pathName: '/setting', label: 'Setting', icon: <SettingsIcon sx={{ fontSize: '1.8rem' }} /> },
 ];
 
 const CustomLink = React.forwardRef<HTMLAnchorElement, LinkProps>(

@@ -6,8 +6,10 @@ import ProtectedRoute from "./ProtectedRoutes";
 import NewUser from "../Pages/NewUser";
 import AccountInfo from "../Pages/Account Info";
 import Wallet from "../Pages/Wallet";
-import MyEarning from "../Pages/MyEarning";
+// import MyEarning from "../Pages/MyEarning";
 import Setting from "../Pages/Setting";
+import ReffralUsers from "../Pages/Reffral Users";
+import Transactions from "../Pages/MyEarning";
 
 const MainRoutes = {
   path: "/",
@@ -34,8 +36,12 @@ const MainRoutes = {
       element: <Wallet />,
     },
     {
-      path: "/myearning",
-      element: <MyEarning />,
+      path: "/transactions",
+      element: <Transactions />,
+    },
+    {
+      path: "/referralusers",
+      element: <ReffralUsers />,
     },
     {
       path: "/setting",

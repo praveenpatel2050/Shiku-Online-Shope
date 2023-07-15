@@ -8,6 +8,9 @@ const rightLink = {
     fontSize: 16,
     color: 'common.white',
     ml: 3,
+    '@media (min-width: 200px) and (max-width: 600px)': {
+        fontSize: 14,  
+    },
 };
 
 function AppAppBar() {
@@ -30,7 +33,10 @@ function AppAppBar() {
                         variant="h6"
                         underline="none"
                         color="inherit"
-                        sx={{ fontSize: 24 }}
+                        sx={{ fontSize: 24, '@media (min-width: 200px) and (max-width: 600px)': {
+                            fontSize: 16,
+                            
+                        }, }}
                     >
                         Shiku Online Shopee
                     </Link>

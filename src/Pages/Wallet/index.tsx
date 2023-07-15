@@ -19,6 +19,7 @@ const Wallet = () => {
             width: 66,
             height: 76,
             margin: "0px 10px 0px 10px",
+            color: 'green'
           }}
         />
       ),
@@ -32,6 +33,7 @@ const Wallet = () => {
             width: 66,
             height: 76,
             margin: "0px 10px 0px 10px",
+            color: 'gold'
           }}
         />
       ),
@@ -45,6 +47,7 @@ const Wallet = () => {
             width: 66,
             height: 76,
             margin: "0px 10px 0px 10px",
+            color: 'orange'
           }}
         />
       ),
@@ -58,6 +61,7 @@ const Wallet = () => {
             width: 66,
             height: 76,
             margin: "0px 20px 0px 10px",
+            color: '#87CEFA',
           }}
         />
       ),
@@ -91,7 +95,7 @@ const Wallet = () => {
             <Box key={index} sx={{ marginBottom: "10px" }}>
               <Card
                 sx={{
-                  background: "#fff",
+                  background: "#F5FFFA",
                   height: "6.5rem",
                   paddingBottom: "0px",
                 }}

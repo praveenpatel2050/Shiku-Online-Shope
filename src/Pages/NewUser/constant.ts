@@ -82,17 +82,6 @@ export const addUserFormField = [
       },
     },
     {
-      id: "8",
-      label: "Aadhar Number",
-      name: "aadharNumber",
-      errorLabel: "Please enter valid aadhar number",
-      type: "number",
-      inputProps: {
-        maxLength: 12,
-        minLength: 12,
-      },
-    },
-    {
       id: "9",
       label: "Address",
       name: "address",
@@ -112,15 +101,15 @@ export const addUserFormField = [
       option: [
         {
           label: "Watch of ₹100",
-          value: "watch100",
+          value: 100,
         },
         {
           label: "Belt of ₹100",
-          value: "belt100",
+          value: 100,
         },
         {
           label: "Smart Watch of ₹1000",
-          value: "smartWatch1000",
+          value: 1000,
         },
       ],
     },
@@ -136,4 +125,5 @@ export const addUserFormField = [
     gender: string;
     dob: string;
     address: string;
+    plan: string;
   }

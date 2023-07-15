@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Footer from "../../_component/ui/footer"
+import Footer from "../../_component/ui/footer";
 import ProductHero from '../../_component/ui/productHero';
 import AppAppBar from '../../_component/ui/AppBar';
 import Plans from '../../_component/ui/Plans';

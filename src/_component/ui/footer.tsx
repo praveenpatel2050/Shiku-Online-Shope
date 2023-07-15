@@ -17,7 +17,7 @@ const Footer = () => {
             backgroundColor: '#fff5f8'
         }}>
             <Box sx={{
-                display: 'flex', '@media (min-width: 200px) and (max-width: 400px)': {
+                display: 'flex', '@media (min-width: 200px) and (max-width: 600px)': {
                     display: 'block',
                     margin: '20px'
                 },
@@ -27,9 +27,9 @@ const Footer = () => {
                     flexDirection: 'column',
                     padding: '2%',
                     paddingTop: '1%',
-                    width: '33%', '@media (min-width: 200px) and (max-width: 400px)': {
+                    width: '33%', '@media (min-width: 200px) and (max-width: 600px)': {
                         width: '100%',
-
+                        
                     },
                 }}>
                     <Typography style={{ marginBottom: '20px' }} variant="h6" marked="left" gutterBottom>

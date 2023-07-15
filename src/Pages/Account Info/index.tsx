@@ -28,7 +28,7 @@ const AccountInfo: React.FC = () => {
     accountNumber: '',
     ifscCode: '',
   });
-  const [submitted, setSubmitted] = useState(true);
+  const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -74,15 +74,13 @@ const AccountInfo: React.FC = () => {
           margin: "10px 20px",
           padding: "20px",
           maxWidth: "100%",
-          backgroundColor: "white",
+          background: "#F5FFFA",
           boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
           borderRadius: "5px",
         }}
       >
         {submitted ? (
           <>
-
-
             <TableContainer component={Paper}>
               <Box sx={{ flexGrow: 1, }}>
                 <AppBar position="static" sx={{ backgroundColor: '#fff', color: 'black', boxShadow: 'none' }}>

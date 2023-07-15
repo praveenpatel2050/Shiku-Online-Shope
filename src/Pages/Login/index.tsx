@@ -82,7 +82,8 @@ const Login = () => {
   }
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs" sx={{
+      padding: "0px",}}>
       <Snackbar
         open={error}
         autoHideDuration={3000}
@@ -105,11 +106,17 @@ const Login = () => {
         sx={{
           marginTop: 10,
           display: "flex",
+          padding: "0px",
           flexDirection: "column",
-          alignItems: "center",
+          alignItems: "center"
+          ,"@media (min-width: 200px) and (max-width: 600px)": {
+            marginTop: 4,
+          },
         }}
       >
-        <Typography component="h1" variant="h4">
+        <Typography component="h1" variant="h4" sx={{ marginBottom: '30px',"@media (min-width: 200px) and (max-width: 600px)": {
+            fontSize: 24,
+          },}}>
           Sign in
         </Typography>
         <Box
