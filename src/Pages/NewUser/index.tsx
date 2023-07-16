@@ -15,6 +15,7 @@ import Typography from "../../_component/ui/Typography"
 import { Link } from "react-router-dom";
 import { addUserFormField } from "./constant";
 import { FormData } from "./constant";
+import { addUserApi } from "../../Api/user";
 declare global {
   interface Window {
     Razorpay: any;
@@ -27,15 +28,16 @@ const NewUser = () => {
   const initialState = {
     _id: "",
     UserName: "",
-    email: "",
     password: "",
     mobileNumber: "",
-    fatherName: "",
-    aadharNumber: "",
-    gender: "",
-    dob: "",
-    address: "",
-    plan: ''
+    // gender: "",
+    // dob: "",
+    // address: "",
+    plan: '',
+    totalItem: "",
+    totalAmount: '',
+    cartAmount: '',
+    paymentStatus: '',
   };
 
   const [formData, setFormData] = useState<FormData>(initialState);
@@ -70,8 +72,8 @@ const NewUser = () => {
       return;
     }
     try {
-      const url = "/schoolAdmin/addStudent";
-      // const response: any = await addStudentApi(url, formData);
+      const url = "/user/add";
+      const response: any = await addUserApi(url, formData);
     } catch (error) {
       console.error("Error", error);
     }

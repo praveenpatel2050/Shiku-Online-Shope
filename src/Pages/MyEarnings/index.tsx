@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import ReffralUsers from './referralHistory';
 import CashHistory from './cashHistory';
+
 interface TabPanelProps {
   children?: React.ReactNode;
   dir?: string;

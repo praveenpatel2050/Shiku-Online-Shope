@@ -69,7 +69,7 @@ export const login =
       // Make API call based on the selected role
         const response = await AuthService.login(mobileNumber, password);
         const token = response.token;
-        const data = response;
+        const data = response.userData;
         const data1: User = {
           id: data._id,
           name: data.name,

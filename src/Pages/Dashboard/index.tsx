@@ -26,7 +26,7 @@ const Dashboard = () => {
       ),
       length: "1500",
       label: "Earnings",
-      navigate: '/myearning'
+      navigate: '/transactions'
     },
     {
       icon: (

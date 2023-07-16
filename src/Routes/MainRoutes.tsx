@@ -9,14 +9,14 @@ import Wallet from "../Pages/Wallet";
 // import MyEarning from "../Pages/MyEarning";
 import Setting from "../Pages/Setting";
 import ReffralUsers from "../Pages/Reffral Users";
-import Transactions from "../Pages/MyEarning";
+import Transactions from "../Pages/MyEarnings";
 
 const MainRoutes = {
   path: "/",
   element: (
-   //<ProtectedRoute>
+   <ProtectedRoute>
       <MainLayout />
-   //</ProtectedRoute>
+   </ProtectedRoute>
   ),
   children: [
     {
