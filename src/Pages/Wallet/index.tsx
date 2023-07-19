@@ -38,7 +38,7 @@ const Wallet = () => {
         />
       ),
       length: "1500",
-      label: "Total Earning Amount",
+      label: "Total Withdraw Amount",
     },
     {
       icon: (

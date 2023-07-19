@@ -1,17 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Button, Card, CardContent, Container } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import Typography from "../../_component/ui/Typography";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
+import { getReferralBy } from "../../_component/other/referralBy";
+import { getTotalAmount } from "../../_component/other/cards";
 export interface CardProps {
   icon: JSX.Element;
   length: any;
   label: string;
   navigate: string;
 }
+
+const totalAmount = getTotalAmount();
+
 const Dashboard = () => {
   const cardData: CardProps[] = [
     {
@@ -24,7 +28,7 @@ const Dashboard = () => {
           }}
         />
       ),
-      length: "1500",
+      length: `${totalAmount}`,
       label: "Earnings",
       navigate: '/transactions'
     },
@@ -44,7 +48,26 @@ const Dashboard = () => {
       navigate: '/referralusers'
     },
   ];
+  const [referraBy, setReferralBy] = useState<string>("");
+
   const navigate = useNavigate();
+  
+  // const getMode = () => {
+  //     const path = window.location.href;
+  //     const pathArray = path.split("/");
+  //     if (pathArray[pathArray.length - 2] === "referral") {
+  //       const editId = pathArray[pathArray.length - 1];
+  //       setReferralEditId(editId);
+  //     }
+  //   };
+  
+    useEffect(() => {
+      const getCurrentRole = async () => {
+          const currentRole = await getReferralBy();
+          setReferralBy(currentRole);
+        };
+        getCurrentRole();
+    }, []);
   return (
     <Box
       sx={{
@@ -106,12 +129,12 @@ const Dashboard = () => {
           Welcome To Shiku Online Shopee. Here You Can Add Users Through Your
           Network and let Them Work For You
         </Typography>
-        <Link to="/newuser" style={{ textDecoration: "none" }}>
+        {/* <Link to="/newuser" style={{ textDecoration: "none" }}> */}
           <Button
             color="primary"
             variant="contained"
             size="large"
-            component="a"
+            onClick={() => navigate(`/adduser/${referraBy}`)}
             sx={{
               minWidth: 200,
               fontSize: 20,
@@ -122,7 +145,7 @@ const Dashboard = () => {
           >
             Add User
           </Button>
-        </Link>
+        {/* </Link> */}
         <Typography variant="h5" color="inherit" sx={{ mt: 4, mb: 4 }}>
           Discover the experience
         </Typography>

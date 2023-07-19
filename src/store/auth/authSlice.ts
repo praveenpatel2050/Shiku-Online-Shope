@@ -11,7 +11,15 @@ interface User {
   id: string;
   name: string;
   mobileNumber: number;
-  password: string; // Add role property
+  level: number;
+  stage: number;
+  planItemName: number;
+  totalAmount: number;
+  cartAmount: number;
+  paymentStatus: string;
+  role: string;
+  referralCode: string;
+   // Add role property
 }
 
 interface AuthState {
@@ -74,7 +82,14 @@ export const login =
           id: data._id,
           name: data.name,
           mobileNumber: data.mobileNumber,
-          password: data.password,
+          level: data.level,
+          stage: data.stage,
+          planItemName: data.pamItemName,
+          totalAmount: data.totalAmount,
+          cartAmount: data.cartAmount,
+          paymentStatus: data.paymentStatus,
+          role: data.role,
+          referralCode: data.referralCode,
         }
         sessionStorage.setItem("token", token);
         return dispatch(loginSuccess(data1));

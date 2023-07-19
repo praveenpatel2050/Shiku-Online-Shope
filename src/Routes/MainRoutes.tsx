@@ -14,7 +14,7 @@ import Transactions from "../Pages/MyEarnings";
 const MainRoutes = {
   path: "/",
   element: (
-   <ProtectedRoute>
+    <ProtectedRoute>
       <MainLayout />
    </ProtectedRoute>
   ),
@@ -24,7 +24,7 @@ const MainRoutes = {
       element: <Dashboard />,
     },
     {
-      path: "/newuser",
+      path: "/adduser/:id",
       element: <NewUser />,
     },
     {

@@ -13,18 +13,17 @@ import {
   InputBase,
   Paper,
   Toolbar,
-  Typography,
 } from "@mui/material";
 
 import User1 from "../../../assets/hanumanjii.jpg";
 import { useAppDispatch } from "../../../hooks/hook";
 import { logout } from "../../../store/auth/authSlice";
+import Typography from "../../../_component/ui/Typography";
 
 interface HeaderProps {
   user: any;
   handleDrawerToggle: () => void;
 }
-
 const Header = ({ user, handleDrawerToggle }: HeaderProps) => {
   const dispatch = useAppDispatch();
 

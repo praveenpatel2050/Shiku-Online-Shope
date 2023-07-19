@@ -2,7 +2,6 @@ import React, { useState, useEffect} from "react";
 import {
   Box,
   TextField,
-
   Button,
   Stack,
   FormControl,
@@ -12,25 +11,27 @@ import {
   Container,
 } from "@mui/material";
 import Typography from "../../_component/ui/Typography"
-import { Link } from "react-router-dom";
-import { addUserFormField } from "./constant";
-import { FormData } from "./constant";
+import { FormData, addUserFormField } from "../NewUser/constant";
 import { addUserApi } from "../../Api/user";
+
 declare global {
   interface Window {
     Razorpay: any;
   }
 }
+
 interface RazorpayResponse {
   razorpay_payment_id: string;
 }
-const NewUser = () => {
+
+const Register = () => {
+
   const [referralBy, setReferralBy] = useState<string>("");
   
   const getMode = () => {
     const path = window.location.href;
     const pathArray = path.split("/");
-    if (pathArray[pathArray.length - 2] === "adduser") {
+    if (pathArray[pathArray.length - 2] === "register") {
       const referralId = pathArray[pathArray.length - 1];
       setReferralBy(referralId);
     }
@@ -38,7 +39,9 @@ const NewUser = () => {
 
   useEffect(() => {
     getMode();
+    console.log(referralBy);
   }, []);
+
   const initialState = {
     _id: "",
     UserName: "",
@@ -108,6 +111,7 @@ const NewUser = () => {
   }
 
   async function displayRazorpay(amount: number) {
+    
     const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js');
 
     if (!res) {
@@ -134,21 +138,22 @@ const NewUser = () => {
     const paymentObject = new window.Razorpay(options);
     paymentObject.open();
   }
+
   return (
     <>
-    <Container
+    {/* <Container
       sx={{
         // backgroundImage: `url(${BackgroundImage})`,
-        background: "#F5FFFA",// Average color of the background image.
+// Average color of the background image.
         backgroundPosition: "center",
         marginBottom: "20px",
         borderRadius: "5px", // Add a border radius to the container
         display: "flex",
+        width: "50%",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center", 
         margin: '10px',
-        width: '60%',
         boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
         "@media (min-width: 200px)": {
           maxWidth: "100%",
@@ -157,13 +162,19 @@ const NewUser = () => {
           padding: "10px",
           width: "99%",
           margin: "auto",
-        },
-        // Ensure the container takes the full height of the viewport
+        },// Ensure the container takes the full height of the viewport
       }}
-    >
-      <Box
+    > */}
+        <Container component="main" maxWidth="xs" sx={{
+      padding: "0px",
+      "@media (min-width: 0px)": {
+        maxWidth: "844px",
+      },}}>
+       <Box
         sx={{
           padding: "10px",
+          width: "100%",
+          marginTop: "20px",
           "& .MuiTextField-root": { m: 1, width: "25ch" },
           "@media (min-width: 200px) and (max-width: 560px)": {
             padding: "10px",
@@ -171,9 +182,9 @@ const NewUser = () => {
             margin: "auto",
           },
         }}
-      >
+      > 
 
-        {/* <Box
+   {/*     <Box
           sx={{
             "@media (min-width: 200px) and (max-width: 560px)": {
               margin: '0 auto',
@@ -199,20 +210,11 @@ const NewUser = () => {
               borderRadius: '5px',
             },
           }}>
-            <Typography
-              component="div"
-              sx={{
-                flexGrow: 1,
-                fontSize: 25,
-                margin: "10px 10px",
-                "@media (min-width: 200px) and (max-width: 560px)": {
-                  fontSize: 18,
-                  alignText: 'center'
-                },
-              }}
-            >
-              Add New User
-            </Typography>
+                 <Typography component="h1" variant="h4" sx={{ margin: '0px 0px 8px 10px',"@media (min-width: 200px) and (max-width: 600px)": {
+            fontSize: 24,
+          },}}>
+          Register
+        </Typography>
             {addUserFormField.map((item: any, index: number) => {
               const { label, name, type, inputProps, sx, InputLabelProps } = item;
               const error = formErrors[name] || false
@@ -255,6 +257,7 @@ const NewUser = () => {
               return (
                 <>
                   <TextField
+                    fullWidth
                     key={index}
                     error={error}
                     id="outlined-controlled"
@@ -275,10 +278,8 @@ const NewUser = () => {
                 </>
               );
             })}
-             <TextField
-             
-             disabled
-             label="Referral Code"
+            <TextField
+            label="Referral Code"
             value={referralBy}
             >
             </TextField>
@@ -315,12 +316,13 @@ const NewUser = () => {
                 </Button>
               </Stack>
             </Box>
-          
-        </Box>
+         </Box>
+       {/*   </Box> */}
       </Box>
       </Container>
+      {/* </Container> */}
     </>
   );
 };
 
-export default NewUser;
+export default Register;

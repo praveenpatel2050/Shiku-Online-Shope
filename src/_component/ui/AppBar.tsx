@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
-import { AppBar, Toolbar, Dialog, DialogContent, Button } from "@mui/material"
-import Login from '../../Pages/Login';
+import { AppBar, Toolbar, Button } from "@mui/material";
+import { useNavigate } from 'react-router-dom';
 
 const rightLink = {
     fontSize: 16,
@@ -14,15 +14,17 @@ const rightLink = {
 };
 
 function AppAppBar() {
-    const [open, setOpen] = useState(false);
+    const [referraBy, setReferralBy] = useState<string>("");
 
-    const handleOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
+const navigate = useNavigate();
+                            // const getMode = () => {
+  //     const path = window.location.href;
+  //     const pathArray = path.split("/");
+  //     if (pathArray[pathArray.length - 2] === "referral") {
+  //       const editId = pathArray[pathArray.length - 1];
+  //       setReferralEditId(editId);
+  //     }
+  //   };                           
 
     return (
         <div>
@@ -44,15 +46,27 @@ function AppAppBar() {
                         <Button
                             color="inherit"
                             sx={rightLink}
-                            onClick={handleOpen}
+                            onClick={() => navigate("/login")}
                         >
                             Login
                         </Button>
-                        <Dialog open={open} onClose={handleClose}>
+                        <Button
+                            color="inherit"
+                            sx={rightLink}
+                            onClick={() => navigate(`/register/123456`)}
+                        >
+                            Register    
+                        </Button>
+                        {/* <Dialog open={loginOpen} onClose={handleLoginClose}>
                             <DialogContent>
                                 <Login />
                             </DialogContent>
                         </Dialog>
+                        <Dialog open={registerOpen} onClose={handleRegisterClose}>
+                            <DialogContent>
+                                <Register />
+                            </DialogContent>
+                        </Dialog> */}
                     </Box>
                 </Toolbar>
             </AppBar>
