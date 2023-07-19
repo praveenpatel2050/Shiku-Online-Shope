@@ -5,6 +5,7 @@ import AppAppBar from '../../_component/ui/AppBar';
 import Plans from '../../_component/ui/Plans';
 import ReceiveOffers from '../../_component/ui/ReceiveOffers';
 import InformationVideo from '../../_component/ui/Informaation';
+import PlansDetails from '../../_component/ui/plansDetails';
 
 const HomePage = () => {
 
@@ -13,6 +14,7 @@ const HomePage = () => {
       <AppAppBar />
       <ProductHero />
       <Plans />
+      <PlansDetails />
       <InformationVideo />
       <ReceiveOffers />
       <Footer />

@@ -73,7 +73,7 @@ const Footer = () => {
                     flexDirection: 'column',
                     padding: '2%',
                     paddingTop: '1%',
-                    width: '33%', '@media (min-width: 200px) and (max-width: 400px)': {
+                    width: '33%', '@media (min-width: 200px) and (max-width: 920px)': {
                         width: '100%'
                     },
                 }}>
@@ -126,7 +126,7 @@ const Footer = () => {
                     flexDirection: 'column',
                     padding: '2%',
                     paddingTop: '1%',
-                    width: '33%', '@media (min-width: 200px) and (max-width: 400px)': {
+                    width: '33%', '@media (min-width: 200px) and (max-width: 920px)': {
                         width: '100%'
                     },
                 }}>
