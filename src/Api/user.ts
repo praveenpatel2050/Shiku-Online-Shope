@@ -17,6 +17,19 @@ export const addUserApi = async (url: any, formData: any = 0) => {
   }
 };
 
+export const RegisterUserApi = async (url: any, formData: any = 0) => {
+  try {
+    const tempData = formData != 0 ? formData : {hello: 'hello'};
+    const response = await fetch(`${baseURL}${url}`, {
+      method: "POST",
+      body: JSON.stringify(tempData),
+    });
+    return response;
+  } catch (error) {
+    console.error("Error", error);
+  }
+};
+
 // export const updateTeacherApi = async (url: any, formData: any = 0) => {
 //   try {
 //     const tempData = formData != 0 ? formData : {};

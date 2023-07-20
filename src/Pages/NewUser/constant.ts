@@ -173,9 +173,11 @@ export const addUserFormField = [
     mobileNumber: string;
     // gender: string;
     // address: string;
-    plan: string;
+    referralCode: string;
+    planAmount: string;
     totalItem: string;
     totalAmount: string;
     cartAmount: string;
     paymentStatus: string;
+    planItem: string;
 }

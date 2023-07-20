@@ -12,7 +12,8 @@ import {
 } from "@mui/material";
 import Typography from "../../_component/ui/Typography"
 import { FormData, addUserFormField } from "../NewUser/constant";
-import { addUserApi } from "../../Api/user";
+import { RegisterUserApi } from "../../Api/user";
+import { useNavigate } from "react-router-dom";
 
 declare global {
   interface Window {
@@ -27,7 +28,7 @@ interface RazorpayResponse {
 const Register = () => {
 
   const [referralBy, setReferralBy] = useState<string>("");
-  
+  const navigate = useNavigate();
   const getMode = () => {
     const path = window.location.href;
     const pathArray = path.split("/");
@@ -39,26 +40,8 @@ const Register = () => {
 
   useEffect(() => {
     getMode();
-    console.log(referralBy);
+    console.log("refferel",referralBy);
   }, []);
-
-  const initialState = {
-    _id: "",
-    UserName: "",
-    password: "",
-    mobileNumber: "",
-    // gender: "",
-    // dob: "",
-    // address: "",
-    plan: '',
-    totalItem: "",
-    totalAmount: '',
-    cartAmount: '',
-    paymentStatus: '',
-  };
-
-  const [formData, setFormData] = useState<FormData>(initialState);
-  const [formErrors, setFormErrors] = useState<{ [key: string]: boolean }>({});
 
   const handleChange = (name: keyof FormData, value: string) => {
     const updatedFormData = {
@@ -68,7 +51,29 @@ const Register = () => {
     setFormData(updatedFormData);
   };
 
-  let amount = 100
+  const initialState = {
+    _id: "",
+    UserName: "",
+    password: "",
+    mobileNumber: "",
+    // gender: "",
+    // dob: "",
+    // address: "",
+    planAmount: '100',
+    planItem: '',
+    totalItem: "",
+    totalAmount: '1000',
+    cartAmount: '0',
+    paymentStatus: '0',
+    referralCode: `VF7FTY`,
+  };
+
+  const [formData, setFormData] = useState<FormData>(initialState);
+  const [formErrors, setFormErrors] = useState<{ [key: string]: boolean }>({});
+
+
+
+  const amount = 100
 
   const validateForm = () => {
     const errors: { [key: string]: boolean } = {};
@@ -85,12 +90,11 @@ const Register = () => {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    if (!validateForm()) {
-      return;
-    }
+    console.log("Submit")
     try {
-      const url = "/user/add";
-      const response: any = await addUserApi(url, formData);
+      const url = "/user/signup";
+      const response: any = await RegisterUserApi(url, formData);
+      navigate("/login")
     } catch (error) {
       console.error("Error", error);
     }
@@ -141,30 +145,6 @@ const Register = () => {
 
   return (
     <>
-    {/* <Container
-      sx={{
-        // backgroundImage: `url(${BackgroundImage})`,
-// Average color of the background image.
-        backgroundPosition: "center",
-        marginBottom: "20px",
-        borderRadius: "5px", // Add a border radius to the container
-        display: "flex",
-        width: "50%",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center", 
-        margin: '10px',
-        boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
-        "@media (min-width: 200px)": {
-          maxWidth: "100%",
-        },
-        "@media (min-width: 200px) and (max-width: 560px)": {
-          padding: "10px",
-          width: "99%",
-          margin: "auto",
-        },// Ensure the container takes the full height of the viewport
-      }}
-    > */}
         <Container component="main" maxWidth="xs" sx={{
       padding: "0px",
       "@media (min-width: 0px)": {
@@ -183,21 +163,6 @@ const Register = () => {
           },
         }}
       > 
-
-   {/*     <Box
-          sx={{
-            "@media (min-width: 200px) and (max-width: 560px)": {
-              margin: '0 auto',
-              maxWidth: '400px',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              minHeight: '100vh',
-            }
-          }}
-        > */}
-
-
           <Box className="row" sx={{
             marginLeft: '0px',
             "@media (min-width: 200px) and (max-width: 560px)": {
@@ -280,7 +245,8 @@ const Register = () => {
             })}
             <TextField
             label="Referral Code"
-            value={referralBy}
+            name="referralCode"
+            value={formData.referralCode}
             >
             </TextField>
             <Button
@@ -317,10 +283,8 @@ const Register = () => {
               </Stack>
             </Box>
          </Box>
-       {/*   </Box> */}
       </Box>
       </Container>
-      {/* </Container> */}
     </>
   );
 };
