@@ -1,6 +1,7 @@
 import React from 'react';
 import Typography from '../../_component/ui/Typography';
 import BankAccountCard from './bankAccount';
+import UserProfile from './profileUser';
 const Setting = () => {
   const bankAccount = {
     accountNumber: '1234567890123334',
@@ -15,6 +16,7 @@ const Setting = () => {
                       Bank Accounts:
                     </Typography>
       <BankAccountCard bankAccount={bankAccount} />
+      <UserProfile />
     </div>
     </div>
   )

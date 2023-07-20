@@ -20,6 +20,7 @@ export interface RefrralUsers {
   mobileNumber: number | string;
   paymentStatus: string;
   totalItem: number | string;
+  deliverySatus: number | string;
 }
 
 const ReffralUsers = () => {
@@ -28,12 +29,17 @@ const ReffralUsers = () => {
 
   const fetchUsers = async () => {
     try {
-      const url = "/user/reflUser";
+      const url = "/user/reflUserList";
       const response: any = await listUserApi(url, users);
       if (response.ok) {
         const jsonData = await response.json();
         if (jsonData && jsonData.refUserList && jsonData.refUserList.length > 0) {
-          setUsers(jsonData.refUserList);
+          // Update the "Delivery Status" field for each user
+          const modifiedUsers = jsonData.refUserList.map((user: { deliverySatus: number; }) => ({
+            ...user,
+            deliveryStatusText: user.deliverySatus === 0 ? "Pending" : "Delivered"
+          }));
+          setUsers(modifiedUsers);
         } else {
           setIsNoUser(true);
         }
@@ -81,19 +87,20 @@ const ReffralUsers = () => {
           </AppBar>
         </Box>
 
-            {isNoUser ? (
-              <Typography variant="h6" align="center">
-                There are no users added by you. <br />
-                Click Add Users Button For Add Users
-              </Typography>
-            ) : (
-              <Card>
-              <Box sx={{ minWidth: 800, overflow: "scroll" }}>
+        {isNoUser ? (
+          <Typography variant="h6" align="center">
+            There are no users added by you. <br />
+            Click Add Users Button For Add Users
+          </Typography>
+        ) : (
+          <Card>
+            <Box sx={{ minWidth: 800, overflow: "scroll" }}>
+              {/* Pass the modified users data with the updated "Delivery Status" */}
               <Tables columns={columns} data={users} />
-              </Box>
-        </Card>
-            )}
-         
+            </Box>
+          </Card>
+        )}
+
       </div>
     </>
   );

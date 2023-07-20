@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { getReferralBy } from "../../_component/other/referralBy";
 import { getTotalAmount } from "../../_component/other/cards";
+
 export interface CardProps {
   icon: JSX.Element;
   length: any;
@@ -17,6 +18,11 @@ export interface CardProps {
 const totalAmount = getTotalAmount();
 
 const Dashboard = () => {
+
+useEffect(() => {
+  getTotalAmount();
+}, [])
+
   const cardData: CardProps[] = [
     {
       icon: (
@@ -30,7 +36,7 @@ const Dashboard = () => {
       ),
       length: `${totalAmount}`,
       label: "Earnings",
-      navigate: '/transactions'
+      navigate: "/transactions",
     },
     {
       icon: (
@@ -45,29 +51,21 @@ const Dashboard = () => {
       ),
       length: `15`,
       label: "Total Referral User",
-      navigate: '/referralusers'
+      navigate: "/referralusers",
     },
   ];
+  
   const [referraBy, setReferralBy] = useState<string>("");
 
   const navigate = useNavigate();
-  
-  // const getMode = () => {
-  //     const path = window.location.href;
-  //     const pathArray = path.split("/");
-  //     if (pathArray[pathArray.length - 2] === "referral") {
-  //       const editId = pathArray[pathArray.length - 1];
-  //       setReferralEditId(editId);
-  //     }
-  //   };
-  
-    useEffect(() => {
-      const getCurrentRole = async () => {
-          const currentRole = await getReferralBy();
-          setReferralBy(currentRole);
-        };
-        getCurrentRole();
-    }, []);
+
+  useEffect(() => {
+    const getCurrentRole = async () => {
+      const currentRole = await getReferralBy();
+      setReferralBy(currentRole);
+    };
+    getCurrentRole();
+  }, []);
   return (
     <Box
       sx={{
@@ -130,21 +128,21 @@ const Dashboard = () => {
           Network and let Them Work For You
         </Typography>
         {/* <Link to="/newuser" style={{ textDecoration: "none" }}> */}
-          <Button
-            color="primary"
-            variant="contained"
-            size="large"
-            onClick={() => navigate(`/adduser/${referraBy}`)}
-            sx={{
-              minWidth: 200,
-              fontSize: 20,
-              "@media (min-width: 200px) and (max-width: 600px)": {
-                minWidth: 100,
-              },
-            }}
-          >
-            Add User
-          </Button>
+        <Button
+          color="primary"
+          variant="contained"
+          size="large"
+          onClick={() => navigate(`/adduser/${referraBy}`)}
+          sx={{
+            minWidth: 200,
+            fontSize: 20,
+            "@media (min-width: 200px) and (max-width: 600px)": {
+              minWidth: 100,
+            },
+          }}
+        >
+          Add User
+        </Button>
         {/* </Link> */}
         <Typography variant="h5" color="inherit" sx={{ mt: 4, mb: 4 }}>
           Discover the experience

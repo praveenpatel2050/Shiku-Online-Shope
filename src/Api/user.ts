@@ -35,7 +35,7 @@ export const addUserApi = async (url: any, formData: any = 0) => {
 //   }
 // };
 
-export const singleUserApi = async (url: any ) => {
+export const SingleUserApi = async (url: any ) => {
   try {
     const response = await fetch(`${baseURL}${url}`, {
       method: "GET",

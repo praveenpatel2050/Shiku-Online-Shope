@@ -10,3 +10,9 @@ export const getTotalAmount = () => {
     return user?.totalAmount ?? "";
 }
 
+export const getTotalEarningAmount = () => {
+    const userString = sessionStorage.getItem("user");
+    const user = userString ? JSON.parse(userString) : null;
+    return user?.totalAmount ?? "";
+}
+

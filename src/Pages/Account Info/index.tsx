@@ -16,7 +16,7 @@ import {
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import addBankAccountApi from '../../Api/bankAccount';
 import Typography from '../../_component/ui/Typography';
-import { singleUserApi } from '../../Api/user';
+import { SingleUserApi } from '../../Api/user';
 
 interface AccountInfo {
   bankName: string;
@@ -40,7 +40,7 @@ const AccountInfo: React.FC = () => {
   const fetchAccountInfo = async () => {
     try {
       const url = '/user/userInfo';
-      const response: any = await singleUserApi(url);
+      const response: any = await SingleUserApi(url);
       if (response.ok) {
         const data = await response.json();
         const accountInfo = data.userInfoData;

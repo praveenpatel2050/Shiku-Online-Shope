@@ -52,7 +52,7 @@ function Plans() {
             opacity: 0.7,
           }}
         />
-        <Typography variant="h4" marked="center" align='center' component="h2" sx={{ mb: 4 }}>
+        <Typography variant="h4" marked="center"  component="h2" sx={{ mb: 4 }}>
           Our Plans
         </Typography>
         <div>
