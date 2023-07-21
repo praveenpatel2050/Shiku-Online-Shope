@@ -41,7 +41,12 @@ const Register = () => {
   useEffect(() => {
     getMode();
     console.log("refferel",referralBy);
-  }, []);
+
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      referralCode: referralBy,
+    }));
+  }, [referralBy]);
 
   const handleChange = (name: keyof FormData, value: string) => {
     const updatedFormData = {
@@ -52,20 +57,19 @@ const Register = () => {
   };
 
   const initialState = {
-    _id: "",
-    UserName: "",
+    userName: "",
     password: "",
     mobileNumber: "",
     // gender: "",
     // dob: "",
     // address: "",
     planAmount: '100',
-    planItem: '',
+    planItemName: '',
     totalItem: "",
     totalAmount: '1000',
     cartAmount: '0',
     paymentStatus: '0',
-    referralCode: `VF7FTY`,
+    referralCode: `${referralBy}`,
   };
 
   const [formData, setFormData] = useState<FormData>(initialState);
@@ -244,6 +248,7 @@ const Register = () => {
               );
             })}
             <TextField
+            disabled
             label="Referral Code"
             name="referralCode"
             value={formData.referralCode}
@@ -252,12 +257,12 @@ const Register = () => {
             <Button
               variant="contained"
               color="primary"
-              sx={{ width: '228px', margin: "8px" }}
+              sx={{ width: '223px', margin: "8px 8px" }}
               onClick={() => displayRazorpay(amount)}
             >
               Pay Now
             </Button>
-            <Box className="footer-btn">
+            <Box className="footer-btn" sx={{padding: '0px 8px'}}>
               <Stack direction={"row"}>
 
                 <Button
@@ -265,7 +270,7 @@ const Register = () => {
                   color="success"
                   type="submit"
                   sx={{
-                    margin: "8px 8px", width: "100px"
+                    margin: "8px 0px", width: "100px"
                   }}
                   onClick={handleSubmit}
                 >

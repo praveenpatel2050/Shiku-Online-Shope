@@ -1,30 +1,37 @@
-export interface SchoolFormData {
-  schoolName: string;
-  email: string;
+export interface UserFormData {
+  userName: string;
+  // email: string;
   password: string;
   mobileNumber: string;
-  startClass: string;
+  planItemName: string;
   highestClass: string;
-  medium: string;
-  foundedYear: string;
-  contactDesignation: string;
-  telephoneNumber: string;
-  affiliatedBy: string;
-  address: string;
+  totalItem: string | number;
+  totalAmount: string | number;
+  referralCode: string;
 }
 
-export const schoolInitialState = {
-  schoolAdminId: "",
-  schoolName: "",
-  email: "",
-  password: "",
+export const userInitialState = {
+  userName: "",
+  // email: string;
+   password: "",
   mobileNumber: "",
-  startClass: "",
+  planItemName: "",
   highestClass: "",
-  medium: "",
-  foundedYear: "",
-  contactDesignation: "",
-  telephoneNumber: "",
-  affiliatedBy: "",
-  address: "",
+  totalItem: "",
+  totalAmount: "",
+  referralCode: "",
+};
+
+export interface UserBankData {
+  accountNumber: string;
+  bankName: string;
+  accountHolderName: string;
+  ifscCode: string;
+}
+
+export const bankInitialState = {
+  accountNumber: "",
+  bankName: "",
+  accountHolderName: "",
+  ifscCode: "",
 };

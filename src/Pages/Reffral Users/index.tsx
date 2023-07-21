@@ -11,9 +11,10 @@ import {
 } from "@mui/material";
 import { columns } from "./constant";
 import { Tables } from "../../_component/ui/table";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import { listUserApi } from "../../Api/user";
+import { getReferralBy } from "../../_component/other/referralBy";
 
 export interface RefrralUsers {
   userName: string;
@@ -26,7 +27,17 @@ export interface RefrralUsers {
 const ReffralUsers = () => {
   const [users, setUsers] = useState<RefrralUsers[]>([]);
   const [isNoUser, setIsNoUser] = useState(false);
+  const [referraBy, setReferralBy] = useState<string>("");
 
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const getReferralCode = async () => {
+      const referralCode = await getReferralBy();
+      setReferralBy(referralCode);
+    };
+    getReferralCode();
+  }, []);
   const fetchUsers = async () => {
     try {
       const url = "/user/reflUserList";
@@ -77,8 +88,7 @@ const ReffralUsers = () => {
                     <PersonAddAlt1Icon />
                   </SvgIcon>
                 }
-                component={Link}
-                to="/newuser"
+                onClick={() => navigate(`/adduser/${referraBy}`)}
                 variant="contained"
               >
                 Add Users

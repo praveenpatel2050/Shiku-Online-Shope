@@ -12,10 +12,6 @@ const Setting = () => {
   return (
     <div>
     <div>
-    <Typography variant="h4" marked="left" component="h2" sx={{ flexGrow: 1, margin: '10px 20px' }}>
-                      Bank Accounts:
-                    </Typography>
-      <BankAccountCard bankAccount={bankAccount} />
       <UserProfile />
     </div>
     </div>

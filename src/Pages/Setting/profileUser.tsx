@@ -1,26 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "@mui/material";
 import image from "../../assets/hanumanjii.jpg";
-import { schoolInitialState, SchoolFormData } from "./constant";
+import { userInitialState, UserFormData, UserBankData, bankInitialState } from "./constant";
 import { IoIosEye, IoIosEyeOff } from 'react-icons/io';
 import { SingleUserApi } from "../../Api/user";
+import Typography from '../../_component/ui/Typography';
+
+
+
 
 const UserProfile = () => {
 
-  const [formData, setFormData] = useState<SchoolFormData>(schoolInitialState);
-  
+  const [formData, setFormData] = useState<UserFormData>(userInitialState);
+  const [bankAccount, setBankAccount] = useState<UserBankData>(bankInitialState);
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState('');
   const [openPopup, setOpenPopup] = useState(false);
-  const userString = sessionStorage.getItem("user");
 
+  const userString = sessionStorage.getItem("user");
   const handlePasswordToggle = () => {
     setShowPassword(!showPassword);
   };
 
   const handlePasswordChange = (event: any) => {
     setPassword(event.target.value);
-    setFormData({ ...formData, password: event.target.value });
+    setFormData({ ...formData });
   };
 
   const user = userString ? JSON.parse(userString) : null;
@@ -28,10 +32,11 @@ const UserProfile = () => {
 
   const editAction = async () => {
     try {
-      const url = `/schoolAdmin/singleSchoolAdmin?schoolAdminId=${id}`;
+      const url = `/user/userInfo`;
       const response: any = await SingleUserApi(url);
       const jsonData = await response.json();
-      const schoolData = jsonData.schoolData;
+      const userData = jsonData.userInfoData;
+      const bankData = userData.bankAccountId;
       // if (schoolData) {
       //   const {
       //     schoolName,
@@ -62,7 +67,9 @@ const UserProfile = () => {
       //     affiliatedBy,
       //     address,
       //   };
-         setFormData(schoolData);
+         setFormData(userData);
+         setBankAccount(bankData)
+         console.log(bankAccount);
       // }
     } catch (error) {
       console.error("Error", error);
@@ -103,26 +110,35 @@ const UserProfile = () => {
       >
         <div className="row">
           <div className="col-xl-4 order-xl-2" style={{ paddingLeft: "0px" }}>
-            <div className="card card-profile">
-              <img
-                src={image}
-                alt="Image placeholder"
-                className="card-img-top rounded-circle"
-                style={{ width: "200px", height: "150px", margin: "10px auto" }}
-              />
-              <div className="card-body pt-0">
-                <div className="text-center">
-                  <h5 className="h3">{formData.schoolName}</h5>
-                  <div className="h5 font-weight-300">{formData.email}</div>
-                  <div className="h5 mt-4">
-                    <i className="ni business_briefcase-24 mr-2"></i> Since {formData.foundedYear}
-                  </div>
-                  <div>
-                    <i className="ni education_hat mr-2"></i>{formData.address}
-                  </div>
-                </div>
+        
+            <div className="col-xl-4 order-xl-2" style={{ paddingLeft: "0px" }}>
+              <div className="card card-profile">
+              {bankAccount && Object.keys(bankAccount).length > 0 ? (
+                <>
+                <Typography variant="h6">
+                  Bank Account Details
+                </Typography>
+                <Typography color="textSecondary" sx={{ margin: '10px 0px' }} variant="h5" gutterBottom>
+                  Owner: {bankAccount.accountHolderName}
+                </Typography>
+                <Typography variant="h5" >
+                  Account Number: {bankAccount.accountNumber}
+                </Typography>
+                <Typography variant="h5" sx={{ margin: '10px 0px' }} >
+                  Ifsc: {bankAccount.bankName}
+                </Typography>
+                <Typography variant="h5" >
+                  Balance: {bankAccount.ifscCode}
+                </Typography>
+                </>
+                ) : (
+                  
+                  <Typography>Add Your Bank Account </Typography>
+                  
+                )}
               </div>
             </div>
+          
           </div>
           <div
             className="col-xl-8 order-xl-1"
@@ -155,12 +171,12 @@ const UserProfile = () => {
                             Name
                           </label>
                           <input
-                            name="teacherName"
+                            name="userName"
                             type="text"
                             id="input-name"
                             className="form-control"
-                            placeholder="Email address"
-                            value={formData.schoolName}
+                            placeholder="Enter Name"
+                            value={formData.userName}
                             onChange={handleChange}
                           />
                         </div>
@@ -171,22 +187,22 @@ const UserProfile = () => {
                             className="form-control-label"
                             htmlFor="input-email"
                           >
-                            Email address
+                            Mobile Number
                           </label>
                           <input
-                            name="email"
-                            type="email"
+                            name="mobileNumber"
+                            type="number"
                             id="input-email"
                             className="form-control"
-                            placeholder="Email address"
-                            value={formData.email}
+                            placeholder="Enter Mobile Number"
+                            value={formData.mobileNumber}
                             onChange={handleChange}
                           />
                         </div>
                       </div>
                     </div>
                     <div className="row">
-                      <div className="col-lg-6">
+                      {/* <div className="col-lg-6">
                         <div className="form-group">
                           <label
                             className="form-control-label"
@@ -204,8 +220,8 @@ const UserProfile = () => {
                             onChange={handleChange}
                           />
                         </div>
-                      </div>
-                      <div className="col-lg-6">
+                      </div> */}
+                      {/* <div className="col-lg-6">
                         <div className="form-group">
                           <label
                             className="form-control-label"
@@ -223,7 +239,7 @@ const UserProfile = () => {
                             onChange={handleChange}
                           />
                         </div>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                   <hr className="my-4" />
@@ -246,7 +262,7 @@ const UserProfile = () => {
                             id="input-address"
                             className="form-control"
                             placeholder="Home Address"
-                            value={formData.address}
+                            value={"sanchore, rajasthan "}
                             type="text"
                             onChange={handleChange}
                           />
@@ -273,7 +289,7 @@ const UserProfile = () => {
                           />
                         </div>
                       </div>
-                      <div className="col-lg-4">
+                      {/* <div className="col-lg-4">
                         <div className="form-group">
                           <label
                             className="form-control-label"
@@ -290,7 +306,7 @@ const UserProfile = () => {
                             value={formData.foundedYear}
                           />
                         </div>
-                      </div>
+                      </div> */}
                       <div className="col-lg-4">
                         <div className="form-group">
                           <label className="form-control-label" htmlFor="input-password">
@@ -323,7 +339,6 @@ const UserProfile = () => {
                   <Button
                     variant="contained"
                     color="success"
-                    type="submit"
                     sx={{ margin: "8px 8px", width: "100px" }}
                   //  onClick={handleUpdate}
                   >

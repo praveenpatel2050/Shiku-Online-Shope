@@ -2,7 +2,7 @@ const baseURL = "http://localhost:3008";
 
 export const addUserApi = async (url: any, formData: any = 0) => {
   try {
-    const tempData = formData != 0 ? formData : {hello: 'hello'};
+    const tempData = formData != 0 ? formData : { hello: "hello" };
     const response = await fetch(`${baseURL}${url}`, {
       method: "POST",
       headers: {
@@ -17,14 +17,15 @@ export const addUserApi = async (url: any, formData: any = 0) => {
   }
 };
 
-export const RegisterUserApi = async (url: any, formData: any = 0) => {
+export const RegisterUserApi = async (url: string, formData: any = 0) => {
   try {
-    const tempData = formData != 0 ? formData : {hello: 'hello'};
-    const response = await fetch(`${baseURL}${url}`, {
+    const tempData = formData != 0 ? formData : { hello: "hello" };
+    console.log('formData', formData);
+    return await fetch(`${baseURL}${url}`, {
+      headers: { 'Content-Type': 'application/json' },
       method: "POST",
       body: JSON.stringify(tempData),
     });
-    return response;
   } catch (error) {
     console.error("Error", error);
   }
@@ -48,7 +49,7 @@ export const RegisterUserApi = async (url: any, formData: any = 0) => {
 //   }
 // };
 
-export const SingleUserApi = async (url: any ) => {
+export const SingleUserApi = async (url: any) => {
   try {
     const response = await fetch(`${baseURL}${url}`, {
       method: "GET",
@@ -63,18 +64,18 @@ export const SingleUserApi = async (url: any ) => {
   }
 };
 
-export const listUserApi =  async (url: any, teachers: any) => {
+export const listUserApi = async (url: any, teachers: any) => {
   try {
     const data = teachers;
     const response = await fetch(`${baseURL}${url}`, {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-      "Content-Type": "application/json"
-    },
-  });
-  return response;
-} catch (error) {
-  console.error("Error", error);
-}
-}
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+    });
+    return response;
+  } catch (error) {
+    console.error("Error", error);
+  }
+};

@@ -95,7 +95,7 @@ export const addUserFormField = [
     {
       id: "10",
       label: "Plan",
-      name: "plan",
+      name: "planItemName",
       errorLabel: "Please select Plan",
       type: "select",
       option: [
@@ -168,7 +168,7 @@ export const addUserFormField = [
   ];
   
   export interface FormData {
-    UserName: string;
+    userName: string;
     password: string;
     mobileNumber: string;
     // gender: string;
@@ -179,5 +179,5 @@ export const addUserFormField = [
     totalAmount: string;
     cartAmount: string;
     paymentStatus: string;
-    planItem: string;
+    planItemName: string;
 }
