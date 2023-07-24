@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { Button } from "@mui/material";
-import image from "../../assets/hanumanjii.jpg";
-import { userInitialState, UserFormData, UserBankData, bankInitialState } from "./constant";
-import { IoIosEye, IoIosEyeOff } from 'react-icons/io';
+import { Box, Button } from "@mui/material";
+import {
+  userInitialState,
+  UserFormData,
+  UserBankData,
+  bankInitialState,
+} from "./constant";
+import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 import { SingleUserApi } from "../../Api/user";
-import Typography from '../../_component/ui/Typography';
-
-
-
+import Typography from "../../_component/ui/Typography";
 
 const UserProfile = () => {
-
   const [formData, setFormData] = useState<UserFormData>(userInitialState);
-  const [bankAccount, setBankAccount] = useState<UserBankData>(bankInitialState);
+  const [bankAccount, setBankAccount] =
+    useState<UserBankData>(bankInitialState);
   const [showPassword, setShowPassword] = useState(false);
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState("");
   const [openPopup, setOpenPopup] = useState(false);
 
   const userString = sessionStorage.getItem("user");
@@ -37,6 +38,7 @@ const UserProfile = () => {
       const jsonData = await response.json();
       const userData = jsonData.userInfoData;
       const bankData = userData.bankAccountId;
+      console.log("bank data", bankData);
       // if (schoolData) {
       //   const {
       //     schoolName,
@@ -67,9 +69,9 @@ const UserProfile = () => {
       //     affiliatedBy,
       //     address,
       //   };
-         setFormData(userData);
-         setBankAccount(bankData)
-         console.log(bankAccount);
+      setFormData(userData);
+      setBankAccount(bankData[0]);
+      console.log(bankAccount);
       // }
     } catch (error) {
       console.error("Error", error);
@@ -99,50 +101,67 @@ const UserProfile = () => {
   // };
 
   useEffect(() => {
-    editAction()
-  }, [])
+    editAction();
+  }, []);
 
   return (
     <>
       <div
         className="container-fluid mt--6"
-        style={{ fontFamily: "Open Sans, sans-serif", marginTop: "10px" }}
+        style={{ fontFamily: "Open Sans, sans-serif" }}
       >
         <div className="row">
-          <div className="col-xl-4 order-xl-2" style={{ paddingLeft: "0px" }}>
-        
-            <div className="col-xl-4 order-xl-2" style={{ paddingLeft: "0px" }}>
-              <div className="card card-profile">
-              {bankAccount && Object.keys(bankAccount).length > 0 ? (
-                <>
-                <Typography variant="h6">
-                  Bank Account Details
-                </Typography>
-                <Typography color="textSecondary" sx={{ margin: '10px 0px' }} variant="h5" gutterBottom>
-                  Owner: {bankAccount.accountHolderName}
-                </Typography>
-                <Typography variant="h5" >
-                  Account Number: {bankAccount.accountNumber}
-                </Typography>
-                <Typography variant="h5" sx={{ margin: '10px 0px' }} >
-                  Ifsc: {bankAccount.bankName}
-                </Typography>
-                <Typography variant="h5" >
-                  Balance: {bankAccount.ifscCode}
-                </Typography>
-                </>
+          <Box
+            className="col-xl-4 order-xl-2"
+            sx={{
+              padding: "10px",
+              paddingLeft: "0px",
+              "@media (min-width: 200px) and (max-width: 560px)": {
+                padding: "10px",
+                paddingBottom: "0px",
+              },
+            }}
+          >
+            <div
+              className="order-xl-2"
+              style={{ paddingLeft: "0px", paddingBottom: "0px" }}
+            >
+              <Box
+                className="card card-profile"
+                sx={{
+                  padding: "10px",
+                }}
+              >
+                {bankAccount && Object.keys(bankAccount).length > 0 ? (
+                  <>
+                    <Typography variant="h6">Bank Account Details</Typography>
+                    <Typography
+                      color="textSecondary"
+                      sx={{ margin: "10px 0px" }}
+                      variant="h5"
+                      gutterBottom
+                    >
+                      Owner: {bankAccount.accountHolderName}
+                    </Typography>
+                    <Typography variant="h5">
+                      Account Number: {bankAccount.accountNumber}
+                    </Typography>
+                    <Typography variant="h5" sx={{ margin: "10px 0px" }}>
+                      Ifsc: {bankAccount.bankName}
+                    </Typography>
+                    <Typography variant="h5">
+                      Balance: {bankAccount.ifscCode}
+                    </Typography>
+                  </>
                 ) : (
-                  
                   <Typography>Add Your Bank Account </Typography>
-                  
                 )}
-              </div>
+              </Box>
             </div>
-          
-          </div>
+          </Box>
           <div
             className="col-xl-8 order-xl-1"
-            style={{ fontFamily: "Open Sans, sans-serif" }}
+            style={{ fontFamily: "Open Sans, sans-serif", padding: "10px" }}
           >
             <div className="card">
               <div className="card-header">
@@ -309,12 +328,15 @@ const UserProfile = () => {
                       </div> */}
                       <div className="col-lg-4">
                         <div className="form-group">
-                          <label className="form-control-label" htmlFor="input-password">
+                          <label
+                            className="form-control-label"
+                            htmlFor="input-password"
+                          >
                             Password
                           </label>
                           <div className="input-group">
                             <input
-                              type={showPassword ? 'text' : 'password'}
+                              type={showPassword ? "text" : "password"}
                               id="input-password"
                               className="form-control"
                               placeholder="Password"
@@ -325,7 +347,11 @@ const UserProfile = () => {
                               <span
                                 className="input-group-text"
                                 onClick={handlePasswordToggle}
-                                style={{ cursor: 'pointer', height: '37.6px', borderRadius: '0px 5px 5px 0px' }}
+                                style={{
+                                  cursor: "pointer",
+                                  height: "37.6px",
+                                  borderRadius: "0px 5px 5px 0px",
+                                }}
                               >
                                 {showPassword ? <IoIosEyeOff /> : <IoIosEye />}
                               </span>
@@ -340,12 +366,11 @@ const UserProfile = () => {
                     variant="contained"
                     color="success"
                     sx={{ margin: "8px 8px", width: "100px" }}
-                  //  onClick={handleUpdate}
+                    //  onClick={handleUpdate}
                   >
                     Save
                   </Button>
                   {/* <Popup open={openPopup} color="green" message="Data Updated Successfully" onClose={() => setOpenPopup(false)} /> */}
-
                 </form>
               </div>
             </div>
