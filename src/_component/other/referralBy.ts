@@ -4,4 +4,3 @@ export const getReferralBy = () => {
     const user = userString ? JSON.parse(userString) : null;
     return user?.referralCode ?? "";
 }
-console.log(getReferralBy());

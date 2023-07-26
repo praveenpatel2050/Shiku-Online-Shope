@@ -14,22 +14,10 @@ const UserProfile = () => {
   const [formData, setFormData] = useState<UserFormData>(userInitialState);
   const [bankAccount, setBankAccount] =
     useState<UserBankData>(bankInitialState);
-  const [showPassword, setShowPassword] = useState(false);
-  const [password, setPassword] = useState("");
-  const [openPopup, setOpenPopup] = useState(false);
 
   const userString = sessionStorage.getItem("user");
-  const handlePasswordToggle = () => {
-    setShowPassword(!showPassword);
-  };
-
-  const handlePasswordChange = (event: any) => {
-    setPassword(event.target.value);
-    setFormData({ ...formData });
-  };
 
   const user = userString ? JSON.parse(userString) : null;
-  const id = user?.id ?? "";
 
   const editAction = async () => {
     try {
@@ -38,7 +26,6 @@ const UserProfile = () => {
       const jsonData = await response.json();
       const userData = jsonData.userInfoData;
       const bankData = userData.bankAccountId;
-      console.log("bank data", bankData);
       // if (schoolData) {
       //   const {
       //     schoolName,
@@ -71,7 +58,6 @@ const UserProfile = () => {
       //   };
       setFormData(userData);
       setBankAccount(bankData[0]);
-      console.log(bankAccount);
       // }
     } catch (error) {
       console.error("Error", error);
@@ -108,14 +94,14 @@ const UserProfile = () => {
     <>
       <div
         className="container-fluid mt--6"
-        style={{ fontFamily: "Open Sans, sans-serif" }}
+        style={{ fontFamily: "Open Sans, sans-serif"  }}
       >
-        <div className="row">
+        <div className="row" >
           <Box
             className="col-xl-4 order-xl-2"
             sx={{
               padding: "10px",
-              paddingLeft: "0px",
+              paddingLeft: "0px", 
               "@media (min-width: 200px) and (max-width: 560px)": {
                 padding: "10px",
                 paddingBottom: "0px",
@@ -129,7 +115,7 @@ const UserProfile = () => {
               <Box
                 className="card card-profile"
                 sx={{
-                  padding: "10px",
+                  padding: "10px", backgroundColor: "#F5FFFA",
                 }}
               >
                 {bankAccount && Object.keys(bankAccount).length > 0 ? (
@@ -147,10 +133,10 @@ const UserProfile = () => {
                       Account Number: {bankAccount.accountNumber}
                     </Typography>
                     <Typography variant="h5" sx={{ margin: "10px 0px" }}>
-                      Ifsc: {bankAccount.bankName}
+                      Bank Name: {bankAccount.bankName}
                     </Typography>
                     <Typography variant="h5">
-                      Balance: {bankAccount.ifscCode}
+                      IFSC Code: {bankAccount.ifscCode}
                     </Typography>
                   </>
                 ) : (
@@ -163,11 +149,11 @@ const UserProfile = () => {
             className="col-xl-8 order-xl-1"
             style={{ fontFamily: "Open Sans, sans-serif", padding: "10px" }}
           >
-            <div className="card">
+            <div className="card" style={{backgroundColor: "#F5FFFA",}}>
               <div className="card-header">
                 <div className="row align-items-center">
                   <div className="col-8">
-                    <h3 className="mb-0">My Account</h3>
+                    <Typography  variant="h6">My Account :-</Typography>
                   </div>
                 </div>
               </div>
@@ -179,7 +165,7 @@ const UserProfile = () => {
                   <h6 className="heading-small text-muted mb-4">
                     User information
                   </h6>
-                  <div className="pl-lg-4" style={{ paddingLeft: "1.5rem" }}>
+                  <div className="pl-lg-4" style={{ paddingBottom: "rem" }}>
                     <div className="row">
                       <div className="col-lg-6">
                         <div className="form-group">
@@ -197,6 +183,7 @@ const UserProfile = () => {
                             placeholder="Enter Name"
                             value={formData.userName}
                             onChange={handleChange}
+                            style={{marginBottom: '10px'}}
                           />
                         </div>
                       </div>
@@ -274,17 +261,14 @@ const UserProfile = () => {
                             className="form-control-label"
                             htmlFor="input-address"
                           >
-                            Address
+                            Address :-  
                           </label>
-                          <input
-                            name="address"
-                            id="input-address"
-                            className="form-control"
-                            placeholder="Home Address"
-                            value={"sanchore, rajasthan "}
-                            type="text"
-                            onChange={handleChange}
-                          />
+                          <label
+                            className="form-control-label"
+                            style={{fontSize: 20, paddingLeft: 10, }} 
+                          >
+                            Sanchore , Rajasthan
+                          </label>
                         </div>
                       </div>
                     </div>
@@ -295,77 +279,45 @@ const UserProfile = () => {
                             className="form-control-label"
                             htmlFor="input-mobile-number"
                           >
-                            Mobile Number
+                            Plan Item Name :-
                           </label>
-                          <input
-                            name="mobileNumber"
-                            type="text"
-                            id="input-city"
-                            className="form-control"
-                            placeholder="Mobile Number"
-                            value={formData.mobileNumber}
-                            onChange={handleChange}
-                          />
+                     
+                           <label
+                            className="form-control-label"
+                            htmlFor="input-mobile-number"
+                            style={{fontSize: 20, paddingLeft: 11, }}  
+                          >
+                           {formData.planItemName}
+                          </label>
                         </div>
                       </div>
-                      {/* <div className="col-lg-4">
-                        <div className="form-group">
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-date"
-                          >
-                            Founded Year
-                          </label>
-                          <input
-                            name="foundedYear"
-                            type="string"
-                            id="input-year"
-                            className="form-control"
-                            placeholder="founded Year"
-                            value={formData.foundedYear}
-                          />
-                        </div>
-                      </div> */}
+                    </div>
+                    <div className="row">
                       <div className="col-lg-4">
                         <div className="form-group">
                           <label
                             className="form-control-label"
-                            htmlFor="input-password"
+                            htmlFor="input-mobile-number"
                           >
-                            Password
+                            My Referrral Code :-
                           </label>
-                          <div className="input-group">
-                            <input
-                              type={showPassword ? "text" : "password"}
-                              id="input-password"
-                              className="form-control"
-                              placeholder="Password"
-                              value={formData.password}
-                              onChange={handlePasswordChange}
-                            />
-                            <div className="input-group-append">
-                              <span
-                                className="input-group-text"
-                                onClick={handlePasswordToggle}
-                                style={{
-                                  cursor: "pointer",
-                                  height: "37.6px",
-                                  borderRadius: "0px 5px 5px 0px",
-                                }}
-                              >
-                                {showPassword ? <IoIosEyeOff /> : <IoIosEye />}
-                              </span>
-                            </div>
-                          </div>
+                     
+                           <label
+                            className="form-control-label"
+                            htmlFor="input-mobile-number"
+                            style={{fontSize: 20, paddingLeft: 20, }}  
+                          >
+                           {formData.referralCode}
+                          </label>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <hr className="my-4" />
+                  <hr className="my-2" />
                   <Button
                     variant="contained"
                     color="success"
-                    sx={{ margin: "8px 8px", width: "100px" }}
+                    sx={{ margin: "8px 0px", width: "100px" }}
                     //  onClick={handleUpdate}
                   >
                     Save

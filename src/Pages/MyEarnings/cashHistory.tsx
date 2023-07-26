@@ -32,9 +32,8 @@ const CashHistory = () => {
     <>
      <Box sx={{ padding: 0 }}>
       <div style={{ margin: "10px" }}>
-
-        <Card>
-          <Box sx={{ minWidth: 800, overflow: "scroll",  }}>
+      <Card sx={{overflow: "scroll"}}>
+          <Box sx={{ minWidth: 100 }}>
             <Tables columns={cashColumns} data={cashTransactionData} />
           </Box>
         </Card>

@@ -17,7 +17,7 @@ const AuthenticationRoutes = {
       element: <Login />
     },
     {
-      path: '/register/:id*',
+      path: '/register/:id/*',
       element: <Register />
     } 
   ],

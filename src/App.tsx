@@ -9,6 +9,8 @@ import Routes from "./Routes/index";
 import store from "./store/index";
 import theme from "./Theme/index";
 
+import "./App.css";
+
 const App = () => {
   return (
     <>

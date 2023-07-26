@@ -1,35 +1,34 @@
 import React, { useState, useEffect } from "react";
 import { Box, Card } from "@mui/material";
-import { referralColumns, referralTransactionData, ReferralUsers } from "./constant";
+import { referralColumns, referralinititalState, ReferralUsers } from "./constant";
 import { Tables } from "../../_component/ui/table";
+import { ReferralTransactionApi } from "../../Api/user";
 
 const ReferralHistory = () => {
-  const [users, setUsers] = useState<ReferralUsers[]>([]);
-
+  const [transactions, setTransactions] = useState<ReferralUsers[]>([]);
   const fetchUsers = async () => {
     try {
-      const url = "/schoolAdmin/teachersList";
-      // const response: any = await (url, teacher);
-      // const jsonData = await response.json()
-      // setTeacher(jsonData);
+      const url = "/user/referralTransactions";
+      const {transactionData} = await ReferralTransactionApi(url);
+      setTransactions(transactionData);
     } catch (error) {
       console.error("Error", error);
     }
   };
-
-  // useEffect(() => {
-  //   fetchUsers();
-  // }, []);
+  useEffect(() => {
+    fetchUsers();
+  }, []);
 
   return (
-    <Box sx={{ padding: 0 }}>
-      <div style={{ margin: "10px" }}>
-        <Card>
-          <Box sx={{ minWidth: 800, overflow: "scroll" }}>
-            <Tables columns={referralColumns} data={referralTransactionData} />
+    <Box sx={{ margin: "15px", 
+    "@media (min-width: 200px) and (max-width: 600px)": {
+    margin: "5px",
+  },  }}>
+          <Card sx={{overflow: "scroll"}}>
+          <Box sx={{ minWidth: 500 }}>
+            <Tables columns={referralColumns} data={transactions} />
           </Box>
         </Card>
-      </div>
     </Box>
   );
 };

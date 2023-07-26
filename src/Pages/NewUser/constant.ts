@@ -173,11 +173,13 @@ export const addUserFormField = [
     mobileNumber: string;
     // gender: string;
     // address: string;
-    referralCode: string;
     planAmount: string;
     totalItem: string;
     totalAmount: string;
     cartAmount: string;
     paymentStatus: string;
     planItemName: string;
+}
+export interface SignUpFormData extends FormData {
+  referralCode: string;
 }

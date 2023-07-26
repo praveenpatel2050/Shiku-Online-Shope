@@ -1,8 +1,7 @@
-import React, { useState, useEffect} from "react";
+import React, { useState } from "react";
 import {
   Box,
   TextField,
-
   Button,
   Stack,
   FormControl,
@@ -12,10 +11,11 @@ import {
   Container,
 } from "@mui/material";
 import Typography from "../../_component/ui/Typography"
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { addUserFormField } from "./constant";
 import { FormData } from "./constant";
 import { addUserApi } from "../../Api/user";
+import Popup from "../../_component/ui/popup";
 declare global {
   interface Window {
     Razorpay: any;
@@ -25,26 +25,7 @@ interface RazorpayResponse {
   razorpay_payment_id: string;
 }
 const NewUser = () => {
-  const [referralBy, setReferralBy] = useState<string>("");
   
-  const getMode = () => {
-    const path = window.location.href;
-    const pathArray = path.split("/");
-    if (pathArray[pathArray.length - 2] === "adduser") {
-      const referralId = pathArray[pathArray.length - 1];
-      setReferralBy(referralId);
-    }
-  };
-
-  useEffect(() => {
-    getMode();
-    console.log("refferel",referralBy);
-
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      referralCode: referralBy,
-    }));
-  }, [referralBy]);
   
   const handleChange = (name: keyof FormData, value: string) => {
     const updatedFormData = {
@@ -67,14 +48,14 @@ const NewUser = () => {
     totalAmount: '1000',
     cartAmount: '0',
     paymentStatus: '0',
-    referralCode: `${referralBy}`,
   };
 
   const [formData, setFormData] = useState<FormData>(initialState);
   const [formErrors, setFormErrors] = useState<{ [key: string]: boolean }>({});
+  const [openPopup, setOpenPopup] = useState(false);
 
 
-
+  const navigate = useNavigate();
   const amount = 100
 
   const validateForm = () => {
@@ -98,6 +79,11 @@ const NewUser = () => {
     try {
       const url = "/user/add";
       const response: any = await addUserApi(url, formData);
+      setOpenPopup(true); // Show success popup
+      setTimeout(() => {
+        setOpenPopup(false);
+        navigate("/referralusers");
+      }, 2000);
     } catch (error) {
       console.error("Error", error);
     }
@@ -182,21 +168,6 @@ const NewUser = () => {
           },
         }}
       >
-
-        {/* <Box
-          sx={{
-            "@media (min-width: 200px) and (max-width: 560px)": {
-              margin: '0 auto',
-              maxWidth: '400px',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              minHeight: '100vh',
-            }
-          }}
-        > */}
-
-
           <Box className="row" sx={{
             marginLeft: '0px',
             "@media (min-width: 200px) and (max-width: 560px)": {
@@ -263,11 +234,9 @@ const NewUser = () => {
                 );
               }
               return (
-                <>
                   <TextField
                     key={index}
                     error={error}
-                    id="outlined-controlled"
                     label={label}
                     name={name}
                     type={type}
@@ -282,16 +251,8 @@ const NewUser = () => {
                     }}
                   />
          
-                </>
               );
             })}
-             <TextField
-             
-             disabled
-             label="Referral Code"
-            value={referralBy}
-            >
-            </TextField>
             <Button
               variant="contained"
               color="primary"
@@ -323,9 +284,14 @@ const NewUser = () => {
                 >
                   Reset
                 </Button>
+                <Popup
+                  open={openPopup}
+                  message="Data Added Successfully"
+                  onClose={() => setOpenPopup(false)}
+                  color="green"
+                />
               </Stack>
             </Box>
-          
         </Box>
       </Box>
       </Container>

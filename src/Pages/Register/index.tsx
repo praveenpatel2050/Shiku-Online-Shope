@@ -11,7 +11,7 @@ import {
   Container,
 } from "@mui/material";
 import Typography from "../../_component/ui/Typography"
-import { FormData, addUserFormField } from "../NewUser/constant";
+import { FormData, SignUpFormData, addUserFormField } from "../NewUser/constant";
 import { RegisterUserApi } from "../../Api/user";
 import { useNavigate } from "react-router-dom";
 
@@ -72,7 +72,7 @@ const Register = () => {
     referralCode: `${referralBy}`,
   };
 
-  const [formData, setFormData] = useState<FormData>(initialState);
+  const [formData, setFormData] = useState<SignUpFormData>(initialState);
   const [formErrors, setFormErrors] = useState<{ [key: string]: boolean }>({});
 
 
@@ -94,7 +94,9 @@ const Register = () => {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    console.log("Submit")
+    if (!validateForm()) {
+      return;
+    }
     try {
       const url = "/user/signup";
       const response: any = await RegisterUserApi(url, formData);

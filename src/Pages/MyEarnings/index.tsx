@@ -1,13 +1,12 @@
-
-import * as React from 'react';
-import { useTheme } from '@mui/material/styles';
-import AppBar from '@mui/material/AppBar';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import ReffralUsers from './referralHistory';
-import CashHistory from './cashHistory';
+import * as React from "react";
+import { useTheme } from "@mui/material/styles";
+import AppBar from "@mui/material/AppBar";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import ReffralUsers from "./referralHistory";
+import CashHistory from "./cashHistory";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -28,7 +27,9 @@ function TabPanel(props: TabPanelProps) {
       aria-labelledby={`action-tab-${index}`}
       {...other}
     >
-      {value === index && <Box sx={{ p: 1, backgroundColor: '#fafafa' }}>{children}</Box>}
+      {value === index && (
+        <Box sx={{ p: 0, backgroundColor: "#fafafa" }}>{children}</Box>
+      )}
     </Typography>
   );
 }
@@ -36,7 +37,7 @@ function TabPanel(props: TabPanelProps) {
 function a11yProps(index: any) {
   return {
     id: `action-tab-${index}`,
-    'aria-controls': `action-tabpanel-${index}`,
+    "aria-controls": `action-tabpanel-${index}`,
   };
 }
 
@@ -51,10 +52,11 @@ const Transactions = () => {
   return (
     <Box
       sx={{
-        bgcolor: 'background.paper',
+        bgcolor: "background.paper",
         width: "100%",
-        position: 'relative',
+        position: "relative",
         minHeight: 200,
+        padding: '0px'
       }}
     >
       <AppBar position="static" color="default">
@@ -66,18 +68,34 @@ const Transactions = () => {
           variant="fullWidth"
           aria-label="action tabs example"
         >
-          <Tab label="Reffered Transactions" {...a11yProps(0)} />
-          <Tab label="Cash Transactions" {...a11yProps(1)} />
+          <Tab
+            label="Reffered Transactions"
+            sx={{
+              "@media (min-width: 200px) and (max-width: 600px)": {
+                fontSize: "0.6rem",
+              },
+            }}
+            {...a11yProps(0)}
+          />
+          <Tab
+            label="Cash Transactions"
+            sx={{
+              "@media (min-width: 200px) and (max-width: 600px)": {
+                fontSize: "0.6rem",
+              },
+            }}
+            {...a11yProps(1)}
+          />
         </Tabs>
       </AppBar>
-        <TabPanel value={value} index={0} dir={theme.direction}>
-          <ReffralUsers />
-        </TabPanel>
-        <TabPanel value={value} index={1} dir={theme.direction}>
+      <TabPanel value={value} index={0} dir={theme.direction}>
+        <ReffralUsers />
+      </TabPanel>
+      <TabPanel value={value} index={1} dir={theme.direction}>
         <CashHistory />
-        </TabPanel>
+      </TabPanel>
     </Box>
   );
-}
+};
 
 export default Transactions;

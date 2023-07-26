@@ -10,6 +10,7 @@ import Wallet from "../Pages/Wallet";
 import Setting from "../Pages/Setting";
 import ReffralUsers from "../Pages/Reffral Users";
 import Transactions from "../Pages/MyEarnings";
+import Invitation from "../Pages/Invitation";
 
 const MainRoutes = {
   path: "/",
@@ -24,7 +25,7 @@ const MainRoutes = {
       element: <Dashboard />,
     },
     {
-      path: "/adduser/:id",
+      path: "/adduser",
       element: <NewUser />,
     },
     {
@@ -42,6 +43,10 @@ const MainRoutes = {
     {
       path: "/referralusers",
       element: <ReffralUsers />,
+    },
+    {
+      path: "/invitation",
+      element: <Invitation />,
     },
     {
       path: "/setting",

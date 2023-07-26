@@ -39,7 +39,7 @@ export const Tables: FC<ITables> = ({ data: item, columns}) => {
   }));
 
   return (
-    <Table sx={{ minWidth: 500 }}  stickyHeader aria-label="sticky table">
+    <Table sx={{ minWidth: 100 }}  stickyHeader aria-label="sticky table">
       <TableHead>
         <StyledTableRow>
           {columns.map((column, index) => {
@@ -53,9 +53,9 @@ export const Tables: FC<ITables> = ({ data: item, columns}) => {
             <StyledTableRow hover key={index}>
               {columns.map((column, index) => { 
                 return (
-                  <>
-                    <StyledTableCell key={index}>{data[column.id]}</StyledTableCell>
-                  </>
+                  
+                    <StyledTableCell key={index} >{data[column.id]}</StyledTableCell>
+                  
                 );
               })}
             </StyledTableRow>

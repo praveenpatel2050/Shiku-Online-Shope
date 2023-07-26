@@ -27,9 +27,9 @@ const rawTheme = createTheme({
     },
   },
   typography: {
-    fontFamily: "'Work Sans', sans-serif",
+    fontFamily: "'Roboto', sans-serif",
     fontSize: 14,
-    fontWeightLight: 300, // Work Sans
+    fontWeightLight: 500, // Work Sans
     fontWeightRegular: 400, // Work Sans
     fontWeightMedium: 700, // Roboto Condensed
   },
@@ -38,7 +38,7 @@ const rawTheme = createTheme({
 const fontHeader = {
   color: rawTheme.palette.text.primary,
   fontWeight: rawTheme.typography.fontWeightMedium,
-  fontFamily: "'Roboto Condensed', sans-serif",
+  fontFamily: "'Roboto', sans-serif",
   textTransform: 'uppercase',
 };
 

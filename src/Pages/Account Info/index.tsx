@@ -109,7 +109,11 @@ const AccountInfo: React.FC = () => {
           maxWidth: '100%',
           background: '#F5FFFA',
           boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px',
-          borderRadius: '5px',
+          borderRadius: '5px', 
+          "@media (min-width: 200px) and (max-width: 600px)": {
+          padding: "0px",
+          margin: "10px",
+        },
         }}
       >
         {isLoading ? (
@@ -118,7 +122,7 @@ const AccountInfo: React.FC = () => {
           <>
             {submitted ? (
               <>
-                <Box sx={{ flexGrow: 1 }}>
+                <Box sx={{ flexGrow: 1,  }}>
                   <AppBar
                     position="static"
                     sx={{
@@ -132,14 +136,21 @@ const AccountInfo: React.FC = () => {
                         variant="h4"
                         marked="left"
                         component="h2"
-                        sx={{ flexGrow: 1 }}
+                        sx={{ flexGrow: 1, 
+                          "@media (min-width: 200px) and (max-width: 600px)": {
+                          fontSize: 19,
+                        },  }}
                       >
                         Account Information:
                       </Typography>
                       <Button
                         variant="contained"
                         color="primary"
-                        sx={{ margin: '8px' }}
+                        sx={{ margin: '8px', 
+                        "@media (min-width: 200px) and (max-width: 600px)": {
+                        margin: "4px",
+                        padding: "2px 0px",
+                      }, }}
                         onClick={handleEdit}
                       >
                         Edit

@@ -10,17 +10,26 @@ export interface CardProps {
   length: any;
   label: string;
 }
+export const styleIcon =
+{
+  width: 66,
+  height: 76,
+  margin: "0px 10px 0px 10px",  
+ "@media (min-width: 200px) and (max-width: 600px)": {
+  width: 50,
+  height: 60,                    
+  }, 
+};
+
 const Wallet = () => {
+
+
+
   const cardData: CardProps[] = [
     {
       icon: (
         <AccountBalanceIcon
-          sx={{
-            width: 66,
-            height: 76,
-            margin: "0px 10px 0px 10px",
-            color: 'green'
-          }}
+        sx={{ ...styleIcon, color: "green" }}
         />
       ),
       length: "1500",
@@ -29,12 +38,7 @@ const Wallet = () => {
     {
       icon: (
         <CurrencyRupeeIcon
-          sx={{
-            width: 66,
-            height: 76,
-            margin: "0px 10px 0px 10px",
-            color: 'gold'
-          }}
+        sx={{ ...styleIcon, color: 'gold' }}
         />
       ),
       length: "1500",
@@ -43,12 +47,7 @@ const Wallet = () => {
     {
       icon: (
         <RedeemIcon
-          sx={{
-            width: 66,
-            height: 76,
-            margin: "0px 10px 0px 10px",
-            color: 'orange'
-          }}
+        sx={{ ...styleIcon, color: "orange" }}
         />
       ),
       length: "500",
@@ -57,12 +56,7 @@ const Wallet = () => {
     {
       icon: (
         <CardMembershipIcon
-          sx={{
-            width: 66,
-            height: 76,
-            margin: "0px 20px 0px 10px",
-            color: '#87CEFA',
-          }}
+        sx={{ ...styleIcon, color: '#87CEFA' }}
         />
       ),
       length: `1400`,
@@ -93,21 +87,26 @@ const Wallet = () => {
         return (
           <React.Fragment key={index}>
             <Box key={index} sx={{ marginBottom: "10px" }}>
-              <Card
+            <Card
                 sx={{
                   background: "#F5FFFA",
-                  height: "6.5rem",
+                  height: "auto",
                   paddingBottom: "0px",
+                  
+                          "@media (min-width: 200px) and (max-width: 600px)": {
+                          padding: '0px',
+                          height: "auto",
+                        }, 
                 }}
               >
-                <CardContent
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    paddingBottom: "0px",
-                    padding: "10px",
-                  }}
-                >
+                  <CardContent
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      paddingBottom: "0px",
+                      padding: "10px",
+                    }}
+                  >
                   {card.icon}
                   <div>
                     <Typography
@@ -127,7 +126,12 @@ const Wallet = () => {
                         <Button
                           variant="contained"
                           color="primary"
-                          sx={{ margin: '0px 10px 0px 10px' }}
+                          sx={{ margin: '0px 10px 5px 10px',
+                          "@media (min-width: 200px) and (max-width: 560px)": {
+                            padding: "2px 12px",
+                            margin: '0px 0px 5px 0px',
+                            fontSize: "0.775rem",
+                          }, }}
                         >
                           Request Withdrawal
                         </Button>

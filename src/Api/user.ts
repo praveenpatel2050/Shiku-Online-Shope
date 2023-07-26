@@ -79,3 +79,18 @@ export const listUserApi = async (url: any, teachers: any) => {
     console.error("Error", error);
   }
 };
+
+export const ReferralTransactionApi = async (url: any) => {
+  try {
+    const response = await fetch(`${baseURL}${url}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+    });
+    return response.json();
+  } catch (error) {
+    console.error("Error", error);
+  }
+};

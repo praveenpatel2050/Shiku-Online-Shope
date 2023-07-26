@@ -3,11 +3,11 @@ import { Box, Button, Card, CardContent, Container } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import Typography from "../../_component/ui/Typography";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { getReferralBy } from "../../_component/other/referralBy";
 import { getTotalAmount } from "../../_component/other/cards";
-
+import { listUserApi } from "../../Api/user";
+import { styleIcon } from "../Wallet";
 export interface CardProps {
   icon: JSX.Element;
   length: any;
@@ -15,23 +15,28 @@ export interface CardProps {
   navigate: string;
 }
 
-const totalAmount = getTotalAmount();
-
 const Dashboard = () => {
+  const [users, setUsers] = useState([]);
+  const [totalAmount, setTotalAmount] = useState("");
 
-useEffect(() => {
-  getTotalAmount();
-}, [])
+  const fetchUsers = async () => {
+    try {
+      const url = "/user/reflUserList";
+      const response: any = await listUserApi(url, users);
+      const jsonData = await response.json();
+      const referralList = jsonData.refUserList;
+      setUsers(referralList);
+      console.log("referral list",referralList);
+    } catch (error) {
+      console.error("Error", error);
+    }
+  };
 
   const cardData: CardProps[] = [
     {
       icon: (
         <CurrencyRupeeIcon
-          sx={{
-            width: 66,
-            height: 76,
-            margin: "0px 10px 0px 10px",
-          }}
+        sx={{ ...styleIcon, color: 'gold' }}
         />
       ),
       length: `${totalAmount}`,
@@ -41,31 +46,22 @@ useEffect(() => {
     {
       icon: (
         <AccountCircleIcon
-          sx={{
-            width: 76,
-            height: 76,
-            color: "gray",
-            margin: "0px 20px 0px 10px",
-          }}
+        sx={{ ...styleIcon, color: 'gray' }}
         />
       ),
-      length: `15`,
+      length: `${users.length}`,
       label: "Total Referral User",
       navigate: "/referralusers",
     },
   ];
   
   const [referraBy, setReferralBy] = useState<string>("");
-
   const navigate = useNavigate();
-
   useEffect(() => {
-    const getCurrentRole = async () => {
-      const currentRole = await getReferralBy();
-      setReferralBy(currentRole);
-    };
-    getCurrentRole();
-  }, []);
+    setReferralBy(getReferralBy());
+    setTotalAmount(getTotalAmount());
+    }, []);
+  
   return (
     <Box
       sx={{
@@ -132,7 +128,7 @@ useEffect(() => {
           color="primary"
           variant="contained"
           size="large"
-          onClick={() => navigate(`/adduser/${referraBy}`)}
+          onClick={() => navigate(`/adduser`)}
           sx={{
             minWidth: 200,
             fontSize: 20,
@@ -163,13 +159,18 @@ useEffect(() => {
           return (
             <React.Fragment key={index}>
               <Box key={index} sx={{ marginBottom: "10px" }}>
-                <Card
-                  sx={{
-                    background: "#F5FFFA",
-                    height: "6.5rem",
-                    paddingBottom: "0px",
-                  }}
-                >
+              <Card
+                sx={{
+                  background: "#F5FFFA",
+                  height: "auto",
+                  paddingBottom: "0px",
+                  
+                          "@media (min-width: 200px) and (max-width: 600px)": {
+                          padding: '0px',
+                          height: "auto",
+                        }, 
+                }}
+              >
                   <CardContent
                     sx={{
                       display: "flex",
