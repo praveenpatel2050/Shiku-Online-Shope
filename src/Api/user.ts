@@ -31,23 +31,22 @@ export const RegisterUserApi = async (url: string, formData: any = 0) => {
   }
 };
 
-// export const updateTeacherApi = async (url: any, formData: any = 0) => {
-//   try {
-//     const tempData = formData != 0 ? formData : {};
-//     const baseURL = "http://localhost:3005";
-//     const response = await fetch(`${baseURL}${url}`, {
-//       method: "PUT",
-//       headers: {
-//         Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(tempData),
-//     });
-//     return response;
-//   } catch (error) {
-//     console.error("Error", error);
-//   }
-// };
+export const updateBankAccountApi = async (url: any, formData: any = 0) => {
+  try {
+    const tempData = formData != 0 ? formData : {};
+    const response = await fetch(`${baseURL}${url}`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(tempData),
+    });
+    return response;
+  } catch (error) {
+    console.error("Error", error);
+  }
+};
 
 export const SingleUserApi = async (url: any) => {
   try {
@@ -94,3 +93,15 @@ export const ReferralTransactionApi = async (url: any) => {
     console.error("Error", error);
   }
 };
+
+// if (bankInfo) {
+//   const { bankName, accountHolderName, accountNumber, ifscCode } =
+//     bankInfo[0];
+//   const data = {
+//     bankName,
+//     accountHolderName,
+//     accountNumber,
+//     ifscCode,
+//   };
+//   setFormData(data);
+// }

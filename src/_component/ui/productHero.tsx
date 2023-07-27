@@ -3,7 +3,9 @@ import { Button } from "@mui/material";
 import ProductHeroLayout from "./ProductHeroLayout";
 import Typography from "./Typography";
 import backgroundImage from "../../assets/homepage-bg.jpg";
+import { useNavigate } from "react-router-dom";
 export default function ProductHero() {
+  const navigate = useNavigate();
   return (
     <ProductHeroLayout
       sxBackground={{
@@ -47,6 +49,7 @@ export default function ProductHero() {
         variant="contained"
         size="large"
         component="a"
+        onClick={() => navigate(`/register/SHIKU1`)}
         sx={{ minWidth: 200, "@media (min-width: 200px) and (max-width: 600px)": {
           minWidth: 100,
         }, }}

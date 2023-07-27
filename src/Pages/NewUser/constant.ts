@@ -44,7 +44,7 @@ export const addUserFormField = [
       label: "Mobile Number",
       name: "mobileNumber",
       errorLabel: "Please enter valid Mobile Number",
-      type: "text",
+      type: "number",
       inputProps: {
         maxLength: 10,
         minLength: 10,

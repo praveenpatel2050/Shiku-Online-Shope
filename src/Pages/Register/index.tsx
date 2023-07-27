@@ -165,7 +165,6 @@ const Register = () => {
           "@media (min-width: 200px) and (max-width: 560px)": {
             padding: "10px",
             width: "99%",
-            margin: "auto",
           },
         }}
       > 
@@ -174,14 +173,13 @@ const Register = () => {
             "@media (min-width: 200px) and (max-width: 560px)": {
               display: 'flex',
               flexDirection: 'column',
-              alignItems: 'left',
               maxWidth: '400px',
               width: '100%',
               padding: '20px',
               borderRadius: '5px',
             },
           }}>
-                 <Typography component="h1" variant="h4" sx={{ margin: '0px 0px 8px 10px',"@media (min-width: 200px) and (max-width: 600px)": {
+                 <Typography  component="h1" variant="h4" sx={{ margin: '0px 0px 8px 0px',"@media (min-width: 200px) and (max-width: 600px)": {
             fontSize: 24,
           },}}>
           Register
@@ -259,7 +257,7 @@ const Register = () => {
             <Button
               variant="contained"
               color="primary"
-              sx={{ width: '223px', margin: "8px 8px" }}
+              sx={{ width: '200px', margin: "8px 8px" }}
               onClick={() => displayRazorpay(amount)}
             >
               Pay Now
@@ -272,7 +270,7 @@ const Register = () => {
                   color="success"
                   type="submit"
                   sx={{
-                    margin: "8px 0px", width: "100px"
+                    margin: "8px 0px", width: "90px"
                   }}
                   onClick={handleSubmit}
                 >
@@ -282,7 +280,7 @@ const Register = () => {
                   variant="contained"
                   color="error"
                   type="reset"
-                  sx={{ margin: "8px 20px", width: "100px" }}
+                  sx={{ margin: "8px 20px", width: "90px" }}
                   onClick={() => setFormData(initialState)}
                 >
                   Reset

@@ -9,7 +9,7 @@ import Wallet from "../Pages/Wallet";
 // import MyEarning from "../Pages/MyEarning";
 import Setting from "../Pages/Setting";
 import ReffralUsers from "../Pages/Reffral Users";
-import Transactions from "../Pages/MyEarnings";
+import Transactions from "../Pages/Transactions";
 import Invitation from "../Pages/Invitation";
 
 const MainRoutes = {
@@ -17,7 +17,7 @@ const MainRoutes = {
   element: (
     <ProtectedRoute>
       <MainLayout />
-   </ProtectedRoute>
+    </ProtectedRoute>
   ),
   children: [
     {

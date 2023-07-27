@@ -1,10 +1,7 @@
-import {  useState, useEffect } from "react";
+import {  useState, } from "react";
 import {
   Box,
   Card,
-  Typography,
-  AppBar,
-  Toolbar,
 } from "@mui/material";
 import { cashColumns, cashTransactionData, CashTransaction } from "./constant";
 import { Tables } from "../../_component/ui/table";
@@ -32,9 +29,9 @@ const CashHistory = () => {
     <>
      <Box sx={{ padding: 0 }}>
       <div style={{ margin: "10px" }}>
-      <Card sx={{overflow: "scroll"}}>
+      <Card sx={{overflowX: "scroll"}}>
           <Box sx={{ minWidth: 100 }}>
-            <Tables columns={cashColumns} data={cashTransactionData} />
+            <Tables columns={cashColumns} data={cashTransactionData} pagination={true} />
           </Box>
         </Card>
       </div>

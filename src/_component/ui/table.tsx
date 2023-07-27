@@ -4,9 +4,11 @@ import {
   TableHead,
   TableRow,
   TableBody,
+  TableFooter,
 } from "@mui/material";
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import { styled } from '@mui/material/styles';
+import CustomTablePagination from "./Pagination";
 type IColumn = {
   id: string;
   label: string;
@@ -14,9 +16,13 @@ type IColumn = {
 export interface ITables {
   columns: IColumn[];
   data: any[];
+  pagination: boolean;
 }
 
-export const Tables: FC<ITables> = ({ data: item, columns}) => {
+export const Tables: FC<ITables> = ({ data: item, columns, pagination}) => {
+
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -37,6 +43,20 @@ export const Tables: FC<ITables> = ({ data: item, columns}) => {
       border: 0,
     },
   }));
+
+  const handleChangePage = (
+    event: React.MouseEvent<HTMLButtonElement> | null,
+    newPage: number,
+  ) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
 
   return (
     <Table sx={{ minWidth: 100 }}  stickyHeader aria-label="sticky table">
@@ -62,6 +82,19 @@ export const Tables: FC<ITables> = ({ data: item, columns}) => {
           );
         })}
       </TableBody>
+      <TableFooter>
+          <TableRow>
+          {pagination && (
+            <CustomTablePagination
+              count={item.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />
+          )}
+          </TableRow>
+        </TableFooter>
     </Table>
   );
 };

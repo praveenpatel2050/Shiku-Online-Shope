@@ -24,9 +24,9 @@ const ReferralHistory = () => {
     "@media (min-width: 200px) and (max-width: 600px)": {
     margin: "5px",
   },  }}>
-          <Card sx={{overflow: "scroll"}}>
+          <Card sx={{overflowX: "scroll"}}>
           <Box sx={{ minWidth: 500 }}>
-            <Tables columns={referralColumns} data={transactions} />
+            <Tables columns={referralColumns} data={transactions} pagination={true} />
           </Box>
         </Card>
     </Box>

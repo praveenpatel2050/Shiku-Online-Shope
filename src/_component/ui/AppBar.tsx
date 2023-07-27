@@ -5,11 +5,15 @@ import { AppBar, Toolbar, Button } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
 
 const rightLink = {
-    fontSize: 16,
+    fontSize: 18,
     color: 'common.white',
-    ml: 3,
+    ml: 4,
+    padding: '0px',
+    textDecoration: "underline",
+    
     '@media (min-width: 200px) and (max-width: 600px)': {
         fontSize: 14,  
+        ml: 1,
     },
 };
 
@@ -29,14 +33,14 @@ const navigate = useNavigate();
     return (
         <div>
             <AppBar position="fixed">
-                <Toolbar sx={{ justifyContent: 'space-between' }}>
+                <Toolbar sx={{ justifyContent: 'space-between', paddingLeft: '0px' }}>
                     <Box sx={{ flex: 1 }} />
                     <Link
                         variant="h6"
                         underline="none"
                         color="inherit"
                         sx={{ fontSize: 24, '@media (min-width: 200px) and (max-width: 600px)': {
-                            fontSize: 16,
+                            fontSize: 14,
                             
                         }, }}
                     >
@@ -57,16 +61,6 @@ const navigate = useNavigate();
                         >
                             Register    
                         </Button>
-                        {/* <Dialog open={loginOpen} onClose={handleLoginClose}>
-                            <DialogContent>
-                                <Login />
-                            </DialogContent>
-                        </Dialog>
-                        <Dialog open={registerOpen} onClose={handleRegisterClose}>
-                            <DialogContent>
-                                <Register />
-                            </DialogContent>
-                        </Dialog> */}
                     </Box>
                 </Toolbar>
             </AppBar>

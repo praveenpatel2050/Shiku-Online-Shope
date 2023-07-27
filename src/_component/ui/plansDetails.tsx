@@ -1,37 +1,3 @@
-// import * as React from 'react';
-// import { Theme } from '@mui/material/styles';
-// import { SxProps } from '@mui/system';
-// import Box from '@mui/material/Box';
-// import Grid from '@mui/material/Grid';
-// import Container from '@mui/material/Container';
-// import Typography from './Typography';
-// import Plan1Img from "../../assets/plan1.png"
-// import Plan2Img from "../../assets/plan2.png"
-// import Plan3Img from "../../assets/plan3.png"
-// import { Button } from '@mui/material';
-// const item: SxProps<Theme> = {
-//   display: 'flex',
-//   flexDirection: 'column',
-//   alignItems: 'center',
-//   px: 5,
-// };
-
-// const number = {
-//   fontSize: 24,
-//   fontFamily: 'default',
-//   color: 'secondary.main',
-//   fontWeight: 'medium',
-// };
-
-// function PlansDetails() {
-//   return (
-
-    
-
-//   );
-// }
-
-// export default PlansDetails;
 import * as React from 'react';
 import { Table, TableCell, TableBody, TableContainer, TableRow, Paper, Box, Container, Tab, TableHead, } from '@mui/material'
 import Typography from './Typography';
@@ -81,15 +47,17 @@ const  PlansDetails = () => {
             opacity: 0.7,
           }}
         />
-        <Typography variant="h4" marked="center"  component="h2" sx={{ mb: 4 }}>
+        <Typography variant="h4" marked="center"   sx={{ mb: 4, fontSize: 21, "@media (min-width: 200px) and (max-width: 560px)": {
+                            fontSize: 14,
+                          }, }}>
           Commission Based On Level
         </Typography>
         <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
+      <Table sx={{ minWidth: 200 }} aria-label="custom pagination table">
         <TableHead >
           <TableRow>
                       <TableCell>Level</TableCell>
-                      <TableCell align="right">Peoples To Add</TableCell>
+                      <TableCell align="right">Connect People</TableCell>
                       <TableCell align="right">Commission</TableCell>
                     </TableRow>
         </TableHead>

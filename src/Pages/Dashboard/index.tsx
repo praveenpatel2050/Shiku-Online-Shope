@@ -102,7 +102,7 @@ const Dashboard = () => {
             margin: "40px 0px 20px 0px",
             "@media (min-width: 200px) and (max-width: 600px)": {
               fontSize: 16,
-              margin: "20px 0px 10px 0px",
+              margin: "20px 0px 0px 0px",
             },
           }}
         >
@@ -113,8 +113,8 @@ const Dashboard = () => {
           align="center"
           variant="h5"
           sx={{
-            mb: 4,
-            mt: { xs: 4, sm: 4 },
+            mb: 2,
+            mt: { xs: 4, sm: 1 },
             "@media (min-width: 200px) and (max-width: 600px)": {
               fontSize: 12,
             },

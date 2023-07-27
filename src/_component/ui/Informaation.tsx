@@ -25,7 +25,9 @@ function InformationVideo() {
           px: 5,
         }}
       >
-        <Typography variant="h4" component="span" sx={{ fontSize: { xs: '1.5rem', sm: '2rem' }  }}>
+        <Typography variant="h4" component="span" sx={{ fontSize: { xs: '1.5rem', sm: '2rem' }, "@media (min-width: 200px) and (max-width: 560px)": {
+                            fontSize: 18,
+                          },   }}>
           Got any questions? Want To UNderstand?
         </Typography>
       </Button>

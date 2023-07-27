@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   TextField,
   Button,
@@ -12,11 +12,11 @@ import {
   Box,
   Paper,
   IconButton,
-} from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import addBankAccountApi from '../../Api/bankAccount';
-import Typography from '../../_component/ui/Typography';
-import { SingleUserApi } from '../../Api/user';
+} from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import addBankAccountApi from "../../Api/bankAccount";
+import Typography from "../../_component/ui/Typography";
+import { SingleUserApi, updateBankAccountApi } from "../../Api/user";
 
 interface AccountInfo {
   bankName: string;
@@ -29,17 +29,18 @@ const theme = createTheme();
 
 const AccountInfo: React.FC = () => {
   const [formData, setFormData] = useState<AccountInfo>({
-    bankName: '',
-    accountHolderName: '',
-    accountNumber: '',
-    ifscCode: '',
+    bankName: "",
+    accountHolderName: "",
+    accountNumber: "",
+    ifscCode: "",
   });
   const [submitted, setSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isEditMode, setIsEditMode] = useState<boolean>(false);
 
   const fetchAccountInfo = async () => {
     try {
-      const url = '/user/userInfo';
+      const url = "/user/userInfo";
       const response: any = await SingleUserApi(url);
       if (response.ok) {
         const data = await response.json();
@@ -51,7 +52,7 @@ const AccountInfo: React.FC = () => {
         }
       }
     } catch (error) {
-      console.error('Error', error);
+      console.error("Error", error);
     } finally {
       setIsLoading(false);
     }
@@ -64,10 +65,10 @@ const AccountInfo: React.FC = () => {
   const validateForm = () => {
     const { bankName, accountHolderName, accountNumber, ifscCode } = formData;
     return (
-      bankName !== '' &&
-      accountHolderName !== '' &&
-      accountNumber !== '' &&
-      ifscCode !== '' &&
+      bankName !== "" &&
+      accountHolderName !== "" &&
+      accountNumber !== "" &&
+      ifscCode !== "" &&
       /^\d{12}$/.test(accountNumber)
     );
   };
@@ -86,34 +87,49 @@ const AccountInfo: React.FC = () => {
       return;
     }
     try {
-      const url = '/user/addBankAccount';
+      const url = "/user/addBankAccount";
       const response: any = await addBankAccountApi(url, formData);
       if (response.ok) {
         setSubmitted(true);
       }
     } catch (error) {
-      console.error('Error', error);
+      console.error("Error", error);
+    }
+  };
+
+  const handleUpdate = async (event: React.FormEvent) => {
+    event.preventDefault();
+    if (!validateForm()) {
+      return;
+    }
+    try {
+      const url = "/user/updateBankAccount";
+      const response: any = await updateBankAccountApi(url, formData);
+      setSubmitted(true);
+    } catch (error) {
+      console.error("Error", error);
     }
   };
 
   const handleEdit = () => {
-    console.log('edit button clicked');
-  };
+    setSubmitted(false);
+    setIsEditMode(true)
+  }
 
   return (
     <ThemeProvider theme={theme}>
       <Box
         sx={{
-          margin: '10px 20px',
-          padding: '20px',
-          maxWidth: '100%',
-          background: '#F5FFFA',
-          boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px',
-          borderRadius: '5px', 
+          margin: "10px 20px",
+          padding: "20px",
+          maxWidth: "100%",
+          background: "#F5FFFA",
+          boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
+          borderRadius: "5px",
           "@media (min-width: 200px) and (max-width: 600px)": {
-          padding: "0px",
-          margin: "10px",
-        },
+            padding: "0px",
+            margin: "10px",
+          },
         }}
       >
         {isLoading ? (
@@ -122,13 +138,13 @@ const AccountInfo: React.FC = () => {
           <>
             {submitted ? (
               <>
-                <Box sx={{ flexGrow: 1,  }}>
+                <Box sx={{ flexGrow: 1 }}>
                   <AppBar
                     position="static"
                     sx={{
-                      backgroundColor: '#F5FFFA',
-                      color: 'black',
-                      boxShadow: 'none',
+                      backgroundColor: "#F5FFFA",
+                      color: "black",
+                      boxShadow: "none",
                     }}
                   >
                     <Toolbar>
@@ -136,21 +152,25 @@ const AccountInfo: React.FC = () => {
                         variant="h4"
                         marked="left"
                         component="h2"
-                        sx={{ flexGrow: 1, 
+                        sx={{
+                          flexGrow: 1,
                           "@media (min-width: 200px) and (max-width: 600px)": {
-                          fontSize: 19,
-                        },  }}
+                            fontSize: 19,
+                          },
+                        }}
                       >
                         Account Information:
                       </Typography>
                       <Button
                         variant="contained"
                         color="primary"
-                        sx={{ margin: '8px', 
-                        "@media (min-width: 200px) and (max-width: 600px)": {
-                        margin: "4px",
-                        padding: "2px 0px",
-                      }, }}
+                        sx={{
+                          margin: "8px",
+                          "@media (min-width: 200px) and (max-width: 600px)": {
+                            margin: "4px",
+                            padding: "2px 0px",
+                          },
+                        }}
                         onClick={handleEdit}
                       >
                         Edit
@@ -249,15 +269,17 @@ const AccountInfo: React.FC = () => {
                   fullWidth
                   variant="contained"
                   sx={{
-                    margin: '10px auto',
-                    height: '40px',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    display: 'flex',
+                    margin: "10px auto",
+                    height: "40px",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    display: "flex",
                   }}
-                  onClick={handleSubmit}
+                  onClick={(event) => {
+                    isEditMode ? handleUpdate(event) : handleSubmit(event);
+                  }}
                 >
-                  Submit Details
+                  {isEditMode ? "Update" : "Submit"}
                 </Button>
               </div>
             )}

@@ -26,7 +26,6 @@ interface RazorpayResponse {
 }
 const NewUser = () => {
   
-  
   const handleChange = (name: keyof FormData, value: string) => {
     const updatedFormData = {
       ...formData,
@@ -256,7 +255,7 @@ const NewUser = () => {
             <Button
               variant="contained"
               color="primary"
-              sx={{ width: '223px', margin: "8px 8px" }}
+              sx={{ width: '200px', margin: "8px 8px" }}
               onClick={() => displayRazorpay(amount)}
             >
               Pay Now
@@ -269,7 +268,7 @@ const NewUser = () => {
                   color="success"
                   type="submit"
                   sx={{
-                    margin: "8px 0px", width: "100px"
+                    margin: "8px 0px", width: "90px"
                   }}
                   onClick={handleSubmit}
                 >
@@ -279,7 +278,7 @@ const NewUser = () => {
                   variant="contained"
                   color="error"
                   type="reset"
-                  sx={{ margin: "8px 20px", width: "100px" }}
+                  sx={{ margin: "8px 20px", width: "90px" }}
                   onClick={() => setFormData(initialState)}
                 >
                   Reset

@@ -103,7 +103,7 @@ const ReffralUsers = () => {
                   },
                 }}
               >
-                Referral Users
+                My Team 
               </Typography>
               <Button
                 startIcon={
@@ -132,10 +132,10 @@ const ReffralUsers = () => {
             Click Add Users Button For Add Users
           </Typography>
         ) : (
-          <Card sx={{ overflow: "scroll" }}>
+          <Card sx={{ overflowX: "scroll" }}>
             <Box sx={{ minWidth: 800 }}>
               {/* Pass the modified users data with the updated "Delivery Status" */}
-              <Tables columns={columns} data={users} />
+              <Tables columns={columns} data={users} pagination={true} />
             </Box>
           </Card>
         )}

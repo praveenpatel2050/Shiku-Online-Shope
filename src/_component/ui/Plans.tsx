@@ -22,7 +22,10 @@ const number = {
   fontFamily: 'default',
   color: 'secondary.main',
   fontWeight: 'medium',
-  margin: '20px'
+  margin: '20px',
+  "@media (min-width: 200px) and (max-width: 560px)": {
+    margin: '0px 0px 10px 0px',
+  }, 
 };
 
 function Plans() {
@@ -52,7 +55,9 @@ function Plans() {
             opacity: 0.7,
           }}
         />
-        <Typography variant="h4" marked="center"  component="h2" sx={{ mb: 4 }}>
+        <Typography variant="h4" marked="center"   sx={{ mb: 4, fontSize: 23, "@media (min-width: 200px) and (max-width: 560px)": {
+                            fontSize: 18,
+                          }, }}>
           Our Plans
         </Typography>
         <div>

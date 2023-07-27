@@ -46,7 +46,6 @@ const Login = () => {
       showError(true);
       setMessage(`${auth.error}`);
       setIsLoading(false);
-      
     }
   }, [auth.error, message]);
   
