@@ -17,6 +17,10 @@ const AuthenticationRoutes = {
       element: <Login />
     },
     {
+      path: '/superuser',
+      element: <Login />
+    },
+    {
       path: '/register/:id/*',
       element: <Register />
     } 

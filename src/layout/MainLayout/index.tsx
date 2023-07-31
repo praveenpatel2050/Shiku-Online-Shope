@@ -8,7 +8,7 @@ import Header from "./Header/index";
 import Sidebar from "./Sidebar";
 
 import { useAppDispatch, useAppSelector } from "../../hooks/hook";
-import { selectAuth } from "../../store/auth/authSlice";
+import { selectAuth } from "../../store/userAuth/authSlice";
 import { selectLayout, setDrawer } from "../../store/layout/layoutSlice";
 import type { Theme } from "../../Theme/index";
 

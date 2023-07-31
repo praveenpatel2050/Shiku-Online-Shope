@@ -19,8 +19,8 @@ import {
 } from "@mui/material";
 
 import { useAppDispatch, useAppSelector } from "../../hooks/hook";
-import { login, selectAuth } from "../../store/auth/authSlice";
-
+import { login, selectAuth  } from "../../store/userAuth/authSlice";
+import { adminLogin} from "../../store/adminAuth/authSlice"
 interface ILoginFormInput {
   mobileNumber: number;
   password: string;
@@ -37,9 +37,21 @@ const Login = () => {
   const [error, showError] = useState(false);
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [ loginUser, setLoginUser] = useState<string>('')
+  const [ adminlogin, setAdminLogin] = useState<boolean>(false)
   // redux store
   const dispatch = useAppDispatch();
   const auth: any = useAppSelector(selectAuth);
+
+  const getMode = () => {
+    const path = window.location.href;
+    const pathArray = path.split("/");
+      const user = pathArray[pathArray.length - 1];
+      if (user === 'superuser') {
+        setAdminLogin(true);
+      }
+      setLoginUser(user);
+  };
 
   useEffect(() => {
     if (auth.error) {
@@ -55,6 +67,7 @@ const Login = () => {
     } else {
       localStorage.removeItem('refreshed');
     }
+    getMode();
   }, []);
 
   // form
@@ -65,11 +78,15 @@ const Login = () => {
   } = useForm<ILoginFormInput>({
     resolver: yupResolver(schema),
   });
-
-  const onSubmit: SubmitHandler<ILoginFormInput> = ({ mobileNumber, password }) => {
+  const url = adminlogin ? "/admin/login" : "/user/login";
+  const onSubmit: SubmitHandler<ILoginFormInput> = ({ mobileNumber, password, }) => {
     setMessage("");
     setIsLoading(true);
-    dispatch(login({ mobileNumber, password }));
+    if (adminlogin) {
+      dispatch(adminLogin({ mobileNumber, password, url }));
+    } else {
+      dispatch(login({ mobileNumber, password, url }));
+    }
   };
 
   if (auth.isLoggedIn) {

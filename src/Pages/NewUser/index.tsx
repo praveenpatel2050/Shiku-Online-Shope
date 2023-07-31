@@ -26,7 +26,7 @@ interface RazorpayResponse {
 }
 const NewUser = () => {
   
-  const handleChange = (name: keyof FormData, value: string) => {
+  const handleChange = (name: keyof FormData, value: string,) => {
     const updatedFormData = {
       ...formData,
       [name]: value,
@@ -34,21 +34,21 @@ const NewUser = () => {
     setFormData(updatedFormData);
   };
 
-  const initialState = {
+  const initialState :any= {
     userName: "",
     password: "",
     mobileNumber: "",
     // gender: "",
     // dob: "",
     // address: "",
-    planAmount: '100',
+    planAmount: '',
     planItemName: '',
     totalItem: "",
-    totalAmount: '1000',
     cartAmount: '0',
     paymentStatus: '0',
   };
-
+  initialState.totalAmount=initialState.planAmount*initialState.totalItem;
+  console.log(initialState);
   const [formData, setFormData] = useState<FormData>(initialState);
   const [formErrors, setFormErrors] = useState<{ [key: string]: boolean }>({});
   const [openPopup, setOpenPopup] = useState(false);
@@ -222,7 +222,7 @@ const NewUser = () => {
                           index: number,
                         ) => {
                           return (
-                            <MenuItem key={index} value={option.value}>
+                            <MenuItem key={index} value={option.value} >
                               {option.label}
                             </MenuItem>
                           );

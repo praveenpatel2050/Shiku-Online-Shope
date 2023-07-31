@@ -17,7 +17,7 @@ import {
 
 import User1 from "../../../assets/hanumanjii.jpg";
 import { useAppDispatch } from "../../../hooks/hook";
-import { logout } from "../../../store/auth/authSlice";
+import { logout } from "../../../store/userAuth/authSlice";
 import Typography from "../../../_component/ui/Typography";
 
 interface HeaderProps {

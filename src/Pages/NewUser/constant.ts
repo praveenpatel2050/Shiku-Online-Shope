@@ -173,7 +173,7 @@ export const addUserFormField = [
     mobileNumber: string;
     // gender: string;
     // address: string;
-    planAmount: string;
+    planAmount: string | number;
     totalItem: string;
     totalAmount: string;
     cartAmount: string;

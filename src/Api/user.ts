@@ -63,9 +63,8 @@ export const SingleUserApi = async (url: any) => {
   }
 };
 
-export const listUserApi = async (url: any, teachers: any) => {
+export const listUserApi = async (url: any, ) => {
   try {
-    const data = teachers;
     const response = await fetch(`${baseURL}${url}`, {
       method: "GET",
       headers: {

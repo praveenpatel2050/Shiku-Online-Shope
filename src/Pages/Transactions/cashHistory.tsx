@@ -4,12 +4,27 @@ import {
   Card,
 } from "@mui/material";
 import { cashColumns, cashTransactionData, CashTransaction } from "./constant";
-import { Tables } from "../../_component/ui/table";
+import  Tables  from "../../_component/ui/table";
 
 const CashHistory = () => {
 
  const [users, setUsers] = useState<CashTransaction[]>([]);
+ const [page, setPage] = useState(0);
+ const [rowsPerPage, setRowsPerPage] = useState(10);
 
+ const handleChangePage = (
+   event: React.MouseEvent<HTMLButtonElement> | null,
+   newPage: number
+ ) => {
+   setPage(newPage);
+ };
+
+ const handleChangeRowsPerPage = (
+   event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+ ) => {
+   setRowsPerPage(parseInt(event.target.value, 10));
+   setPage(0);
+ };
   const fetchUsers = async () => {
     try {
       const url = "/schoolAdmin/teachersList"
@@ -31,7 +46,10 @@ const CashHistory = () => {
       <div style={{ margin: "10px" }}>
       <Card sx={{overflowX: "scroll"}}>
           <Box sx={{ minWidth: 100 }}>
-            <Tables columns={cashColumns} data={cashTransactionData} pagination={true} />
+          <Tables columns={cashColumns} data={cashTransactionData} pagination={true} page={page}
+        rowsPerPage={rowsPerPage}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}  />
           </Box>
         </Card>
       </div>

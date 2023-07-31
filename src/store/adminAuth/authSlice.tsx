@@ -9,17 +9,14 @@ import { PayloadAction } from "@reduxjs/toolkit";
 
 interface User {
   id: string;
-  name: string;
+  adminName: string;
   mobileNumber: number;
   level: number;
   stage: number;
-  planItemName: number;
-  totalAmount: number;
   cartAmount: number;
-  paymentStatus: string;
   role: string;
-  referralCode: string;
-   // Add role property
+  // referralCode: string;
+  // Add role property
 }
 
 interface AuthState {
@@ -36,7 +33,7 @@ const initialState: AuthState = {
   ...(user ? { isLoggedIn: true } : { isLoggedIn: false }),
 };
 
-export const authSlice = createSlice({
+export const adminAuthSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
@@ -62,34 +59,34 @@ export const authSlice = createSlice({
 });
 
 // actions
-export const { loginSuccess, loginFail, logout } = authSlice.actions;
+export const { loginSuccess, loginFail, logout } = adminAuthSlice.actions;
 
-export const login =
+export const adminLogin =
   ({
     mobileNumber,
     password, 
+    url
   }: {
     mobileNumber: number;
     password: string;
+    url: string;
   }) =>
   async (dispatch: AppDispatch) => {
+
     try {
       // Make API call based on the selected role
-        const response = await AuthService.login(mobileNumber, password);
+        const response = await AuthService.login(mobileNumber, password, url);
         const token = response.token;
-        const data = response.userData;
+        const data = response.adminData;
         const data1: User = {
           id: data._id,
-          name: data.name,
+          adminName: data.name,
           mobileNumber: data.mobileNumber,
           level: data.level,
           stage: data.stage,
-          planItemName: data.pamItemName,
-          totalAmount: data.totalAmount,
           cartAmount: data.cartAmount,
-          paymentStatus: data.paymentStatus,
           role: data.role,
-          referralCode: data.referralCode,
+        //   referralCode: data.referralCode,
         }
         sessionStorage.setItem("token", token);
         return dispatch(loginSuccess(data1));
@@ -102,4 +99,4 @@ export const login =
 export const selectAuth = (state: RootState) => state.auth;
 
 // reducer
-export default authSlice.reducer;
+export default adminAuthSlice.reducer;

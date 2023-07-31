@@ -22,7 +22,7 @@ const Dashboard = () => {
   const fetchUsers = async () => {
     try {
       const url = "/user/reflUserList";
-      const response: any = await listUserApi(url, users);
+      const response: any = await listUserApi(url);
       const jsonData = await response.json();
       const referralList = jsonData.refUserList;
       setUsers(referralList);

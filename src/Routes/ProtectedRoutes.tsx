@@ -3,7 +3,7 @@ import { Navigate, useLocation } from "react-router-dom";
 import { getLocalData } from "../helpers/storage";
 
 import { useAppSelector } from "../hooks/hook";
-import { selectAuth } from "../store/auth/authSlice";
+import { selectAuth } from "../store/userAuth/authSlice";
 
 // ProtectedRoute:: Protected routes area accessible to logged in users only.
 const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
