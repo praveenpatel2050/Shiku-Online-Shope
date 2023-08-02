@@ -19,10 +19,9 @@ const UserDetails = () => {
     getMode();
   }, [])
   return (
-
     <div>
       <h6>User Detail of of this id:- {userId}</h6>
-      </div>
+    </div>
   )
 }
 
