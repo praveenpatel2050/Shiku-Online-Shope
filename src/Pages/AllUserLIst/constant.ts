@@ -8,4 +8,16 @@ export const columns = [
     { id: "paymentStatus", label: "Payment Status" },
     { id: 'totalItem', label: "Total Items" },
     { id: "deliveryStatus", label: "Delivery Status" },
+    {
+      id: "actions",
+      label: "Details",
+      action: [
+        {
+          id: "details",
+          type: "button",
+          icon: "BagdeIcon",
+          label: "User Details",
+        },
+      ],
+    },
   ];

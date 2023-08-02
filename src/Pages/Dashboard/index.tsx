@@ -8,6 +8,7 @@ import { getReferralBy } from "../../_component/other/referralBy";
 import { getTotalAmount } from "../../_component/other/cards";
 import { listUserApi } from "../../Api/user";
 import { styleIcon } from "../Wallet";
+
 export interface CardProps {
   icon: JSX.Element;
   length: any;

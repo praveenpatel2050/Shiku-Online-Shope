@@ -4,6 +4,7 @@ import NoMatch from "../Pages/NoMatch";
 import MainLayout from "../layout/MainLayout/index";
 import ProtectedRoute from "./ProtectedRoutes";
 import AllUserList from "../Pages/AllUserLIst";
+import UserDetails from "../Pages/UserDetails";
 
 
 const Admin = {
@@ -21,6 +22,10 @@ const Admin = {
     {
       path: "userlist",
       element: <AllUserList />,
+    },
+    {
+      path: "/userlist/details/user/:id",
+      element: <UserDetails />,
     },
     {
       path: "*",
