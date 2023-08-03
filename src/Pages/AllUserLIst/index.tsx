@@ -20,7 +20,7 @@ export interface RefrralUsers {
   mobileNumber: number | string;
   paymentStatus: string;
   totalItem: number | string;
-  deliverySatus: number | string;
+  deliveryStatusText: number | string;
 }
 const AllUserList = () => {
   const [users, setUsers] = useState<RefrralUsers[]>([]);
@@ -57,10 +57,10 @@ const AllUserList = () => {
         ) {
           // Update the "Delivery Status" field for each user
           const modifiedUsers = jsonData.userList.map(
-            (user: { deliverySatus: number }) => ({
+            (user: { deliveryStatus: string }) => ({
               ...user,
               deliveryStatusText:
-                user.deliverySatus === 0 ? "Pending" : "Delivered",
+                user.deliveryStatus === "0" ? "Pending" : "Delivered",    
             })
           );
           setUsers(modifiedUsers);
@@ -77,7 +77,7 @@ const AllUserList = () => {
 
   useEffect(() => {
     fetchUsers();
-    console.log("fetchUSer")
+    // console.log("fetchUSer" users.deliveryStatus)
   }, []);
 
   return (

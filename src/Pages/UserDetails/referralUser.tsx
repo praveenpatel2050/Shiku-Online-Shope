@@ -1,17 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, FC, useEffect } from "react";
 import {
   Box,
   Card,
-  Button,
   Typography,
   AppBar,
   Toolbar,
-  SvgIcon,
 } from "@mui/material";
-import { columns } from "./constant";
+import { columns } from "../Reffral Users/constant";
 import Tables from "../../_component/ui/table";
 import { useNavigate } from "react-router-dom";
-import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 import { listUserApi } from "../../Api/user";
 
 export interface RefrralUsers {
@@ -21,8 +18,11 @@ export interface RefrralUsers {
   totalItem: number | string;
   deliveryStatusText: number | string;
 }
+interface IList {
+    userId: string
+}
 
-const ReffralUsers = () => {
+const ReffralUsers: FC<IList>  = ( userId) => {
   const [users, setUsers] = useState<RefrralUsers[]>([]);
   const [isNoUser, setIsNoUser] = useState(false);
   const [page, setPage] = useState(0);
@@ -45,7 +45,7 @@ const ReffralUsers = () => {
 
   const fetchUsers = async () => {
     try {
-      const url = "/user/reflUserList";
+      const url = `/user/reflUserList?userId=${userId}`;
       const response: any = await listUserApi(url);
       if (response.ok) {
         const jsonData = await response.json();
@@ -75,9 +75,10 @@ const ReffralUsers = () => {
   };
 
   useEffect(() => {
-    fetchUsers();
-    console.log("fetchUSer");
-  }, []);
+    if (userId) {
+      fetchUsers();
+    }
+  }, [userId]);
 
   return (
     <Box
@@ -121,31 +122,13 @@ const ReffralUsers = () => {
             >
               My Team
             </Typography>
-            <Button
-              startIcon={
-                <SvgIcon fontSize="small">
-                  <PersonAddAlt1Icon />
-                </SvgIcon>
-              }
-              sx={{
-                "@media (min-width: 200px) and (max-width: 600px)": {
-                  padding: "2px 12px",
-                  fontSize: "0.7rem",
-                },
-              }}
-              onClick={() => navigate(`/adduser/`)}
-              variant="contained"
-            >
-              Add Users
-            </Button>
           </Toolbar>
         </AppBar>
       </Box>
 
       {isNoUser ? (
         <Typography variant="h6" align="center">
-          There are no users added by you. <br />
-          Click Add Users Button For Add Users
+          There are no users added by user
         </Typography>
       ) : (
         <Card sx={{ overflowX: "scroll" }}>

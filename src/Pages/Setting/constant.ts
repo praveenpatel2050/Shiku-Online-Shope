@@ -7,6 +7,7 @@ export interface UserFormData {
   highestClass: string;
   totalItem: string | number;
   totalAmount: string | number;
+  deliveryStatus: string | number;
   referralCode: string;
 }
 
@@ -20,6 +21,7 @@ export const userInitialState = {
   totalItem: "",
   totalAmount: "",
   referralCode: "",
+  deliveryStatus: "",
 };
 
 export interface UserBankData {

@@ -48,6 +48,8 @@ export const updateBankAccountApi = async (url: any, formData: any = 0) => {
   }
 };
 
+
+
 export const SingleUserApi = async (url: any) => {
   try {
     const response = await fetch(`${baseURL}${url}`, {

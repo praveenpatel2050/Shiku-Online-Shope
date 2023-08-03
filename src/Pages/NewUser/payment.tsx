@@ -24,7 +24,7 @@ declare global {
 interface RazorpayResponse {
   razorpay_payment_id: string;
 }
-const NewUser = () => {
+const Payment = () => {
   const handleChange = (name: keyof FormData, value: string) => {
     const updatedFormData = {
       ...formData,
@@ -310,4 +310,4 @@ const NewUser = () => {
   );
 };
 
-export default NewUser;
+export default Payment;

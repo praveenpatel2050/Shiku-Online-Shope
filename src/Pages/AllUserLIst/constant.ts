@@ -7,7 +7,7 @@ export const columns = [
     // { id: "address", label: "Address" },
     { id: "paymentStatus", label: "Payment Status" },
     { id: 'totalItem', label: "Total Items" },
-    { id: "deliveryStatus", label: "Delivery Status" },
+    { id: "deliveryStatusText", label: "Delivery Status" },
     {
       id: "actions",
       label: "Details",
