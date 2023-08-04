@@ -61,7 +61,7 @@ const cardData: CardProps[] = [
       sx={{ ...styleIcon, color: 'gray' }}
       />
     ),
-    length: `username`,
+    length: `Praveen`,
     label: "Earnings",
     navigate: "/transactions",
   },
@@ -98,27 +98,6 @@ const UserDetails = () => {
   useEffect(() => {
     getMode();
   }, []);
-
-
-  const fetchBankAccount = async () => {
-    try {
-      const url = `/user/userInfo?userId=${userId}`;
-      const response: any = await SingleUserApi(url);
-      const jsonData = await response.json();
-      const userData = jsonData.userInfoData;
-      const bankData = userData.bankAccountId;
-      setFormData(userData);
-      // }
-    } catch (error) {
-      console.error("Error", error);
-    }
-  };
-
-  useEffect(() => {
-    if (userId) {
-      fetchBankAccount();
-    }
-  }, [userId,]);
 
   return (
     <Box

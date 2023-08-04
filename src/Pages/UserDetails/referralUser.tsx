@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { columns } from "../Reffral Users/constant";
 import Tables from "../../_component/ui/table";
 import { Box, Card, Typography } from '@mui/material';
@@ -78,11 +78,11 @@ const ReferralListByUser = () => {
     }
   };
 
-  useEffect(() => {
+  useMemo(() => {
     if (userId) {
       fetchUsers();
     }
-  }, [userId,]);
+  }, [userId]);
 
   return (
           <Box

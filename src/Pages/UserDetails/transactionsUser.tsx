@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Box, Card } from "@mui/material";
 import {
   referralColumns,
@@ -49,11 +49,11 @@ const TransactionUser = () => {
       console.error("Error", error);
     }
   };
-  useEffect(() => {
+  useMemo(() => {
     if (userId) {
       fetchUsers();
     }
-  }, [userId,]);
+  }, [userId]);
 
   return (
     <Box
