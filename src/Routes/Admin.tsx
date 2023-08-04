@@ -5,6 +5,7 @@ import MainLayout from "../layout/MainLayout/index";
 import ProtectedRoute from "./ProtectedRoutes";
 import AllUserList from "../Pages/AllUserLIst";
 import UserDetails from "../Pages/UserDetails";
+import DeliveryStatus from "../Pages/DeliveryStatus";
 
 
 const Admin = {
@@ -26,6 +27,10 @@ const Admin = {
     {
       path: "/userlist/details/user/:id",
       element: <UserDetails />,
+    },
+    {
+      path: "/delivery",
+      element: <DeliveryStatus />,
     },
     {
       path: "*",

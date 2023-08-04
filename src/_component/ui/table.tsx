@@ -11,6 +11,9 @@ import {
   TableFooter,
   Box,
   SvgIcon,
+  Chip,
+  FormControlLabel,
+  Checkbox,
 } from "@mui/material";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import { styled } from "@mui/material/styles";
@@ -22,6 +25,8 @@ interface IColumn {
   id: string;
   label: string;
   action?: any[];
+  status?: any[];
+
 }
 
 interface ITables {
@@ -114,7 +119,6 @@ const Tables: FC<ITables> = ({
             <StyledTableRow hover key={index}>
               {columns.map((column, index) => {
                   if (column.id === "actions" && column?.action) {
-                    
                     return (
                       <TableCell
                         sx={{
@@ -177,8 +181,33 @@ const Tables: FC<ITables> = ({
                         </TableCell>
               );
             }
+            if (column.id === "status" && column?.status) {
+              return (
+                <TableCell
+                  sx={{
+                    textTransform: 'capitalize',
+                    "@media (min-width: 200px) and (max-width: 560px)": {
+                      fontSize: "0.675rem",
+                    },
+                  }}
+                  key={index}
+                >
+                    <Button
+                    id={data._id}
+                    aria-describedby={id}
+                    onClick={(event) => {
+                      setCurrentUserId(data._id);
+                      handleClick(event);
+                    }}
+                    sx={{ color: 'black'}}
+                  >
+                    <FormControlLabel control={<Checkbox sx={{ }} color="success" />} label="Delivered" sx={{ textTransform: 'capitalize'}} />
+                  </Button>
+                  </TableCell>
+        );
+      }
                 return (
-                  <StyledTableCell key={index}>
+                  <StyledTableCell key={index} sx={{textTransform: 'capitalize',}}>
                     {data[column.id]}
                   </StyledTableCell>
                 );

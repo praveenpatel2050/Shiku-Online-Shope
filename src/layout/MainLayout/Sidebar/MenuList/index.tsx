@@ -15,6 +15,7 @@ import ContactMailOutlinedIcon from '@mui/icons-material/ContactMailOutlined';
 import GroupsOutlinedIcon from '@mui/icons-material/GroupsOutlined';
 import AddLinkIcon from '@mui/icons-material/AddLink';
 import SettingsIcon from '@mui/icons-material/Settings';
+import DeliveryDiningIcon from '@mui/icons-material/DeliveryDining';
 import ListIcon from '@mui/icons-material/List';
 import { getRole } from '../../../../_component/other/utils';
 interface MenuProps {
@@ -54,6 +55,7 @@ const MenuList = () => {
     : []),
     ...(role === 'ADMIN' ? [
         { pathName: '/userlist', label: 'User List', icon: <ListIcon sx={{ fontSize: '2rem',color: "purple", backgroundColor: '#F5FFFA' }} /> },
+        { pathName: '/delivery', label: 'Delivery Status', icon: <DeliveryDiningIcon sx={{ fontSize: '2rem',color: "#322653", backgroundColor: '#F5FFFA' }} /> },
     ]
      : [])
     ];

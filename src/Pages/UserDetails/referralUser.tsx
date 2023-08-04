@@ -1,15 +1,8 @@
-import { useState, FC, useEffect } from "react";
-import {
-  Box,
-  Card,
-  Typography,
-  AppBar,
-  Toolbar,
-} from "@mui/material";
+import React, { useEffect, useState } from 'react'
 import { columns } from "../Reffral Users/constant";
 import Tables from "../../_component/ui/table";
-import { useNavigate } from "react-router-dom";
-import { listUserApi } from "../../Api/user";
+import { Box, Card, Typography } from '@mui/material';
+import { listUserApi } from '../../Api/user';
 
 export interface RefrralUsers {
   userName: string;
@@ -18,15 +11,27 @@ export interface RefrralUsers {
   totalItem: number | string;
   deliveryStatusText: number | string;
 }
-interface IList {
-    userId: string
-}
 
-const ReffralUsers: FC<IList>  = ( userId) => {
+const ReferralListByUser = () => {
   const [users, setUsers] = useState<RefrralUsers[]>([]);
   const [isNoUser, setIsNoUser] = useState(false);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [userId, setUserId] = useState("");
+
+
+  const getMode = () => {
+    const path = window.location.href;
+    const pathArray = path.split("/");
+    if (pathArray[pathArray.length - 2] === "user") {
+      const referralId = pathArray[pathArray.length - 1];
+      setUserId(referralId);
+    }
+  };
+
+  useEffect(() => {
+    getMode();
+  }, []);
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
@@ -41,7 +46,6 @@ const ReffralUsers: FC<IList>  = ( userId) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-  const navigate = useNavigate();
 
   const fetchUsers = async () => {
     try {
@@ -56,10 +60,10 @@ const ReffralUsers: FC<IList>  = ( userId) => {
         ) {
           // Update the "Delivery Status" field for each user
           const modifiedUsers = jsonData.refUserList.map(
-            (user: { deliverySatus: string }) => ({
+            (user: { deliveryStatus: string }) => ({
               ...user,
               deliveryStatusText:
-                user.deliverySatus === "0" ? "Pending" : "Delivered",
+                user.deliveryStatus === "0" ? "Pending" : "Delivered",
             })
           );
           setUsers(modifiedUsers);
@@ -78,10 +82,10 @@ const ReffralUsers: FC<IList>  = ( userId) => {
     if (userId) {
       fetchUsers();
     }
-  }, [userId]);
+  }, [userId,]);
 
   return (
-    <Box
+          <Box
       sx={{
         margin: "20px",
         "@media (min-width: 200px) and (max-width: 600px)": {
@@ -89,44 +93,7 @@ const ReffralUsers: FC<IList>  = ( userId) => {
         },
       }}
     >
-      <Box
-        sx={{
-          flexGrow: 1,
-          marginBottom: "20px",
-          "@media (min-width: 200px) and (max-width: 600px)": {
-            marginBottom: "10px",
-          },
-        }}
-      >
-        <AppBar
-          position="static"
-          sx={{ backgroundColor: "#F5FFFA", color: "black" }}
-        >
-          <Toolbar
-            sx={{
-              "@media (min-width: 200px) and (max-width: 600px)": {
-                padding: "0px 8px",
-              },
-            }}
-          >
-            <Typography
-              variant="h6"
-              component="div"
-              sx={{
-                flexGrow: 1,
-                fontSize: 25,
-                "@media (min-width: 200px) and (max-width: 600px)": {
-                  fontSize: 11,
-                },
-              }}
-            >
-              My Team
-            </Typography>
-          </Toolbar>
-        </AppBar>
-      </Box>
-
-      {isNoUser ? (
+       {isNoUser ? (
         <Typography variant="h6" align="center">
           There are no users added by user
         </Typography>
@@ -134,6 +101,21 @@ const ReffralUsers: FC<IList>  = ( userId) => {
         <Card sx={{ overflowX: "scroll" }}>
           <Box sx={{ minWidth: 800 }}>
             {/* Pass the modified users data with the updated "Delivery Status" */}
+            <Typography
+              variant="h6"
+              component="div"
+              sx={{
+                flexGrow: 1,
+                fontSize: 25,
+                marginLeft: 2,
+                textTransform: "capitalize",
+                "@media (min-width: 200px) and (max-width: 600px)": {
+                  fontSize: 11,
+                },
+              }}
+            >
+              Referral Users
+            </Typography>
             <Tables
               columns={columns}
               data={users}
@@ -146,8 +128,8 @@ const ReffralUsers: FC<IList>  = ( userId) => {
           </Box>
         </Card>
       )}
-    </Box>
-  );
-};
+      </Box>
+  )
+}
 
-export default ReffralUsers;
+export default ReferralListByUser
