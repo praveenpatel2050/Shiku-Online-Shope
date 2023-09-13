@@ -3,7 +3,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { Navigate } from "react-router-dom";
 import * as yup from "yup";
-
 import {
   Box,
   Button,
@@ -19,8 +18,8 @@ import {
 } from "@mui/material";
 
 import { useAppDispatch, useAppSelector } from "../../hooks/hook";
-import { login, selectAuth  } from "../../store/userAuth/authSlice";
-import { adminLogin} from "../../store/adminAuth/authSlice"
+import { login, selectAuth } from "../../store/userAuth/authSlice";
+import { adminLogin } from "../../store/adminAuth/authSlice";
 interface ILoginFormInput {
   mobileNumber: number;
   password: string;
@@ -31,14 +30,12 @@ const schema = yup.object({
   password: yup.string().required("Enter a valid password"),
 });
 
-
-
 const Login = () => {
   const [error, showError] = useState(false);
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [ loginUser, setLoginUser] = useState<string>('')
-  const [ adminlogin, setAdminLogin] = useState<boolean>(false)
+  const [loginUser, setLoginUser] = useState<string>("");
+  const [adminlogin, setAdminLogin] = useState<boolean>(false);
   // redux store
   const dispatch = useAppDispatch();
   const auth: any = useAppSelector(selectAuth);
@@ -46,11 +43,11 @@ const Login = () => {
   const getMode = () => {
     const path = window.location.href;
     const pathArray = path.split("/");
-      const user = pathArray[pathArray.length - 1];
-      if (user === 'superuser') {
-        setAdminLogin(true);
-      }
-      setLoginUser(user);
+    const user = pathArray[pathArray.length - 1];
+    if (user === "superuser") {
+      setAdminLogin(true);
+    }
+    setLoginUser(user);
   };
 
   useEffect(() => {
@@ -60,12 +57,12 @@ const Login = () => {
       setIsLoading(false);
     }
   }, [auth.error, message]);
-  
+
   useEffect(() => {
-    if (!localStorage.getItem('refreshed')) {
-      localStorage.setItem('refreshed', 'true');
+    if (!localStorage.getItem("refreshed")) {
+      localStorage.setItem("refreshed", "true");
     } else {
-      localStorage.removeItem('refreshed');
+      localStorage.removeItem("refreshed");
     }
     getMode();
   }, []);
@@ -79,7 +76,10 @@ const Login = () => {
     resolver: yupResolver(schema),
   });
   const url = adminlogin ? "/admin/login" : "/user/login";
-  const onSubmit: SubmitHandler<ILoginFormInput> = ({ mobileNumber, password, }) => {
+  const onSubmit: SubmitHandler<ILoginFormInput> = ({
+    mobileNumber,
+    password,
+  }) => {
     setMessage("");
     setIsLoading(true);
     if (adminlogin) {
@@ -90,16 +90,21 @@ const Login = () => {
   };
 
   if (auth.isLoggedIn) {
-    if (localStorage.getItem('refreshed')) {
-      localStorage.removeItem('refreshed');
+    if (localStorage.getItem("refreshed")) {
+      localStorage.removeItem("refreshed");
       window.location.reload();
     }
     return <Navigate to="/dashboard" replace />;
   }
 
   return (
-    <Container component="main" maxWidth="xs" sx={{
-      padding: "0px",}}>
+    <Container
+      component="main"
+      maxWidth="xs"
+      sx={{
+        padding: "0px",
+      }}
+    >
       <Snackbar
         open={error}
         autoHideDuration={3000}
@@ -124,15 +129,22 @@ const Login = () => {
           display: "flex",
           padding: "0px",
           flexDirection: "column",
-          alignItems: "center"
-          ,"@media (min-width: 200px) and (max-width: 600px)": {
+          alignItems: "center",
+          "@media (min-width: 200px) and (max-width: 600px)": {
             marginTop: 4,
           },
         }}
       >
-        <Typography component="h1" variant="h4" sx={{ marginBottom: '30px',"@media (min-width: 200px) and (max-width: 600px)": {
-            fontSize: 24,
-          },}}>
+        <Typography
+          component="h1"
+          variant="h4"
+          sx={{
+            marginBottom: "30px",
+            "@media (min-width: 200px) and (max-width: 600px)": {
+              fontSize: 24,
+            },
+          }}
+        >
           Sign in
         </Typography>
         <Box

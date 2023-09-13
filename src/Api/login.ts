@@ -1,6 +1,6 @@
 const baseURL = "http://localhost:3008";
 
-async function login(mobileNumber: number, password: string, url: string) {
+async function login(mobileNumber: number | null, password: string, url: string) {
   return await fetch(`${baseURL}${url}`, {
     method: "POST",
     headers: {

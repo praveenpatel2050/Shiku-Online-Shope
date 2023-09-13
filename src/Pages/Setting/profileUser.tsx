@@ -112,14 +112,14 @@ const UserProfile = () => {
               className="order-xl-2"
               style={{ paddingLeft: "0px", paddingBottom: "0px" }}
             >
-              <Box
-                className="card card-profile"
-                sx={{
-                  padding: "10px", backgroundColor: "#F5FFFA",
-                }}
-              >
+              
                 {bankAccount && Object.keys(bankAccount).length > 0 ? (
-                  <>
+                  <Box
+                  className="card card-profile"
+                  sx={{
+                    padding: "10px", backgroundColor: "#F5FFFA",
+                  }}
+                >
                     <Typography variant="h6">Bank Account Details</Typography>
                     <Typography
                       color="textSecondary"
@@ -138,11 +138,17 @@ const UserProfile = () => {
                     <Typography variant="h5">
                       IFSC Code: {bankAccount.ifscCode}
                     </Typography>
-                  </>
+                  </Box>
                 ) : (
-                  <Typography>Add Your Bank Account </Typography>
+                  <Box
+                  className="card card-profile"
+                  sx={{
+                    padding: "10px", backgroundColor: "#F5FFFA", border: '1px solid red'
+                  }}
+                >
+                  <Typography sx={{color: 'red'}} >Add Your Bank Account ! </Typography>
+                  </Box>
                 )}
-              </Box>
             </div>
           </Box>
           <div

@@ -25,7 +25,7 @@ const MainRoutes = {
       element: <Dashboard />,
     },
     {
-      path: "/adduser",
+      path: "/adduser/*",
       element: <NewUser />,
     },
     {

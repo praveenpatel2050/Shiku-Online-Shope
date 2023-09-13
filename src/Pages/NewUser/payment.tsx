@@ -114,7 +114,7 @@ const Payment = () => {
       key: "rzp_test_VdGdvprTKB8u1w",
       currency: "INR",
       amount: amount * 100,
-      name: "Code with akky",
+      name: "Shiku Online Shopee",
       description: "Thanks for purchasing",
       image:
         "https://mern-blog-akky.herokuapp.com/static/media/logo.8c649bfa.png",
@@ -123,7 +123,7 @@ const Payment = () => {
         alert("Payment Successfully");
       },
       prefill: {
-        name: "code with akky",
+        name: "Shiku Online Shopee",
       },
     };
 

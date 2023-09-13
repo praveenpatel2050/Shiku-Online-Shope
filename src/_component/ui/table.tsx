@@ -26,7 +26,7 @@ interface IColumn {
   label: string;
   action?: any[];
   status?: any[];
-
+  
 }
 
 interface ITables {
@@ -42,6 +42,7 @@ interface ITables {
   onRowsPerPageChange: (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
+  onCheckboxChange?: (userId: string) => void;
 }
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -71,6 +72,7 @@ const Tables: FC<ITables> = ({
   rowsPerPage,
   onPageChange,
   onRowsPerPageChange,
+  onCheckboxChange, 
 }) => {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const navigate = useNavigate();
@@ -97,6 +99,14 @@ const Tables: FC<ITables> = ({
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     onRowsPerPageChange(event);
+  };
+
+  const handleCheckboxChange = (userId: string) => { // Assuming the user ID is set as the checkbox's ID
+    console.log(`User ID ${userId} is checked.`);
+    // You can now use the `checkedUserId` value as needed.
+    if (onCheckboxChange) {
+      onCheckboxChange(userId);
+    }
   };
 
   return (
@@ -155,7 +165,6 @@ const Tables: FC<ITables> = ({
                                 return (
                                   <Button
                                   startIcon={
-                                    
                                        <BadgeIcon /> 
                                   }
                                   key={indexb}
@@ -201,7 +210,7 @@ const Tables: FC<ITables> = ({
                     }}
                     sx={{ color: 'black'}}
                   >
-                    <FormControlLabel control={<Checkbox sx={{ }} color="success" />} label="Delivered" sx={{ textTransform: 'capitalize'}} />
+                    <FormControlLabel control={<Checkbox sx={{ }} color="success" />} label="Delivered" onChange={() => handleCheckboxChange(data._id)} sx={{ textTransform: 'capitalize'}} />
                   </Button>
                   </TableCell>
         );

@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import {
   AppBar,
@@ -8,18 +8,19 @@ import {
   Typography,
   Menu,
   Container,
+  Snackbar
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 
 import NavMenu from "./NavMenu";
 import NavMenuXs from "./NavMenuXs";
 import routes from "../../routes";
+import { getPaymentStatus } from "../../_component/other/paymentStatus";
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null,
   );
-
   const handleOpenNavMenu = useCallback(
     (event: React.MouseEvent<HTMLElement>) => {
       setAnchorElNav(event.currentTarget);
@@ -31,7 +32,9 @@ const Header = () => {
     setAnchorElNav(null);
   }, []);
 
+
   return (
+    <>
     <AppBar position="sticky" color="primary">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -112,6 +115,8 @@ const Header = () => {
         </Toolbar>
       </Container>
     </AppBar>
+
+    </>
   );
 };
 
