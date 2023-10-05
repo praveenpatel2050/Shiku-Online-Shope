@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import {
   Box,
   TextField,
@@ -13,9 +13,11 @@ import {
 import Typography from "../../_component/ui/Typography";
 import { useNavigate } from "react-router-dom";
 import { addUserFormField } from "./constant";
-import { FormData } from "./constant";
+import { FormData, OrderData } from "./constant";
 import { addUserApi } from "../../Api/user";
 import Popup from "../../_component/ui/popup";
+import ShikuOnlineLogo from "../../assets/logo.png";
+import { OrderIdGenerate } from "../../Api/payment";
 declare global {
   interface Window {
     Razorpay: any;
@@ -24,36 +26,50 @@ declare global {
 interface RazorpayResponse {
   razorpay_payment_id: string;
 }
+const initialState: any = {
+  userName: "",
+  password: "",
+  mobileNumber: "",
+  planAmount: "",
+  planItemName: "",
+  totalAmount: 0,
+  totalItem: 0,
+  cartAmount: "0",
+  paymentStatus: "0",
+};
+const orderInitialState: any = {
+  requestAmount: 0
+}
+
 const NewUser = () => {
   const handleChange = (name: keyof FormData, value: string) => {
     const updatedFormData = {
       ...formData,
       [name]: value,
     };
+    updatedFormData.planAmount =
+      updatedFormData.planItemName === "belt" ||
+      updatedFormData.planItemName === "watch"
+        ? 100
+        : updatedFormData.planItemName === "smart Watch"
+        ? 1000
+        : 10;
+    updatedFormData.totalAmount =
+      updatedFormData.planAmount * updatedFormData.totalItem;
+      orderData.requestAmount = updatedFormData.totalAmount;
+      setAmount(updatedFormData.totalAmount);
     setFormData(updatedFormData);
   };
+
   // scraping
-  const initialState: any = {
-    userName: "",
-    password: "",
-    mobileNumber: "",
-    // gender: "",
-    // dob: "",
-    // address: "",
-    planAmount: "10",
-    planItemName: "",
-    totalItem: "",
-    cartAmount: "0",
-    paymentStatus: "0",
-  };
-  initialState.totalAmount = initialState.planAmount * initialState.totalItem;
-  console.log(initialState);
+''
   const [formData, setFormData] = useState<FormData>(initialState);
   const [formErrors, setFormErrors] = useState<{ [key: string]: boolean }>({});
   const [openPopup, setOpenPopup] = useState(false);
-
+  const [amount, setAmount] = useState<number>(0);
+  const [orderId, setOrderId] = useState<string>('')
+  const [orderData, _setOrderData] = useState<OrderData>(orderInitialState)
   const navigate = useNavigate();
-  const amount = 100;
 
   const validateForm = () => {
     const errors: { [key: string]: boolean } = {};
@@ -76,11 +92,24 @@ const NewUser = () => {
     try {
       const url = "/user/add";
       const response: any = await addUserApi(url, formData);
-      setOpenPopup(true); // Show success popup
-      setTimeout(() => {
-        setOpenPopup(false);
-        navigate("/referralusers");
-      }, 2000);
+      console.log("amount", amount)
+      console.log(formData.totalAmount)
+      if (response) {
+        const orderIdUrl = "/user/createOrder";
+        try {
+          const orderResponse: any = await OrderIdGenerate(orderIdUrl, orderData);
+          const jsonData = await orderResponse.json();
+          if (jsonData) {
+            navigate(`adduser/paynow/${jsonData.id}`)
+            setOrderId(jsonData.id)
+            displayRazorpay(amount);
+          }
+        } catch (error) {
+          console.error("Error", error);
+        }
+      }
+      // setFormData(response);
+      console.log("formData", formData);
     } catch (error) {
       console.error("Error", error);
     }
@@ -111,25 +140,28 @@ const NewUser = () => {
     }
 
     const options = {
-      key: "rzp_test_VdGdvprTKB8u1w",
+      key: "rzp_test_V4tGgwJD2STEcq",
       currency: "INR",
       amount: amount * 100,
-      name: "Code with akky",
+      name: "Shiku Online Shopee",
       description: "Thanks for purchasing",
-      image:
-        "https://mern-blog-akky.herokuapp.com/static/media/logo.8c649bfa.png",
+      image: ShikuOnlineLogo,
+      order_id: orderId,
       handler: function (response: RazorpayResponse) {
         alert(response.razorpay_payment_id);
         alert("Payment Successfully");
+        navigate("/referralusers")
       },
+     
       prefill: {
-        name: "code with akky",
+        name: "Shiku Online Shopee",
       },
     };
 
     const paymentObject = new window.Razorpay(options);
     paymentObject.open();
   }
+
   return (
     <>
       <Container
@@ -264,14 +296,6 @@ const NewUser = () => {
                 />
               );
             })}
-            <Button
-              variant="contained"
-              color="primary"
-              sx={{ width: "200px", margin: "8px 8px" }}
-              onClick={() => displayRazorpay(amount)}
-            >
-              Pay Now
-            </Button>
             <Box className="footer-btn" sx={{ padding: "0px 8px" }}>
               <Stack direction={"row"}>
                 <Button

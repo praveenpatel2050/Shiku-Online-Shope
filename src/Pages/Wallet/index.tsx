@@ -33,7 +33,7 @@ const Wallet = () => {
         />
       ),
       length: "1500",
-      label: "Current Account Balance",
+      label: "Cart Account Balance",
     },
     {
       icon: (
@@ -42,7 +42,7 @@ const Wallet = () => {
         />
       ),
       length: "1500",
-      label: "Total Withdraw Amount",
+      label: "Total Amount Balance",
     },
     {
       icon: (

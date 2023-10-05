@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useMemo } from "react";
+import  { useState, useEffect, useMemo } from "react";
 import { Box, Card } from "@mui/material";
 import {
   referralColumns,
-  referralinititalState,
   ReferralUsers,
 } from "../Transactions/constant"
 import Tables from "../../_component/ui/table";
@@ -28,7 +27,7 @@ const TransactionUser = () => {
   }, []);
 
   const handleChangePage = (
-    event: React.MouseEvent<HTMLButtonElement> | null,
+    _event: React.MouseEvent<HTMLButtonElement> | null,
     newPage: number
   ) => {
     setPage(newPage);

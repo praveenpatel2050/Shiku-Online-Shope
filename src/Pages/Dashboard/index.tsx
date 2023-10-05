@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, Card, CardContent, Container } from "@mui/material";
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Container,
+} from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import Typography from "../../_component/ui/Typography";
 import { useNavigate } from "react-router-dom";
 import { getReferralBy } from "../../_component/other/referralBy";
-import { getTotalAmount } from "../../_component/other/cards";
-import { listUserApi } from "../../Api/user";
+import { SingleUserApi } from "../../Api/user";
 import { styleIcon } from "../Wallet";
 
 export interface CardProps {
@@ -17,52 +22,57 @@ export interface CardProps {
 }
 
 const Dashboard = () => {
-  const [users, setUsers] = useState([]);
+  const [users, _setUsers] = useState([]);
   const [totalAmount, setTotalAmount] = useState("");
 
-  const fetchUsers = async () => {
-    try {
-      const url = "/user/reflUserList";
-      const response: any = await listUserApi(url);
-      const jsonData = await response.json();
-      const referralList = jsonData.refUserList;
-      setUsers(referralList);
-      console.log("referral list",referralList);
-    } catch (error) {
-      console.error("Error", error);
-    }
-  };
+  // const fetchUsers = async () => {
+  //   try {
+  //     const url = "/user/reflUserList";
+  //     const response: any = await listUserApi(url);
+  //     const jsonData = await response.json();
+  //     const referralList = jsonData.refUserList;
+  //     setUsers(referralList);
+  //     console.log("referral list", referralList);
+  //   } catch (error) {
+  //     console.error("Error", error);
+  //   }
+  // };
 
   const cardData: CardProps[] = [
     {
-      icon: (
-        <CurrencyRupeeIcon
-        sx={{ ...styleIcon, color: 'gold' }}
-        />
-      ),
+      icon: <CurrencyRupeeIcon sx={{ ...styleIcon, color: "gold" }} />,
       length: `${totalAmount}`,
       label: "Earnings",
       navigate: "/transactions",
     },
     {
-      icon: (
-        <AccountCircleIcon
-        sx={{ ...styleIcon, color: 'gray' }}
-        />
-      ),
+      icon: <AccountCircleIcon sx={{ ...styleIcon, color: "gray" }} />,
       length: `${users.length}`,
       label: "Total Referral User",
       navigate: "/referralusers",
     },
   ];
-  
-  const [referraBy, setReferralBy] = useState<string>("");
+
+  const [_referraBy, setReferralBy] = useState<string>("");
   const navigate = useNavigate();
   useEffect(() => {
     setReferralBy(getReferralBy());
-    setTotalAmount(getTotalAmount());
-    }, []);
-  
+    const UserInfo = async () => {
+      try {
+        const url = `/user/userInfo`;
+        const response: any = await SingleUserApi(url);
+        const jsonData = await response.json();
+        const userData = jsonData.userInfoData;
+         setTotalAmount(userData.totalAmount);
+
+        // }
+      } catch (error) {
+        console.error("Error", error);
+      }
+    };
+    UserInfo();
+  }, []);
+
   return (
     <Box
       sx={{
@@ -160,18 +170,18 @@ const Dashboard = () => {
           return (
             <React.Fragment key={index}>
               <Box key={index} sx={{ marginBottom: "10px" }}>
-              <Card
-                sx={{
-                  background: "#F5FFFA",
-                  height: "auto",
-                  paddingBottom: "0px",
-                  
-                          "@media (min-width: 200px) and (max-width: 600px)": {
-                          padding: '0px',
-                          height: "auto",
-                        }, 
-                }}
-              >
+                <Card
+                  sx={{
+                    background: "#F5FFFA",
+                    height: "auto",
+                    paddingBottom: "0px",
+
+                    "@media (min-width: 200px) and (max-width: 600px)": {
+                      padding: "0px",
+                      height: "auto",
+                    },
+                  }}
+                >
                   <CardContent
                     sx={{
                       display: "flex",

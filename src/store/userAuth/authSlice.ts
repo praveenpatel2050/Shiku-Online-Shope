@@ -70,7 +70,7 @@ export const login =
     password, 
     url
   }: {
-    mobileNumber: number;
+    mobileNumber: number | null;
     password: string;
     url: string;
   }) =>

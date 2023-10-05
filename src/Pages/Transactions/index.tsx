@@ -45,7 +45,7 @@ const Transactions = () => {
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
 
-  const handleChange = (event: unknown, newValue: number) => {
+  const handleChange = (_event: unknown, newValue: number) => {
     setValue(newValue);
   };
 

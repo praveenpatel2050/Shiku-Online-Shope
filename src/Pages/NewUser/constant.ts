@@ -102,17 +102,17 @@ export const addUserFormField = [
         {
           label: "Watch of ₹100",
           value: "watch",
-          amount: 100,
+          amount: "100",
         },
         {
           label: "Belt of ₹100",
           value: "belt",
-          amount: 100,
+          amount: "100",
         },
         {
           label: "Smart Watch of ₹1000",
           value: "smart Watch",
-          amount: 1000,
+          amount: "1000",
         },
       ],
     },
@@ -170,15 +170,18 @@ export const addUserFormField = [
   export interface FormData {
     userName: string;
     password: string;
-    mobileNumber: string;
+    mobileNumber: number | null;
     // gender: string;
     // address: string;
-    planAmount: string | number;
-    totalItem: string;
-    totalAmount: string;
+    planAmount: string | number | undefined;
+    totalItem: number;
+    totalAmount: number;
     cartAmount: string;
     paymentStatus: string;
     planItemName: string;
+}
+export interface OrderData {
+  requestAmount:  number
 }
 export interface SignUpFormData extends FormData {
   referralCode: string;

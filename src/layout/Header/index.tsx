@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import  { useCallback,  useState } from "react";
 
 import {
   AppBar,
@@ -16,10 +16,9 @@ import NavMenuXs from "./NavMenuXs";
 import routes from "../../routes";
 
 const Header = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
+  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(
     null,
   );
-
   const handleOpenNavMenu = useCallback(
     (event: React.MouseEvent<HTMLElement>) => {
       setAnchorElNav(event.currentTarget);
@@ -31,7 +30,9 @@ const Header = () => {
     setAnchorElNav(null);
   }, []);
 
+
   return (
+    <>
     <AppBar position="sticky" color="primary">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -112,6 +113,8 @@ const Header = () => {
         </Toolbar>
       </Container>
     </AppBar>
+
+    </>
   );
 };
 

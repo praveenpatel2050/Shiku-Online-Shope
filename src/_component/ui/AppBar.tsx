@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import { AppBar, Toolbar, Button } from "@mui/material";
@@ -18,7 +18,6 @@ const rightLink = {
 };
 
 function AppAppBar() {
-    const [referraBy, setReferralBy] = useState<string>("");
 
 const navigate = useNavigate();
                             // const getMode = () => {
@@ -57,7 +56,7 @@ const navigate = useNavigate();
                         <Button
                             color="inherit"
                             sx={rightLink}
-                            onClick={() => navigate(`/register/SHIKU1`)}
+                            onClick={() => navigate(`/register/L8P7PX`)}
                         >
                             Register    
                         </Button>

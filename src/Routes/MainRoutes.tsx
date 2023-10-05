@@ -1,4 +1,4 @@
-import React from "react";
+
 import  Dashboard  from "../Pages/Dashboard";
 import NoMatch from "../Pages/NoMatch";
 import MainLayout from "../layout/MainLayout/index";
@@ -25,7 +25,7 @@ const MainRoutes = {
       element: <Dashboard />,
     },
     {
-      path: "/adduser",
+      path: "/adduser/*",
       element: <NewUser />,
     },
     {

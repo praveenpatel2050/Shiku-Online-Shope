@@ -1,4 +1,4 @@
-import React from "react";
+
 import Login from "../Pages/Login/index";
 import MinimalLayout from "../layout/MinimalLayout/index";
 import HomePage from "../Pages/HomePage";
