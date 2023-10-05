@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import {
   TextField,
   Button,
@@ -101,7 +101,7 @@ const AccountInfo: React.FC = () => {
     }
     try {
       const url = "/user/updateBankAccount";
-      const response: any = await updateBankAccountApi(url, formData);
+      await updateBankAccountApi(url, formData);
       setSubmitted(true);
     } catch (error) {
       console.error("Error", error);

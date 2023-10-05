@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import {
   Box,
   TextField,
@@ -18,7 +18,6 @@ import { addUserApi } from "../../Api/user";
 import Popup from "../../_component/ui/popup";
 import ShikuOnlineLogo from "../../assets/logo.png";
 import { OrderIdGenerate } from "../../Api/payment";
-import { number } from "yup";
 declare global {
   interface Window {
     Razorpay: any;
@@ -69,7 +68,7 @@ const NewUser = () => {
   const [openPopup, setOpenPopup] = useState(false);
   const [amount, setAmount] = useState<number>(0);
   const [orderId, setOrderId] = useState<string>('')
-  const [orderData, setOrderData] = useState<OrderData>(orderInitialState)
+  const [orderData, _setOrderData] = useState<OrderData>(orderInitialState)
   const navigate = useNavigate();
 
   const validateForm = () => {

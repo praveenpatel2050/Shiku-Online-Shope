@@ -3,17 +3,16 @@ import {
   Box,
   Card,
 } from "@mui/material";
-import { cashColumns, cashTransactionData, CashTransaction } from "./constant";
+import { cashColumns, cashTransactionData } from "./constant";
 import  Tables  from "../../_component/ui/table";
 
 const CashHistory = () => {
 
- const [users, setUsers] = useState<CashTransaction[]>([]);
  const [page, setPage] = useState(0);
  const [rowsPerPage, setRowsPerPage] = useState(10);
 
  const handleChangePage = (
-   event: React.MouseEvent<HTMLButtonElement> | null,
+  _event: React.MouseEvent<HTMLButtonElement> | null,
    newPage: number
  ) => {
    setPage(newPage);
@@ -25,16 +24,16 @@ const CashHistory = () => {
    setRowsPerPage(parseInt(event.target.value, 10));
    setPage(0);
  };
-  const fetchUsers = async () => {
-    try {
-      const url = "/schoolAdmin/teachersList"
-    //   const response: any = await (url, teacher);
-    //   const jsonData = await response.json()
-    // setTeacher(jsonData);
-    } catch (error) {
-      console.error("Error", error);
-    }
-  };
+  // const fetchUsers = async () => {
+  //   try {
+  //     const url = "/schoolAdmin/teachersList"
+  //   //   const response: any = await (url, teacher);
+  //   //   const jsonData = await response.json()
+  //   // setTeacher(jsonData);
+  //   } catch (error) {
+  //     console.error("Error", error);
+  //   }
+  // };
 
   // useEffect(() => {
   //   fetchUsers();

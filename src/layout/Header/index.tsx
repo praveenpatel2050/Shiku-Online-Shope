@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import  { useCallback,  useState } from "react";
 
 import {
   AppBar,
@@ -8,17 +8,15 @@ import {
   Typography,
   Menu,
   Container,
-  Snackbar
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 
 import NavMenu from "./NavMenu";
 import NavMenuXs from "./NavMenuXs";
 import routes from "../../routes";
-import { getPaymentStatus } from "../../_component/other/paymentStatus";
 
 const Header = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
+  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(
     null,
   );
   const handleOpenNavMenu = useCallback(

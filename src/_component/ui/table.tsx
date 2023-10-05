@@ -1,17 +1,13 @@
-import React, { FC, useState } from "react";
+import  { FC, useState } from "react";
 import {
   Table,
   TableHead,
   TableRow,
   TableBody,
-  IconButton,
   Stack,
   Popover,
   Button,
   TableFooter,
-  Box,
-  SvgIcon,
-  Chip,
   FormControlLabel,
   Checkbox,
 } from "@mui/material";
@@ -161,7 +157,7 @@ const Tables: FC<ITables> = ({
                         >
                              <Stack direction="row" sx={{boxShadow: '5px 10px #888888'}}>
                             {column.action.map(
-                              (actionItem: any, indexb: number) => {
+                              (_actionItem: any, indexb: number) => {
                                 return (
                                   <Button
                                   startIcon={

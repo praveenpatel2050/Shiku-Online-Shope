@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { Table, TableCell, TableBody, TableContainer, TableRow, Paper, Box, Container, Tab, TableHead, } from '@mui/material'
+import { Table, TableCell, TableBody, TableContainer, TableRow, Paper, Box, Container, TableHead, } from '@mui/material'
 import Typography from './Typography';
 
 function createData(level: string, peoples: number, commission: string) {

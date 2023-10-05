@@ -5,16 +5,13 @@ import {
   Card,
   CardContent,
   Container,
-  Snackbar,
 } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import Typography from "../../_component/ui/Typography";
 import { useNavigate } from "react-router-dom";
 import { getReferralBy } from "../../_component/other/referralBy";
-import { getTotalAmount } from "../../_component/other/cards";
-import { getPaymentStatus } from "../../_component/other/paymentStatus";
-import { SingleUserApi, listUserApi } from "../../Api/user";
+import { SingleUserApi } from "../../Api/user";
 import { styleIcon } from "../Wallet";
 
 export interface CardProps {
@@ -25,21 +22,21 @@ export interface CardProps {
 }
 
 const Dashboard = () => {
-  const [users, setUsers] = useState([]);
+  const [users, _setUsers] = useState([]);
   const [totalAmount, setTotalAmount] = useState("");
 
-  const fetchUsers = async () => {
-    try {
-      const url = "/user/reflUserList";
-      const response: any = await listUserApi(url);
-      const jsonData = await response.json();
-      const referralList = jsonData.refUserList;
-      setUsers(referralList);
-      console.log("referral list", referralList);
-    } catch (error) {
-      console.error("Error", error);
-    }
-  };
+  // const fetchUsers = async () => {
+  //   try {
+  //     const url = "/user/reflUserList";
+  //     const response: any = await listUserApi(url);
+  //     const jsonData = await response.json();
+  //     const referralList = jsonData.refUserList;
+  //     setUsers(referralList);
+  //     console.log("referral list", referralList);
+  //   } catch (error) {
+  //     console.error("Error", error);
+  //   }
+  // };
 
   const cardData: CardProps[] = [
     {
@@ -56,7 +53,7 @@ const Dashboard = () => {
     },
   ];
 
-  const [referraBy, setReferralBy] = useState<string>("");
+  const [_referraBy, setReferralBy] = useState<string>("");
   const navigate = useNavigate();
   useEffect(() => {
     setReferralBy(getReferralBy());

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import  { useEffect, useMemo, useState } from 'react'
 import { columns } from "../Reffral Users/constant";
 import Tables from "../../_component/ui/table";
 import { Box, Card, Typography } from '@mui/material';
@@ -34,7 +34,7 @@ const ReferralListByUser = () => {
   }, []);
 
   const handleChangePage = (
-    event: React.MouseEvent<HTMLButtonElement> | null,
+    _event: React.MouseEvent<HTMLButtonElement> | null,
     newPage: number
   ) => {
     setPage(newPage);

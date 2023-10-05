@@ -6,13 +6,11 @@ import {
   Typography,
   AppBar,
   Toolbar,
-  SvgIcon,
 } from "@mui/material";
 
 import Tables from "../../_component/ui/table";
-import { useNavigate } from "react-router-dom";
-import { AllUserListApi } from "../../Api/admin";
 import { columns } from "./constant";
+import { AllUserListApi } from "../../Api/admin";
 
 export interface RefrralUsers {
   _id: string;
@@ -30,7 +28,7 @@ const DeliveryStatus = () => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [selectedUserIds, setSelectedUserIds] = useState<string[]>([]);
   const handleChangePage = (
-    event: React.MouseEvent<HTMLButtonElement> | null,
+    _event: React.MouseEvent<HTMLButtonElement> | null,
     newPage: number
   ) => {
     setPage(newPage);

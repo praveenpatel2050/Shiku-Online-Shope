@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 
 import MenuIcon from "@mui/icons-material/Menu";
-import SearchIcon from "@mui/icons-material/Search";
 import ShikuOnlineLogo from "../../../assets/logo.png";
 import {
   AppBar,
@@ -10,8 +9,6 @@ import {
   Button,
   Chip,
   IconButton,
-  InputBase,
-  Paper,
   Toolbar,
 } from "@mui/material";
 
@@ -43,9 +40,8 @@ const orderInitialState: any = {
 
 const Header = ({ user, handleDrawerToggle }: HeaderProps) => {
   const dispatch = useAppDispatch();
-  const [amount, setAmount] = useState<number | null>(null);
   const [orderId, setOrderId] = useState<string>("");
-  const [orderData, setOrderData] = useState<OrderData>(orderInitialState);
+  const [orderData, _setOrderData] = useState<OrderData>(orderInitialState);
 
   const handleOnLogout = () => {
     sessionStorage.clear();

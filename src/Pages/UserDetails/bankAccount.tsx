@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import React, { useEffect, useMemo, useState } from "react";
+import  { useEffect, useMemo, useState } from "react";
 import { SingleUserApi } from "../../Api/user";
 import { UserBankData, bankInitialState } from "../Setting/constant";
 

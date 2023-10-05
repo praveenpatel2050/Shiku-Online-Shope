@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Container, Button, Box } from "@mui/material";
 import QRCode from "react-qr-code";
 import Typography from "../../_component/ui/Typography";

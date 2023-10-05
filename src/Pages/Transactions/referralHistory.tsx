@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import { Box, Card } from "@mui/material";
 import {
   referralColumns,
-  referralinititalState,
   ReferralUsers,
 } from "./constant";
 import Tables from "../../_component/ui/table";
@@ -14,7 +13,7 @@ const ReferralHistory = () => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const handleChangePage = (
-    event: React.MouseEvent<HTMLButtonElement> | null,
+    _event: React.MouseEvent<HTMLButtonElement> | null,
     newPage: number
   ) => {
     setPage(newPage);

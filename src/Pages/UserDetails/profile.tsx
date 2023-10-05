@@ -1,5 +1,5 @@
 import { Box, Button } from '@mui/material'
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 import { IoIosEye, IoIosEyeOff } from 'react-icons/io'
 import { UserFormData, userInitialState } from '../Setting/constant';
 import { updateUserApi } from '../../Api/admin';
@@ -13,7 +13,7 @@ const UserProfileUpdate = () => {
     const [userId, setUserId] = useState("");
     const [formData, setFormData] = useState<UserFormData>(userInitialState);
     const [showPassword, setShowPassword] = useState(false);
-    const [password, setPassword] = useState("");
+    const [_password, setPassword] = useState("");
     const [updateUser, setUpdateUser] = useState<UpdateUser>({
       userId: `${userId}`,
       password: "",
@@ -48,7 +48,7 @@ const UserProfileUpdate = () => {
         }
         try {
           const url = "/user/update";
-          const response: any = await updateUserApi(url, updateUser);
+          await updateUserApi(url, updateUser);
         } catch (error) {
           console.error("Error", error);
         }

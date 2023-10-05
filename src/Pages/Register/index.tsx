@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import {
   Box,
   TextField,
@@ -18,12 +18,11 @@ import {
   addUserFormField,
 } from "../NewUser/constant";
 import { RegisterUserApi } from "../../Api/user";
-import { useNavigate } from "react-router-dom";
-import ShikuOnlineLogo from "../../assets/logo.png";
 import { login, selectAuth } from "../../store/userAuth/authSlice";
 import { useAppDispatch, useAppSelector } from "../../hooks/hook";
 import { Navigate } from "react-router-dom";
 import Popup from "../../_component/ui/popup";
+import CashfreePayment from "../NewUser/payment";
 
 declare global {
   interface Window {
@@ -31,9 +30,6 @@ declare global {
   }
 }
 
-interface RazorpayResponse {
-  razorpay_payment_id: string;
-}
 
 const orderInitialState: any = {
   requestAmount: 0,
@@ -42,7 +38,6 @@ const orderInitialState: any = {
 const Register = () => {
   const [referralBy, setReferralBy] = useState<string>("");
 
-  const navigate = useNavigate();
   const getMode = () => {
     const path = window.location.href;
     const pathArray = path.split("/");
@@ -99,9 +94,9 @@ const Register = () => {
   const [formData, setFormData] = useState<SignUpFormData>(initialState);
   const [formErrors, setFormErrors] = useState<{ [key: string]: boolean }>({});
   const [openPopup, setOpenPopup] = useState(false);
-  const [amount, setAmount] = useState<number>(0);
-  const [orderId, setOrderId] = useState<string>("");
-  const [orderData, setOrderData] = useState<OrderData>(orderInitialState);
+  const [_amount, setAmount] = useState<number>(0);
+  const [_orderId, _setOrderId] = useState<string>("");
+  const [orderData, _setOrderData] = useState<OrderData>(orderInitialState);
   const [mobileNumber, setMobileNumber] = useState<number | null >(null);
   const [password, setPassword] = useState<string>("");
 
@@ -155,52 +150,40 @@ const Register = () => {
     return <Navigate to="/dashboard" replace />;
   }
 
-  function loadScript(src: string) {
-    return new Promise((resolve) => {
-      const script = document.createElement("script");
-      script.src = src;
-      script.onload = () => {
-        resolve(true);
-      };
-      script.onerror = () => {
-        resolve(false);
-      };
-      document.body.appendChild(script);
-    });
-  }
 
-  async function displayRazorpay(amount: number) {
-    const res = await loadScript(
-      "https://checkout.razorpay.com/v1/checkout.js"
-    );
 
-    if (!res) {
-      alert("You are offline... Failed to load Razorpay SDK");
-      return;
-    }
+  // async function displayRazorpay(amount: number) {
+  //   const res = await loadScript(
+  //     "https://checkout.razorpay.com/v1/checkout.js"
+  //   );
 
-    const options = {
-      key: "rzp_test_V4tGgwJD2STEcq",
-      currency: "INR",
-      amount: amount * 100,
-      name: "Shiku Online Shopee",
-      description: "Thanks for purchasing",
-      image: ShikuOnlineLogo,
-      order_id: orderId,
-      handler: function (response: RazorpayResponse) {
-        alert(response.razorpay_payment_id);
-        alert("Payment Successfully");
-        // navigate('/login')
-      },
+  //   if (!res) {
+  //     alert("You are offline... Failed to load Razorpay SDK");
+  //     return;
+  //   }
 
-      prefill: {
-        name: "Shiku Online Shopee",
-      },
-    };
+  //   const options = {
+  //     key: "rzp_test_V4tGgwJD2STEcq",
+  //     currency: "INR",
+  //     amount: amount * 100,
+  //     name: "Shiku Online Shopee",
+  //     description: "Thanks for purchasing",
+  //     image: ShikuOnlineLogo,
+  //     order_id: orderId,
+  //     handler: function (response: RazorpayResponse) {
+  //       alert(response.razorpay_payment_id);
+  //       alert("Payment Successfully");
+  //       // navigate('/login')
+  //     },
 
-    const paymentObject = new window.Razorpay(options);
-    paymentObject.open();
-  }
+  //     prefill: {
+  //       name: "Shiku Online Shopee",
+  //     },
+  //   };
+
+  //   const paymentObject = new window.Razorpay(options);
+  //   paymentObject.open();
+  // }
 
   return (
     <>
@@ -352,6 +335,7 @@ const Register = () => {
                 >
                   Reset
                 </Button>
+                <CashfreePayment />
               </Stack>
             </Box>
           </Box>

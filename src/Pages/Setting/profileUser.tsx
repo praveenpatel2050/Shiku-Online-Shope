@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { Box, Button } from "@mui/material";
 import {
   userInitialState,
@@ -6,7 +6,6 @@ import {
   UserBankData,
   bankInitialState,
 } from "./constant";
-import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 import { SingleUserApi } from "../../Api/user";
 import Typography from "../../_component/ui/Typography";
 
@@ -15,9 +14,7 @@ const UserProfile = () => {
   const [bankAccount, setBankAccount] =
     useState<UserBankData>(bankInitialState);
 
-  const userString = sessionStorage.getItem("user");
 
-  const user = userString ? JSON.parse(userString) : null;
 
   const editAction = async () => {
     try {

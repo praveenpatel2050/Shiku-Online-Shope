@@ -1,4 +1,3 @@
-import React from "react";
 import { Box, Drawer, useMediaQuery } from "@mui/material";
 
 import type { Theme } from "../../../Theme/index";

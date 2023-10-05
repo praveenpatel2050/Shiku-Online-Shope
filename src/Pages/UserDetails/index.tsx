@@ -1,11 +1,6 @@
 import { useState, useEffect } from "react";
 import { useTheme } from "@mui/material/styles";
 
-import {
-  UserFormData,
-  userInitialState,
-} from "../Setting/constant";
-import { SingleUserApi } from "../../Api/user";
 import { AppBar, Box, Card, CardContent, Tab, Tabs, Typography } from "@mui/material";
 import ReferralListByUser from "./referralUser";
 import UserBankAccount from "./bankAccount";
@@ -78,12 +73,11 @@ const cardData: CardProps[] = [
 ];
 
 const UserDetails = () => {
-  const [userId, setUserId] = useState("");
-  const [formData, setFormData] = useState<UserFormData>(userInitialState);
+  const [_userId, setUserId] = useState("");
   const theme = useTheme();
   const [value, setValue] = useState(0);
 
-  const handleChange = (event: unknown, newValue: number) => {
+  const handleChange = (_event: unknown, newValue: number) => {
     setValue(newValue);
   };
   const getMode = () => {

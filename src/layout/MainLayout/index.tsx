@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import  { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 
 import { Box, useMediaQuery } from "@mui/material";
@@ -13,7 +13,7 @@ import { selectLayout, setDrawer } from "../../store/layout/layoutSlice";
 import type { Theme } from "../../Theme/index";
 
 const drawerWidth = 240;
-
+  
 //--- Main Container ---//
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
   open?: boolean;

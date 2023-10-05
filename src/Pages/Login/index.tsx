@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { Navigate } from "react-router-dom";
@@ -34,7 +34,7 @@ const Login = () => {
   const [error, showError] = useState(false);
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [loginUser, setLoginUser] = useState<string>("");
+  const [_loginUser, setLoginUser] = useState<string>("");
   const [adminlogin, setAdminLogin] = useState<boolean>(false);
   // redux store
   const dispatch = useAppDispatch();
