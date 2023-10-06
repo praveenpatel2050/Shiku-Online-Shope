@@ -4,8 +4,17 @@ import ProductHeroLayout from "./ProductHeroLayout";
 import Typography from "./Typography";
 import backgroundImage from "../../assets/homepage-bg.jpg";
 import { useNavigate } from "react-router-dom";
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+
 export default function ProductHero() {
   const navigate = useNavigate();
+
+  const openWhatsAppChat = () => {
+    const phoneNumber = 9879889396;
+    const whatsappUrl = `https://wa.me/${phoneNumber}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
   return (
     <ProductHeroLayout
       sxBackground={{
@@ -59,6 +68,21 @@ export default function ProductHero() {
       <Typography variant="body2" color="inherit" sx={{ mt: 2 }}>
         Discover the experience
       </Typography>
+      <Button
+      variant="outlined"
+      color="primary"
+      onClick={openWhatsAppChat}
+      style={{
+        position: 'fixed',
+        right: '25px',
+        bottom: '45px',
+        zIndex: 99,
+        border: "none"
+      }}
+      id="whatsapp-button"
+    >
+      <WhatsAppIcon sx={{ backgroundColor: 'green', color: 'black', fontSize: '55px', borderRadius: '10px' }} />
+    </Button>
     </ProductHeroLayout>
   );
 }

@@ -18,6 +18,7 @@ const HomePage = () => {
       <InformationVideo />
       <ReceiveOffers />
       <Footer />
+      
     </div>
   );
 };
