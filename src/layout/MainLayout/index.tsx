@@ -13,8 +13,7 @@ import { selectLayout, setDrawer } from "../../store/layout/layoutSlice";
 import type { Theme } from "../../Theme/index";
 
 const drawerWidth = 240;
-  
-//--- Main Container ---//
+
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
   open?: boolean;
 }>(({ theme, open }) => ({

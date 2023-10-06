@@ -3,7 +3,6 @@ import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import { AppBar, Toolbar, Button } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
-
 const rightLink = {
     fontSize: 18,
     color: 'common.white',
@@ -30,6 +29,7 @@ const navigate = useNavigate();
   //   };                           
 
     return (
+        <>
         <div>
             <AppBar position="fixed">
                 <Toolbar sx={{ justifyContent: 'space-between', paddingLeft: '0px' }}>
@@ -63,8 +63,12 @@ const navigate = useNavigate();
                     </Box>
                 </Toolbar>
             </AppBar>
+          
             <Toolbar />
+            
         </div>
+        
+        </>
     );
 }
 
