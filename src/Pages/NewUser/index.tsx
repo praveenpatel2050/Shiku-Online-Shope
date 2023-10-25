@@ -24,7 +24,7 @@ const initialState: any = {
   userName: "",
   password: "",
   mobileNumber: "",
-  planAmount: "",
+  planAmount: 0,
   planItemName: "",
   totalAmount: 0,
   totalItem: 0,
@@ -46,23 +46,34 @@ export interface Plan {
 const NewUser = () => {
 
   const handleChange = (name: keyof FormData, value: string) => {
-    // if (name === "planItemName") {
+    if (name === "planItemName") {
       const selectedPlan = plans.find((plan) => plan._id === value);
       console.log('selectedPlan', selectedPlan)
-      const planAmount = selectedPlan?.price || 0;
-      console.log('planAmount', planAmount);
-
+      const planAmounts = selectedPlan?.price || 0;
+      console.log('planAmount', planAmounts);
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+        planAmount: planAmounts,
+      }));
+      console.log("formData.planAmount", formData.planAmount)
+     } else {
+     
       const updatedFormData = {
         ...formData,
         [name]: value,
-        planAmount: planAmount,
       };
+      
+      // console.log("formData.totalAmount", formData.planAmount * formData.totalItem)
+      // console.log("formData.totalItem", formData.totalItem)
+      updatedFormData.totalAmount = formData.planAmount * updatedFormData.totalItem,
       console.log('totalItem', updatedFormData.totalItem)
-      updatedFormData.totalAmount = planAmount * formData.totalItem,
+      console.log('updatedformData', updatedFormData)
       setFormData(updatedFormData)
-      console.log('formData w', formData)
-    // }
-         
+      
+   
+    }
+
   };
 
   // scraping

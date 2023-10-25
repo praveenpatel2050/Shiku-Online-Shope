@@ -53,14 +53,14 @@ const Footer = () => {
                         }}
                     >
                         <LocalPhoneIcon sx={{ marginRight: '10px', marginBottom: '-10px' }} />
-                        +91-8141 205111
+                        +919879889396
                     </Link>
                     <Link to="#" style={{
                         textDecoration: 'none',
                         lineHeight: '180%',
                     }}>
                         <EmailIcon sx={{ marginRight: '10px', marginBottom: '-10px' }} />
-                        vyasji.opc@gmail.com
+                        shikuonlineshopee@gmail.com
                     </Link>
                 </Box>
                 <Box sx={{

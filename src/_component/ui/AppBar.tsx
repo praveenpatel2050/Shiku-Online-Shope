@@ -1,8 +1,9 @@
-
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import { AppBar, Toolbar, Button } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
+import Logo from '../../assets/shikuonlinelogo.png'; // Import your logo image or SVG
+
 const rightLink = {
     fontSize: 18,
     color: 'common.white',
@@ -17,31 +18,25 @@ const rightLink = {
 };
 
 function AppAppBar() {
-
-const navigate = useNavigate();
-                            // const getMode = () => {
-  //     const path = window.location.href;
-  //     const pathArray = path.split("/");
-  //     if (pathArray[pathArray.length - 2] === "referral") {
-  //       const editId = pathArray[pathArray.length - 1];
-  //       setReferralEditId(editId);
-  //     }
-  //   };                           
+    const navigate = useNavigate();
 
     return (
-        <>
         <div>
             <AppBar position="fixed">
                 <Toolbar sx={{ justifyContent: 'space-between', paddingLeft: '0px' }}>
-                    <Box sx={{ flex: 1 }} />
+                    {/* Your logo */}
+                    <img src={Logo} alt="Logo" style={{ width: '50px', height: '50px' }} />
+                    
                     <Link
                         variant="h6"
                         underline="none"
                         color="inherit"
-                        sx={{ fontSize: 24, '@media (min-width: 200px) and (max-width: 600px)': {
-                            fontSize: 14,
-                            
-                        }, }}
+                        sx={{
+                            fontSize: 24,
+                            '@media (min-width: 200px) and (max-width: 600px)': {
+                                fontSize: 14,
+                            },
+                        }}
                     >
                         Shiku Online Shopee
                     </Link>
@@ -58,17 +53,13 @@ const navigate = useNavigate();
                             sx={rightLink}
                             onClick={() => navigate(`/register/YXSWBR`)}
                         >
-                            Register    
+                            Register
                         </Button>
                     </Box>
                 </Toolbar>
             </AppBar>
-          
             <Toolbar />
-            
         </div>
-        
-        </>
     );
 }
 
