@@ -13,6 +13,7 @@ const UserProfileUpdate = () => {
     const [userId, setUserId] = useState("");
     const [formData, setFormData] = useState<UserFormData>(userInitialState);
     const [showPassword, setShowPassword] = useState(false);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [_password, setPassword] = useState("");
     const [updateUser, setUpdateUser] = useState<UpdateUser>({
       userId: `${userId}`,
@@ -69,7 +70,7 @@ const UserProfileUpdate = () => {
         }));
       };
 
-      const handleChange = (event: any) => {
+      const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const updatedFormData = {
           ...formData,
           [event.target.name]: event.target.value,

@@ -52,6 +52,7 @@ const TransactionUser = () => {
     if (userId) {
       fetchUsers();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
 
   return (

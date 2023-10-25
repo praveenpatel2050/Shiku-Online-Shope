@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
-import QrCodeImage from '../../assets/qrcodepayment.png'
 import { Button } from '@mui/material';
 import Typography from './Typography';
 interface WithdrwalRequestPopupProps {

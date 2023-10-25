@@ -55,6 +55,7 @@ const MainLayout = () => {
 
   useEffect(() => {
     dispatch(setDrawer(!matchDownMd));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [matchDownMd]);
 
   return (

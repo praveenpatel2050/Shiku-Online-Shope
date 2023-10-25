@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from "react";
 import {
   Box,
@@ -47,7 +48,7 @@ const AllUserList = () => {
   const fetchUsers = async () => {
     try {
       const url = "/user/list";
-      const response: any = await AllUserListApi(url);
+      const response = await AllUserListApi(url) as any;
       if (response.ok) {
         const jsonData = await response.json();
         if (

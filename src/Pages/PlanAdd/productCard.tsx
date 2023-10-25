@@ -17,7 +17,7 @@ interface CardProps {
   onDelete: () => void;
 }
 
-const ProductCard: React.FC<CardProps> = ({ id, name, description, price, imageSrc, onEdit, onDelete }) => {
+const ProductCard: React.FC<CardProps> = ({ id, name, description, price, imageSrc, onDelete }) => {
   return (
     <Card sx={{ maxWidth: 345, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%' }}>
       <img src={imageSrc} alt={name} style={{ maxWidth: '100%', height: 'auto' }} />

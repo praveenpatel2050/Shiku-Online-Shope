@@ -144,13 +144,13 @@ export const addUserFormField = [
   ];
   
   export interface FormData {
-    planId: any;
+    planId: string;
     userName: string;
     password: string;
     mobileNumber: number | null;
     // gender: string;
     // address: string;
-    planAmount: any;
+    planAmount: number;
     totalItem: number;
     totalAmount: number;
     cartAmount: string;

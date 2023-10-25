@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import * as React from 'react';
 import { styled, Theme } from '@mui/material/styles';
 import MuiTypography, { TypographyProps } from '@mui/material/Typography';

@@ -4,7 +4,7 @@ import { Snackbar } from "@mui/material";
 interface PopupProps {
     open: boolean;
     message: string;
-    onClose: any,
+    onClose: () => void,
     color: string
   }
   

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import React, { useEffect, useState } from 'react';
 import { Box, Button, Card, CardContent } from "@mui/material";
 import Typography from "../../_component/ui/Typography";
@@ -6,22 +8,14 @@ import RedeemIcon from '@mui/icons-material/Redeem';
 import CardMembershipIcon from '@mui/icons-material/CardMembership';
 import { SingleUserApi } from '../../Api/user';
 import WithdrwalRequestPopup from '../../_component/ui/withdrwaRequest';
-
+import { styleIcon } from './constant';
 export interface CardProps {
   icon: JSX.Element;
-  length: any;
+  length: string;
   label: string;
 }
 
-export const styleIcon = {
-  width: 66,
-  height: 76,
-  margin: "0px 10px 0px 10px",
-  "@media (min-width: 200px) and (max-width: 600px)": {
-    width: 50,
-    height: 60,
-  },
-};
+
 
 const Wallet = () => {
   const [cartAmount, setCartAmount] = useState(0);
@@ -65,6 +59,7 @@ const Wallet = () => {
       }
     };
     UserInfo();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const cardData: CardProps[] = [

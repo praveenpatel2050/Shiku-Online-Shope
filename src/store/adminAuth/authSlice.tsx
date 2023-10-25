@@ -90,7 +90,7 @@ export const adminLogin =
         }
         sessionStorage.setItem("token", token);
         return dispatch(loginSuccess(data1));
-    } catch (err: any) {
+    } catch (err) {
       dispatch(loginFail("Mobile Number or password is incorrect. Please try again."));
     }
   };

@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
@@ -7,11 +8,11 @@ import Typography from './Typography';
 interface QRCodePopupProps {
     closeModal: () => void;
     handleLogout: () => void;
-    amount: any
+    amount?: number | string;
 }  
   
-  const QRCodePopup: React.FC<QRCodePopupProps> = ({closeModal, amount, handleLogout}) => {
-    const [isOpen, setIsOpen] = useState(true);
+  const QRCodePopup: React.FC<QRCodePopupProps> = ({ amount, handleLogout}) => {
+    const [isOpen] = useState(true);
 
     // Generate the text for the QR code
     const qrText = `Scan this QR code to pay ${amount} and create your account.`;

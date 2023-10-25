@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { useState, useEffect } from "react";
 import {
   Box,
@@ -6,8 +8,6 @@ import {
   Typography,
   AppBar,
   Toolbar,
-  capitalize,
-  Checkbox,
 } from "@mui/material";
 
 import Tables from "../../_component/ui/table";

@@ -312,48 +312,48 @@
 
 // export default Payment;
 
-import  { useState } from 'react';
+// import  { useState } from 'react';
 
-const CashfreePayment: React.FC = () => {
-  const [paymentStatus, setPaymentStatus] = useState<string | null>(null);
+// const CashfreePayment: React.FC = () => {
+//   const [paymentStatus, setPaymentStatus] = useState<string | null>(null);
 
-  const handlePayment = async () => {
-    try {
-      const response = await fetch('https://test.cashfree.com/api/v2/cftoken/order', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Client-Id': 'TEST10025475539ff7fc3288409df22c57452001',
-          'X-Client-Secret': '	TESxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxf93',
-        },
-        body: JSON.stringify({
-          order_id: 'ORDER123', // Replace with your order ID
-          order_amount: '100.00', // Replace with the order amount
-          order_currency: 'INR', // Replace with the currency
-        }),
-      });
+//   const handlePayment = async () => {
+//     try {
+//       const response = await fetch('https://test.cashfree.com/api/v2/cftoken/order', {
+//         method: 'POST',
+//         headers: {
+//           'Content-Type': 'application/json',
+//           'X-Client-Id': 'TEST10025475539ff7fc3288409df22c57452001',
+//           'X-Client-Secret': '	TESxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxf93',
+//         },
+//         body: JSON.stringify({
+//           order_id: 'ORDER123', // Replace with your order ID
+//           order_amount: '100.00', // Replace with the order amount
+//           order_currency: 'INR', // Replace with the currency
+//         }),
+//       });
 
-      if (response.ok) {
-        const data = await response.json();
-        // The data object may contain a payment link or other relevant information
-        // You can redirect the user to the payment link or handle it as needed
-        console.log(data);
-        // setPaymentStatus('Payment initiated successfully');
-      } else {
-        setPaymentStatus('Payment initiation failed');
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      setPaymentStatus('Error occurred');
-    }
-  };
+//       if (response.ok) {
+//         const data = await response.json();
+//         // The data object may contain a payment link or other relevant information
+//         // You can redirect the user to the payment link or handle it as needed
+//         console.log(data);
+//         // setPaymentStatus('Payment initiated successfully');
+//       } else {
+//         setPaymentStatus('Payment initiation failed');
+//       }
+//     } catch (error) {
+//       console.error('Error:', error);
+//       setPaymentStatus('Error occurred');
+//     }
+//   };
 
-  return (
-    <div>
-      <button onClick={handlePayment}>Initiate Payment</button>
-      {paymentStatus && <p>{paymentStatus}</p>}
-    </div>
-  );
-};
+//   return (
+//     <div>
+//       <button onClick={handlePayment}>Initiate Payment</button>
+//       {paymentStatus && <p>{paymentStatus}</p>}
+//     </div>
+//   );
+// };
 
-export default CashfreePayment;
+// export default CashfreePayment;

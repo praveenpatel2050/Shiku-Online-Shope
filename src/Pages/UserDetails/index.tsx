@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { useState, useEffect } from "react";
 import { useTheme } from "@mui/material/styles";
 
@@ -8,11 +10,11 @@ import UserProfileUpdate from "./profile";
 import TransactionUser from "./transactionsUser";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import CallIcon from '@mui/icons-material/Call';
-import { styleIcon } from "../Wallet";
+import { styleIcon } from "../Wallet/constant";
 
 export interface CardProps {
   icon: JSX.Element;
-  length: any;
+  length: string;
   label: string;
   navigate: string;
 }
@@ -73,7 +75,7 @@ const cardData: CardProps[] = [
 ];
 
 const UserDetails = () => {
-  const [_userId, setUserId] = useState("");
+  const [userId, setUserId] = useState("");
   const theme = useTheme();
   const [value, setValue] = useState(0);
 
@@ -86,11 +88,13 @@ const UserDetails = () => {
     if (pathArray[pathArray.length - 2] === "user") {
       const referralId = pathArray[pathArray.length - 1];
       setUserId(referralId);
+      console.log(userId)
     }
   };
 
   useEffect(() => {
     getMode();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

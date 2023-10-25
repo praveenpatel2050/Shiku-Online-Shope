@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import  { useEffect, useState } from "react";
 import { Box, Button } from "@mui/material";
 import {
@@ -13,8 +15,6 @@ const UserProfile = () => {
   const [formData, setFormData] = useState<UserFormData>(userInitialState);
   const [bankAccount, setBankAccount] =
     useState<UserBankData>(bankInitialState);
-
-
 
   const editAction = async () => {
     try {

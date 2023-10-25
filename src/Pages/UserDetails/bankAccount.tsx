@@ -1,3 +1,5 @@
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Box, Typography } from "@mui/material";
 import  { useEffect, useMemo, useState } from "react";
 import { SingleUserApi } from "../../Api/user";
@@ -39,6 +41,7 @@ const UserBankAccount = () => {
     if (userId) {
       fetchBankAccount();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
 
   return (

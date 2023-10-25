@@ -4,7 +4,6 @@ import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import TextareaAutosize from "@mui/material/TextareaAutosize";
 import { addPlanApi } from "../../Api/plan";
 
 const AddPlan: React.FC = () => {
@@ -43,7 +42,7 @@ const AddPlan: React.FC = () => {
     form.append("status", formData.status)
     try {
       const url = "/product/add";
-      const response = await addPlanApi(url, form);
+      await addPlanApi(url, form);
       // Handle the response from the API
     } catch (error) {
       console.error("Error", error);

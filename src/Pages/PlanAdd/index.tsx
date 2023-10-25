@@ -1,4 +1,5 @@
-// App.tsx
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import React, { useEffect, useState } from "react";
 import ProductCard from "./productCard";
 import Grid from "@mui/material/Grid";
@@ -42,7 +43,7 @@ const ProductPlans: React.FC = () => {
       }
     };
     fetchUsers();
-  }, []);
+  }, [products]);
 
   const handleEdit = (id: string) => {
     // Implement edit functionality here

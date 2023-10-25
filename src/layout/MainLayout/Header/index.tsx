@@ -1,7 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import  { useEffect, useState } from "react";
 
 import MenuIcon from "@mui/icons-material/Menu";
-import ShikuOnlineLogo from "../../../assets/logo.png";
 import {
   AppBar,
   Avatar,
@@ -17,7 +17,6 @@ import { useAppDispatch } from "../../../hooks/hook";
 import { logout } from "../../../store/userAuth/authSlice";
 import Typography from "../../../_component/ui/Typography";
 import { SingleUserApi } from "../../../Api/user";
-import { useNavigate } from "react-router-dom";
 import QRCodePopup from '../../../_component/ui/qrCodeRestrict';
 
 interface HeaderProps {
@@ -30,15 +29,13 @@ interface HeaderProps {
 
 const Header = ({ user, handleDrawerToggle }: HeaderProps) => {
   const dispatch = useAppDispatch();
-  const [orderId, setOrderId] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [amount, setAmount] = useState();
+  const [amount, setAmount] = useState<number | string>();
   const handleOnLogout = () => {
     sessionStorage.clear();
     dispatch(logout());
   };
 
-  const navigate = useNavigate();
 
   const closeModal = () => {
     setIsModalOpen(false);

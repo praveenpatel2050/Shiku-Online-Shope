@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import  { useEffect, useMemo, useState } from 'react'
 import { columns } from "../Reffral Users/constant";
 import Tables from "../../_component/ui/table";
@@ -82,6 +84,7 @@ const ReferralListByUser = () => {
     if (userId) {
       fetchUsers();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
 
   return (

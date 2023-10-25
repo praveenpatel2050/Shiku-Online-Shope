@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { useEffect, useState } from "react";
 import {
   Box,
@@ -12,10 +14,9 @@ import {
 } from "@mui/material";
 import Typography from "../../_component/ui/Typography";
 import { addUserFormField } from "./constant";
-import { FormData, OrderData } from "./constant";
+import { FormData } from "./constant";
 import { addUserApi } from "../../Api/user";
 import Popup from "../../_component/ui/popup";
-import { OrderIdGenerate } from "../../Api/payment";
 import QRCodePopup from "../../_component/ui/qrCodePopup";
 import { productListApi } from "../../Api/plan";
 
@@ -30,7 +31,7 @@ const initialState: any = {
   cartAmount: "0",
   paymentStatus: "0",
 };
-interface Plan {
+export interface Plan {
   _id: string;
   productName: string;
   imageUrl: string;
@@ -41,15 +42,6 @@ interface Plan {
   updatedAt: string;
   __v: number;
 }
-
-const orderInitialState: any = {
-  requestAmount: 0,
-};
-      // const planAmount = selectedPlan
-      //   ? selectedPlan.price
-      //     ? parseInt(selectedPlan.price)
-      //     : 0
-      //   : 0;
 
 const NewUser = () => {
 
@@ -72,22 +64,13 @@ const NewUser = () => {
     // }
          
   };
-  
-  const handlePlanChange = (event: any) => {
-    const selectedPlanId = event.target.value as string; // Assuming planId is of type string
-    setFormData({
-      ...formData,
-      planId: selectedPlanId,
-    });
-  }; 
-     
+
   // scraping
   ("");
   const [formData, setFormData] = useState<FormData>(initialState);
   const [formErrors, setFormErrors] = useState<{ [key: string]: boolean }>({});
   const [openPopup, setOpenPopup] = useState(false);
   const [amount, setAmount] = useState<number>(0);
-  const [orderData, _setOrderData] = useState<OrderData>(orderInitialState);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [userCreated, setUserCreated] = useState(false);
   const [isPaymentButtonDisabled, setPaymentButtonDisabled] = useState(
@@ -96,7 +79,6 @@ const NewUser = () => {
   const [plans, setPlans] = useState<Plan[]>([]);
 
   useEffect(() => {
-    // Fetch the list of plans from an API
     const fetchPlans = async () => {
       try {
         const url = "/product/list";
@@ -104,14 +86,14 @@ const NewUser = () => {
         const data = await response.json();
         console.log("data", data.productData);
         if (data) {
-          setPlans(data.productData); // Set the plans state with the fetched data
+          setPlans(data.productData); 
         }
       } catch (error) {
         console.error("Error", error);
       }
     };
 
-    fetchPlans(); // Call the fetchPlans function when the component mounts
+    fetchPlans();
   }, []);
 
   useEffect(() => {
@@ -155,24 +137,12 @@ const NewUser = () => {
       const url = "/user/add";
       const response: any = await addUserApi(url, formData);
       console.log("amount", amount);
-      console.log(formData.totalAmount);
-      // if (response) {
-      //   const orderIdUrl = "/user/createOrder";
-      //   try {
-      //     const orderResponse: any = await OrderIdGenerate(
-      //       orderIdUrl,
-      //       orderData
-      //     );
-      //     const jsonData = await orderResponse.json();
-      //     if (jsonData) {
-      //       openModal();
-      //       setPaymentButtonDisabled(false);
-      //       setUserCreated(true);
-      //     }
-      //   } catch (error) {
-      //     console.error("Error", error);
-      //   }
-      // }
+      setAmount(formData.totalAmount);
+       if (response) {
+        openModal();
+        setPaymentButtonDisabled(false);
+        setUserCreated(true);
+       }
       // setFormData(response);
       console.log("formData", formData);
     } catch (error) {

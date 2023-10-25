@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import React, { useEffect, useState } from "react";
 import {
   Box,
@@ -10,13 +12,12 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import Typography from "../../_component/ui/Typography";
 import { useNavigate } from "react-router-dom";
-import { getReferralBy } from "../../_component/other/referralBy";
 import { SingleUserApi, listUserApi } from "../../Api/user";
-import { styleIcon } from "../Wallet";
+import { styleIcon } from "../Wallet/constant";
 
 export interface CardProps {
   icon: JSX.Element;
-  length: any;
+  length: string;
   label: string;
   navigate: string;
 }
@@ -41,17 +42,13 @@ const Dashboard = () => {
       navigate: "/referralusers",
     },
   ];
-
-  const [_referraBy, setReferralBy] = useState<string>("");
   const navigate = useNavigate();
   useEffect(() => {
-    setReferralBy(getReferralBy());
     const UserInfo = async () => {
       try {
         const url = `/user/userInfo`;
         const response: any = await SingleUserApi(url);
-        const jsonData = await response.json();
-        const userData = jsonData.userInfoData;
+        const userData = (await response.json()).userInfoData;
          setCartAmount(userData.cartAmount);
           console.log(userData)
         // }

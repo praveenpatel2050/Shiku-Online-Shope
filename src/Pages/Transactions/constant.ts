@@ -12,7 +12,6 @@ export const cashColumns = [
 ];
 
 export const cashTransactionData = [
-  
     {
       information:"Deposit Amount",
       amount: "+1000",
