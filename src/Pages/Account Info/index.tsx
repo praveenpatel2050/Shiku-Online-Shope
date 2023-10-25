@@ -13,7 +13,7 @@ import {
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import addBankAccountApi from "../../Api/bankAccount";
 import Typography from "../../_component/ui/Typography";
-import { SingleUserApi, updateBankAccountApi } from "../../Api/user";
+import { SingleUserApi, UpdateBankAccountApi } from "../../Api/user";
 
 interface AccountInfo {
   bankName: string;
@@ -101,7 +101,7 @@ const AccountInfo: React.FC = () => {
     }
     try {
       const url = "/user/updateBankAccount";
-      await updateBankAccountApi(url, formData);
+      await UpdateBankAccountApi(url, formData);
       setSubmitted(true);
     } catch (error) {
       console.error("Error", error);

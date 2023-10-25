@@ -1,7 +1,7 @@
 export const columns = [
     {
         id: "status",
-        label: "Pending Deliveries",
+        label: "Order Delivered",
         status: [
           {
             id: "status",

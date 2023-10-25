@@ -4,7 +4,7 @@ import { green, grey, red } from '@mui/material/colors';
 const rawTheme = createTheme({
   palette: {
     primary: {
-      main: '#0f3cc9'
+      main: '#11AAFF'
     },
     secondary: {
       light: '#fff5f8',

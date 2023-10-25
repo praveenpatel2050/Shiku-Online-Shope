@@ -11,7 +11,7 @@ import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import Typography from "../../_component/ui/Typography";
 import { useNavigate } from "react-router-dom";
 import { getReferralBy } from "../../_component/other/referralBy";
-import { SingleUserApi } from "../../Api/user";
+import { SingleUserApi, listUserApi } from "../../Api/user";
 import { styleIcon } from "../Wallet";
 
 export interface CardProps {
@@ -22,32 +22,21 @@ export interface CardProps {
 }
 
 const Dashboard = () => {
-  const [users, _setUsers] = useState([]);
-  const [totalAmount, setTotalAmount] = useState("");
+  const [referralUsers, setReferralUsers] = useState(0);
+  const [cartAmount, setCartAmount] = useState(0);
 
-  // const fetchUsers = async () => {
-  //   try {
-  //     const url = "/user/reflUserList";
-  //     const response: any = await listUserApi(url);
-  //     const jsonData = await response.json();
-  //     const referralList = jsonData.refUserList;
-  //     setUsers(referralList);
-  //     console.log("referral list", referralList);
-  //   } catch (error) {
-  //     console.error("Error", error);
-  //   }
-  // };
+
 
   const cardData: CardProps[] = [
     {
       icon: <CurrencyRupeeIcon sx={{ ...styleIcon, color: "gold" }} />,
-      length: `${totalAmount}`,
-      label: "Earnings",
+      length: `${cartAmount}`,
+      label: "Cart Amount",
       navigate: "/transactions",
     },
     {
       icon: <AccountCircleIcon sx={{ ...styleIcon, color: "gray" }} />,
-      length: `${users.length}`,
+      length: `${referralUsers}`,
       label: "Total Referral User",
       navigate: "/referralusers",
     },
@@ -63,14 +52,26 @@ const Dashboard = () => {
         const response: any = await SingleUserApi(url);
         const jsonData = await response.json();
         const userData = jsonData.userInfoData;
-         setTotalAmount(userData.totalAmount);
-
+         setCartAmount(userData.cartAmount);
+          console.log(userData)
         // }
       } catch (error) {
         console.error("Error", error);
       }
     };
+    const fetchUsers = async () => {
+      try {
+        const url = "/user/reflUserlist";
+        const response: any = await listUserApi(url);
+        const jsonData = await response.json();
+        const referralUser = jsonData.totalRefUser;
+        setReferralUsers(referralUser);
+      } catch (error) {
+        console.error("Error", error);
+      }
+    };
     UserInfo();
+    fetchUsers();
   }, []);
 
   return (
@@ -208,7 +209,6 @@ const Dashboard = () => {
                         variant="h5"
                         sx={{
                           cursor: "pointer",
-                          textDecoration: "underline",
                           color: "blue",
                         }}
                         onClick={() => {

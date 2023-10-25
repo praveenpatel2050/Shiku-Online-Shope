@@ -17,14 +17,15 @@ import AddLinkIcon from '@mui/icons-material/AddLink';
 import SettingsIcon from '@mui/icons-material/Settings';
 import DeliveryDiningIcon from '@mui/icons-material/DeliveryDining';
 import ListIcon from '@mui/icons-material/List';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import AssignmentReturnIcon from '@mui/icons-material/AssignmentReturn';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { getRole } from '../../../../_component/other/utils';
 interface MenuProps {
     pathName: string;
     label: string;  
     icon: JSX.Element;
 }
-
-
 
 const CustomLink = React.forwardRef<HTMLAnchorElement, LinkProps>(
     function _Link(linkProps, ref) {
@@ -56,8 +57,11 @@ const MenuList = () => {
     ...(role === 'ADMIN' ? [
         { pathName: '/userlist', label: 'User List', icon: <ListIcon sx={{ fontSize: '2rem',color: "purple", backgroundColor: '#F5FFFA' }} /> },
         { pathName: '/delivery', label: 'Delivery Status', icon: <DeliveryDiningIcon sx={{ fontSize: '2rem',color: "#322653", backgroundColor: '#F5FFFA' }} /> },
-    ]
-     : [])
+        { pathName: '/add-user-request', label: 'Payment Request', icon: <GroupAddIcon sx={{ fontSize: '2rem',color: "green", backgroundColor: '#F5FFFA' }} /> },
+    { pathName: '/withdrawal-request', label: 'Withdrawal Request', icon: <AssignmentReturnIcon sx={{ fontSize: '2rem',color: "#007FFF", backgroundColor: '#F5FFFA' }} /> },
+    { pathName: '/product-plans', label: 'New Plan', icon: <AddShoppingCartIcon sx={{ fontSize: '2rem',color: "fuchsia", backgroundColor: '#F5FFFA' }} /> },
+      
+]  : [])
     ];
     return (
         <List color='inherit'>

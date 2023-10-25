@@ -18,83 +18,31 @@ import { logout } from "../../../store/userAuth/authSlice";
 import Typography from "../../../_component/ui/Typography";
 import { SingleUserApi } from "../../../Api/user";
 import { useNavigate } from "react-router-dom";
-import { OrderData } from "../../../Pages/NewUser/constant";
-import { OrderIdGenerate } from "../../../Api/payment";
+import QRCodePopup from '../../../_component/ui/qrCodeRestrict';
 
 interface HeaderProps {
   user: any;
   handleDrawerToggle: () => void;
 }
 
-declare global {
-  interface Window {
-    Razorpay: any;
-  }
-}
-interface RazorpayResponse {
-  razorpay_payment_id: string;
-}
-const orderInitialState: any = {
-  requestAmount: 0,
-};
+
+
 
 const Header = ({ user, handleDrawerToggle }: HeaderProps) => {
   const dispatch = useAppDispatch();
   const [orderId, setOrderId] = useState<string>("");
-  const [orderData, _setOrderData] = useState<OrderData>(orderInitialState);
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [amount, setAmount] = useState();
   const handleOnLogout = () => {
     sessionStorage.clear();
     dispatch(logout());
   };
+
   const navigate = useNavigate();
 
-  function loadScript(src: string) {
-    return new Promise((resolve) => {
-      const script = document.createElement("script");
-      script.src = src;
-      script.onload = () => {
-        resolve(true);
-      };
-      script.onerror = () => {
-        resolve(false);
-      };
-      document.body.appendChild(script);
-    });
-  }
-
-  async function displayRazorpay(amount: number | null) {
-    const res = await loadScript(
-      "https://checkout.razorpay.com/v1/checkout.js"
-    );
-
-    if (!res) {
-      alert("You are offline... Failed to load Razorpay SDK");
-      return;
-    }
-
-    const options = {
-      key: "rzp_test_V4tGgwJD2STEcq",
-      currency: "INR",
-      amount: amount !== null ? amount * 100 : 0,
-      name: "Shiku Online Shopee",
-      description: "Thanks for purchasing",
-      image: ShikuOnlineLogo,
-      order_id: orderId,
-      handler: function (response: RazorpayResponse) {
-        alert("Payment Successfully");
-        console.log(response)
-        navigate("/dashboard");
-      },
-
-      prefill: {
-        name: "Shiku Online Shopee",
-      },
-    };
-
-    const paymentObject = new window.Razorpay(options);
-    paymentObject.open();
-  }
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   useEffect(() => {
     const UserInfo = async () => {
@@ -103,22 +51,11 @@ const Header = ({ user, handleDrawerToggle }: HeaderProps) => {
         const response: any = await SingleUserApi(url);
         const jsonData = await response.json();
         const userData = jsonData.userInfoData;
-        if (userData.paymentStatus == "2") {
-          const orderIdUrl = "/user/createOrder";
-          // setAmount(userData.totalAmount);
-          // console.log("amount", amount);
-          try {
-            const orderResponse: any = await OrderIdGenerate(orderIdUrl, orderData);
-            const jsonData = await orderResponse.json();
-            if (jsonData) {
-              navigate(`adduser/paynow/${jsonData.id}`)
-              setOrderId(jsonData.id)
-              displayRazorpay(userData.totalAmount);
-            }
-          } catch (error) {
-            console.error("Error", error);
-          }
+        console.log('userData', userData)
+        if (userData.paymentStatus == 0) {
           console.log("true");
+          setAmount(userData.totalAmount)
+          // setIsModalOpen(true)
         } else if (userData.paymentStatus == "1") {
           console.log("false");
         } else {
@@ -133,6 +70,7 @@ const Header = ({ user, handleDrawerToggle }: HeaderProps) => {
   }, []);
 
   return (
+    <>
     <AppBar
       enableColorOnDark
       position="fixed"
@@ -237,6 +175,8 @@ const Header = ({ user, handleDrawerToggle }: HeaderProps) => {
         </Button>
       </Toolbar>
     </AppBar>
+    {isModalOpen && <QRCodePopup handleLogout={handleOnLogout} amount={amount} closeModal={closeModal} />}
+    </>
   );
 };
 

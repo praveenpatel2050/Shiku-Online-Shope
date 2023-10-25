@@ -58,7 +58,7 @@ export default function ProductHero() {
         variant="contained"
         size="large"
         component="a"
-        onClick={() => navigate(`/register/L8P7PX`)}
+        onClick={() => navigate(`/register/YXSWBR`)}
         sx={{ minWidth: 200, "@media (min-width: 200px) and (max-width: 600px)": {
           minWidth: 100,
         }, }}

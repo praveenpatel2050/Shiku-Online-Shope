@@ -143,6 +143,7 @@ const UserDetails = () => {
                         sx={{
                           flexGrow: 1,
                           fontSize: 29,
+                          textTransform: 'capitalize',
                           "@media (min-width: 200px) and (max-width: 560px)": {
                             fontSize: 21,
                           },
@@ -154,7 +155,6 @@ const UserDetails = () => {
                         variant="h5"
                         sx={{
                           cursor: "pointer",
-                          textDecoration: "underline",
                           color: "blue",
                         }}
                         // onClick={() => {

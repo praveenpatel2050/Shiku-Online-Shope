@@ -15,4 +15,4 @@ export const OrderIdGenerate = async (orderIdUrl: any, amount: any = 0) => {
     } catch (error) {
       console.error("Error", error);
     }
-  };
+};

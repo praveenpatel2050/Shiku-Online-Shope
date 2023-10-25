@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Container, TextField,  Button, Grid, Box} from '@mui/material';
 import Typography from './Typography';
 import Snackbar from './snackbar'
-import Logo from "../../assets/logo.png"
+import Logo from "../../assets/shikuonlinelogo.jpeg"
 function ReceiveOffers() {
   const [open, setOpen] = React.useState(false);
 

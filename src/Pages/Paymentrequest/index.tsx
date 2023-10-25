@@ -6,23 +6,22 @@ import {
   Typography,
   AppBar,
   Toolbar,
+  capitalize,
+  Checkbox,
 } from "@mui/material";
 
 import Tables from "../../_component/ui/table";
 import { columns } from "./constant";
 import { AllUserListApi } from "../../Api/admin";
-import { updateDeliveryStatusApi } from "../../Api/user";
 
 export interface RefrralUsers {
   _id: string;
   userName: string;
   mobileNumber: number | string;
-  paymentStatusText: string;
   totalItem: number | string;
-  deliveryStatusText: number | string;
   planItemName: string;
 }
-const DeliveryStatus = () => {
+const UserRequest = () => {
   const [users, setUsers] = useState<RefrralUsers[]>([]);
   const [isNoUser, setIsNoUser] = useState(false);
   const [page, setPage] = useState(0);
@@ -53,22 +52,13 @@ const DeliveryStatus = () => {
       setSelectedUserIds((prevSelectedUserIds) => [...prevSelectedUserIds, userId]);
     }
   }
-const selectedDeliveryStatusId =  {
-  userId:  selectedUserIds,
-  deliveryStatus:"1"
-}
-const handleCheckboxSubmit = async() => {
-  try {
-    const url = "/user/update";
-    await updateDeliveryStatusApi(url, selectedDeliveryStatusId);
-  } catch (error) {
-    console.error("Error", error);
-  }
-}
+ const handleCheckboxSubmit = () => {
+  console.log("selectedUserIds", selectedUserIds)
+ }
 
   const fetchUsers = async () => {
     try {
-      const url = "/user/list?deliveryStatus=0";
+      const url = "/user/list?paymentStatus=0";
       const response: any = await AllUserListApi(url);
       if (response.ok) {
         const jsonData = await response.json();
@@ -76,11 +66,7 @@ const handleCheckboxSubmit = async() => {
           // Update the "Delivery Status" field for each user
           const modifiedUsers = jsonData.userList.map(
             (user: { deliveryStatus: string; paymentStatus: string }) => ({
-              ...user,
-              deliveryStatusText:
-                user.deliveryStatus === "0" ? "Pending" : "Delivered",
-              paymentStatusText:
-                user.paymentStatus === "0" ? "Pending" : "Completed",
+              ...user
             })
           );
           setUsers(modifiedUsers);
@@ -140,16 +126,16 @@ const handleCheckboxSubmit = async() => {
                   fontSize: 11,
                 },
               }}
-            >
-              Pending Delivery Services
+            > 
+              Pending User Payment
             </Typography>
           </Toolbar>
         </AppBar>
       </Box>
 
       {isNoUser ? (
-        <Typography variant="h6" align="center" sx={{ textTransform: 'capitalize'}}>
-          There are no users delivery Pending.
+        <Typography variant="h6" align="center" sx={{ textTransform: 'capitalize' }}>
+          There no payment request pending.
         </Typography>
       ) : (
         <>
@@ -186,8 +172,9 @@ const handleCheckboxSubmit = async() => {
           </Button>
         </>
       )}
+      
     </Box>
   );
 };
 
-export default DeliveryStatus;
+export default UserRequest;

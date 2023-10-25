@@ -36,18 +36,13 @@ const Footer = () => {
                         Address
                     </Typography>
 
-
                     <Link to="#" style={{
                         textDecoration: 'none',
                         lineHeight: '180%',
-
+                        textTransform: 'uppercase'
                     }}>
                         < LocationOnIcon sx={{ marginRight: '10px' }} />
-                        Organization: HAPPY JIVAN FOUNDATION
-                        Managed by: VYASJI ONLINE OPC PVT LTD
-                        My Happy Help
-                        C/o. Vyasji Online Pvt Ltd.
-                        3/4 JIN KRUPA COMPLEX, OPP DOSABHAI DHAMRSHALA, PILANJIGANJ MAHESANA-384002, GUJARAT, INDIA
+                        PROPERTY NO-1/191, PAKU MAKAN, KUDA, AT,POST- KUDA ,TA-LAKHANI, Kuda, District-Banaskantha, Gujarat, 385535
                     </Link>
                     <Link
                         to="tel:+918141205111"

@@ -91,31 +91,7 @@ export const addUserFormField = [
     //     maxLength: 60,
     //     minLength: 10,
     //   },
-    // },  
-    {
-      id: "10",
-      label: "Plan",
-      name: "planItemName",
-      errorLabel: "Please select Plan",
-      type: "select",
-      option: [
-        {
-          label: "Watch of ₹100",
-          value: "watch",
-          amount: "100",
-        },
-        {
-          label: "Belt of ₹100",
-          value: "belt",
-          amount: "100",
-        },
-        {
-          label: "Smart Watch of ₹1000",
-          value: "smart Watch",
-          amount: "1000",
-        },
-      ],
-    },
+    // },
     {
       id: "11",
       label: "Quantity",
@@ -168,12 +144,13 @@ export const addUserFormField = [
   ];
   
   export interface FormData {
+    planId: any;
     userName: string;
     password: string;
     mobileNumber: number | null;
     // gender: string;
     // address: string;
-    planAmount: string | number | undefined;
+    planAmount: any;
     totalItem: number;
     totalAmount: number;
     cartAmount: string;

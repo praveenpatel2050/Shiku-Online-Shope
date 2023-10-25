@@ -152,10 +152,13 @@ const Tables: FC<ITables> = ({
                           onClose={handleClose}
                           anchorOrigin={{
                             vertical: "bottom",
-                            horizontal: "left",
+                            horizontal: "center"
+                          }}
+                          sx={{
+                            boxShadow: 'none', // Remove the box shadow
                           }}
                         >
-                             <Stack direction="row" sx={{boxShadow: '5px 10px #888888'}}>
+                             <Stack direction="row" sx={{boxShadow: 'none'}}>
                             {column.action.map(
                               (_actionItem: any, indexb: number) => {
                                 return (
@@ -165,10 +168,17 @@ const Tables: FC<ITables> = ({
                                   }
                                   key={indexb}
                                   sx={{
-                                    backgroundColor: "purple",
+                                    backgroundColor: "#f5f5f5",
+                                    color: '#333333',
+                                    boxShadow: 'none',
+                                    textTransform: 'capitalize',
                                     "@media (min-width: 200px) and (max-width: 600px)": {
                                       padding: "2px 12px",
                                       fontSize: "0.7rem",
+                                      
+                                    },
+                                    "&:hover": {
+                                      backgroundColor: "#F5f5f5",
                                     },
                                   }}
                                   onClick={() => {
@@ -206,7 +216,7 @@ const Tables: FC<ITables> = ({
                     }}
                     sx={{ color: 'black'}}
                   >
-                    <FormControlLabel control={<Checkbox sx={{ }} color="success" />} label="Delivered" onChange={() => handleCheckboxChange(data._id)} sx={{ textTransform: 'capitalize'}} />
+                    <FormControlLabel control={<Checkbox sx={{ }} color="success" />} label={column.label} onChange={() => handleCheckboxChange(data._id)} sx={{ textTransform: 'capitalize'}} />
                   </Button>
                   </TableCell>
         );

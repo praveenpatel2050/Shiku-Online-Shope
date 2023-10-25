@@ -151,7 +151,7 @@ const Login = () => {
           component="form"
           onSubmit={handleSubmit(onSubmit)}
           noValidate
-          sx={{ mt: 1, width: "100%" }}
+          sx={{ margin: '8px 20px' }}
         >
           <Controller
             name="mobileNumber"

@@ -168,7 +168,7 @@ const UserProfileUpdate = () => {
               style={{
                 fontSize: 20,
                 marginTop: 10,
-                width: "572px",
+                width: "100%",
                 height: "44px",
                 borderRadius: "5px",
                 paddingRight: "10px",

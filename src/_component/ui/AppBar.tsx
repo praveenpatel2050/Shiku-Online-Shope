@@ -56,7 +56,7 @@ const navigate = useNavigate();
                         <Button
                             color="inherit"
                             sx={rightLink}
-                            onClick={() => navigate(`/register/L8P7PX`)}
+                            onClick={() => navigate(`/register/YXSWBR`)}
                         >
                             Register    
                         </Button>
