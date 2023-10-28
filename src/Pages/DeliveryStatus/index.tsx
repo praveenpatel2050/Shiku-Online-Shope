@@ -13,7 +13,8 @@ import {
 import Tables from "../../_component/ui/table";
 import { columns } from "./constant";
 import { AllUserListApi } from "../../Api/admin";
-import { updateDeliveryStatusApi } from "../../Api/user";
+import { UpdateUserStatusApi } from "../../Api/user";
+import Popup from "../../_component/ui/popup";
 
 export interface RefrralUsers {
   _id: string;
@@ -30,6 +31,8 @@ const DeliveryStatus = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [selectedUserIds, setSelectedUserIds] = useState<string[]>([]);
+  const [openPopup, setOpenPopup] = useState(false);
+
   const handleChangePage = (
     _event: React.MouseEvent<HTMLButtonElement> | null,
     newPage: number
@@ -62,7 +65,17 @@ const selectedDeliveryStatusId =  {
 const handleCheckboxSubmit = async() => {
   try {
     const url = "/user/update";
-    await updateDeliveryStatusApi(url, selectedDeliveryStatusId);
+    const response: any = await UpdateUserStatusApi(url, selectedDeliveryStatusId);
+
+    if (response.status === 200) {
+      setOpenPopup(true); // Show success popup
+      setTimeout(() => {
+        setOpenPopup(false);
+      }, 1000);
+      fetchUsers();
+    } else {
+      null
+    }
   } catch (error) {
     console.error("Error", error);
   }
@@ -188,6 +201,12 @@ const handleCheckboxSubmit = async() => {
           </Button>
         </>
       )}
+      <Popup
+            open={openPopup}
+            message="Delivery Status Updated successfully"
+            onClose={() => setOpenPopup(false)}
+            color="green"
+          />
     </Box>
   );
 };

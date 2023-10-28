@@ -3,6 +3,7 @@ import Login from "../Pages/Login/index";
 import MinimalLayout from "../layout/MinimalLayout/index";
 import HomePage from "../Pages/HomePage";
 import Register from "../Pages/Register";
+import PolicyPage from "../_component/ui/policy";
 
 const AuthenticationRoutes = {
   path: "/",
@@ -15,6 +16,10 @@ const AuthenticationRoutes = {
     {
       path: '/login',
       element: <Login />
+    },
+    {
+      path: '/policy',
+      element: <PolicyPage />
     },
     {
       path: '/superuser',

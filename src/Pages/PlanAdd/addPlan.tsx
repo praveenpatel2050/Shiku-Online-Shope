@@ -5,6 +5,7 @@ import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { addPlanApi } from "../../Api/plan";
+import { TextareaAutosize } from "@mui/material";
 
 const AddPlan: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -13,7 +14,7 @@ const AddPlan: React.FC = () => {
     mrp: "",
     price: "",
     status: "true",
-    // productDetails: "",
+     description: "",
   });
 
   const handleInputChange = (
@@ -40,6 +41,7 @@ const AddPlan: React.FC = () => {
     form.append("mrp", formData.mrp);
     form.append("price", formData.price);
     form.append("status", formData.status)
+    form.append("status", formData.description)
     try {
       const url = "/product/add";
       await addPlanApi(url, form);
@@ -100,13 +102,13 @@ const AddPlan: React.FC = () => {
           onChange={(e) => handleInputChange(e)}
         />
         </form>
-        {/* <TextareaAutosize
+        <TextareaAutosize
   placeholder="Product Details..."
   style={{ width: "100%", marginTop: "20px", height: "50px" }}
   name="productDetails"
-  value={formData.productDetails}
+  value={formData.description}
   onChange={(e) => handleInputChange(e)}
-/> */}
+/>
       </CardContent>
       <CardActions>
         <Button

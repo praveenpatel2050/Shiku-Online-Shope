@@ -180,7 +180,7 @@ const Login = () => {
               <TextField
                 id="password"
                 label="Password"
-                type="text"
+                type="password"
                 size="medium"
                 margin="normal"
                 required

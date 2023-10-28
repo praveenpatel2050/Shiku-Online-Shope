@@ -13,6 +13,7 @@ import {
 import Tables from "../../_component/ui/table";
 import { columns } from "./constant";
 import { AllUserListApi } from "../../Api/admin";
+import { UpdateUserStatusApi } from "../../Api/user";
 
 export interface RefrralUsers {
   _id: string;
@@ -52,9 +53,18 @@ const UserRequest = () => {
       setSelectedUserIds((prevSelectedUserIds) => [...prevSelectedUserIds, userId]);
     }
   }
- const handleCheckboxSubmit = () => {
-  console.log("selectedUserIds", selectedUserIds)
- }
+  const selectedStatusId =  {
+    userId:  selectedUserIds,
+    paymentStatus:"1"
+  }
+  const handleCheckboxSubmit = async() => {
+    try {
+      const url = "/user/update";
+      await UpdateUserStatusApi(url, selectedStatusId);
+    } catch (error) {
+      console.error("Error", error);
+    }
+  }
 
   const fetchUsers = async () => {
     try {

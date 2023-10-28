@@ -26,3 +26,18 @@ export const addPlanApi = async (url: any, formData: any = 0) => {
     }
   };
   
+  export const UpdatePlanApi = async (url: any, products: any = 0) => {
+    try {
+      const response = await fetch(`${baseURL}${url}`, {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(products),
+      });
+      return response;
+    } catch (error) {
+      console.error("Error", error);
+    }
+  };

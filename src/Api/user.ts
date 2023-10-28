@@ -48,7 +48,7 @@ export const UpdateBankAccountApi = async (url: any, selectedUserIds: any = 0) =
   }
 };
 
-export const updateDeliveryStatusApi = async (url: any, formData: any = 0) => {
+export const UpdateUserStatusApi = async (url: any, formData: any = 0) => {
   try {
     const tempData = formData != 0 ? formData : {};
     const response = await fetch(`${baseURL}${url}`, {
