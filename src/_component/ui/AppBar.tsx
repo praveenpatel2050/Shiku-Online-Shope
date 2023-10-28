@@ -25,12 +25,14 @@ function AppAppBar() {
             <AppBar position="fixed">
                 <Toolbar sx={{ justifyContent: 'space-between', paddingLeft: '0px' }}>
                     {/* Your logo */}
+                    <a href='/' style={{textDecoration: 'none', color: '#333333'}}>
                     <img src={Logo} alt="Logo" style={{ width: '50px', height: '50px' }} />
-                    
+                    </a>
                     <Link
                         variant="h6"
                         underline="none"
                         color="inherit"
+                        
                         sx={{
                             fontSize: 24,
                             '@media (min-width: 200px) and (max-width: 600px)': {
@@ -38,7 +40,7 @@ function AppAppBar() {
                             },
                         }}
                     >
-                        Shiku Online Shopee
+                       <a href='/' style={{textDecoration: 'none', color: '#333333'}}>Shiku Online Shopee</a> 
                     </Link>
                     <Box sx={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
                         <Button

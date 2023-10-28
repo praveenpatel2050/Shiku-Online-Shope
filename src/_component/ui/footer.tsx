@@ -71,15 +71,17 @@ const Footer = () => {
             +919879889396
           </Link>
           <Link
-            to="mailto:shikuonlineshopee@gmail.com"
+            to="mailto:sittalbhati37@gmail.com"
             style={{
               textDecoration: "none",
               lineHeight: "180%",
             }}
           >
             <EmailIcon sx={{ marginRight: "10px", marginBottom: "-10px" }} />
-            shikuonlineshopee@gmail.com
+            sittalbhati37@gmail.com
           </Link>
+          <a style={{marginLeft: '33px', textDecoration: 'none'}} href="mailto:shikuonlineshopee@gmail.com" >shikuonlineshopee@gmail.com</a>
+          
         </Box>
         <Box
           sx={{
@@ -192,10 +194,18 @@ const Footer = () => {
       <Typography
         style={{
           textAlign: "center",
-          padding: "1%",
+          paddingTop: "1%",
         }}
       >
-        Shiku Online Shopee
+        All right reserved Shiku online shopping@2023. Designed By <a target="_blank" style={{ textDecoration: 'none'}} href="https://upperdigital.in/" >UpperDigitalLLP</a>.
+      </Typography>
+      <Typography
+        style={{
+          textAlign: "center",
+          paddingBottom: "1%",
+        }}
+      >
+        Powered by Darji Suresh Kumar
       </Typography>
     </footer>
   );

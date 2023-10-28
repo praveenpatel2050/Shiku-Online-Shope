@@ -1,12 +1,13 @@
 import React from 'react';
 import { Container, Typography, Paper } from '@mui/material';
 import AppAppBar from './AppBar';
+import Footer from './footer';
 
 const PolicyPage: React.FC = () => {
   return (
     <>
-      <AppAppBar />
-    <Container maxWidth="md" sx={{ marginTop: '10px'}}>
+  <AppAppBar />
+    <Container maxWidth="md" sx={{ margin: '10px auto'}}>
       <Paper sx={{ padding: 2 }}>
         <Typography variant="h4" gutterBottom>
           Return, Refund, and Shipping Policy
@@ -49,6 +50,7 @@ const PolicyPage: React.FC = () => {
         </Typography>
       </Paper>
     </Container>
+    <Footer />
     </>
   );
 };
