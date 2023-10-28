@@ -166,7 +166,7 @@ const Footer = () => {
           </Typography>
 
           <Link
-            to="#"
+            to="/policy"
             style={{
               display: "flex",
               flexDirection: "column",
@@ -174,7 +174,7 @@ const Footer = () => {
               paddingTop: "1%",
             }}
           >
-            Become a Partner
+            RETURN, REFUND, AND SHIPPING POLICY
           </Link>
           <Link
             to="#"
