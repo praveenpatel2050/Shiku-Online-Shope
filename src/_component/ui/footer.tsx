@@ -77,11 +77,10 @@ const Footer = () => {
               lineHeight: "180%",
             }}
           >
-            <EmailIcon sx={{ marginRight: "10px", marginBottom: "-10px" }} />
+          <EmailIcon sx={{ marginRight: "10px", marginBottom: "-10px" }} />
             sittalbhati37@gmail.com
           </Link>
           <a style={{marginLeft: '33px', textDecoration: 'none'}} href="mailto:shikuonlineshopee@gmail.com" >shikuonlineshopee@gmail.com</a>
-          
         </Box>
         <Box
           sx={{
@@ -197,7 +196,15 @@ const Footer = () => {
           paddingTop: "1%",
         }}
       >
-        All right reserved Shiku online shopping@2023. Designed By <a target="_blank" style={{ textDecoration: 'none'}} href="https://upperdigital.in/" >UpperDigitalLLP</a>.
+        All right reserved Shiku online shopping@2023.
+      </Typography>
+      <Typography
+        style={{
+          textAlign: "center",
+          paddingTop: "0%",
+        }}
+      >
+        Designed By <a target="_blank" style={{ textDecoration: 'none'}} href="https://upperdigital.in/" >UpperDigitalLLP</a>.
       </Typography>
       <Typography
         style={{

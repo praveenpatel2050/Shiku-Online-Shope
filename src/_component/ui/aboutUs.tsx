@@ -1,18 +1,45 @@
-import React from 'react';
-import { Container, Typography, Paper, Button } from '@mui/material';
-import AppAppBar from './AppBar';
-import Footer from './footer';
+import React from "react";
+import { Container, Typography, Paper, Button } from "@mui/material";
+import AppAppBar from "./AppBar";
+import Footer from "./footer";
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
-const PolicyPage: React.FC = () => {
-  const openWhatsAppChat = () => {
-    const phoneNumber = 9879889396;
-    const whatsappUrl = `https://wa.me/${phoneNumber}`;
-    window.open(whatsappUrl, '_blank');
-  };
+
+const AboutUsPage: React.FC = () => {
+    const openWhatsAppChat = () => {
+        const phoneNumber = 9879889396;
+        const whatsappUrl = `https://wa.me/${phoneNumber}`;
+        window.open(whatsappUrl, '_blank');
+      };
   return (
     <>
-  <AppAppBar />
-    <Container maxWidth="md" sx={{ margin: '10px auto'}}>
+      <AppAppBar />
+      <Container maxWidth="md" sx={{ margin: "10px auto" }}>
+        <Paper sx={{ padding: 2 }}>
+        <Typography variant="h4" gutterBottom>
+        About Shiku Online Shopee
+      </Typography>
+          <Typography paragraph style={{textTransform: 'none'}}>
+            At Shiku Online Shopee, we are dedicated to making your online
+            shopping experience seamless and satisfying. Founded by Sittal Bhai
+            Darji, we take pride in offering a diverse range of quality products
+            that cater to your every need. Based in the heart of Gujarat, our
+            dedicated team works tirelessly to ensure that your orders reach
+            your doorstep within 3 to 7 days, all while upholding a hassle-free
+            refund policy in case you receive a defective or non-functional
+            product. Customer satisfaction is our top priority, and we are
+            always just a phone call or email away at +919879889396 and
+            sittalbhati37@gmail.com or shikuonlineshopee@gmail.com. Join us on
+            this exciting shopping journey, and let Shiku Online Shopee, under
+            the leadership of Sittal Bhai Darji, be your trusted online shopping
+            destination.
+          </Typography>
+
+          <Typography paragraph>
+            Thank you for choosing <b>Shiku Online Shopee.</b>
+          </Typography>
+        </Paper>
+      </Container>
+      <Container maxWidth="md" sx={{ margin: '10px auto'}}>
       <Paper sx={{ padding: 2 }}>
         <Typography variant="h4" gutterBottom>
           Return, Refund, and Shipping Policy
@@ -55,8 +82,8 @@ const PolicyPage: React.FC = () => {
         </Typography>
       </Paper>
     </Container>
-    <Footer />
-    <Button
+      <Footer />
+      <Button
       variant="outlined"
       color="primary"
       onClick={openWhatsAppChat}
@@ -75,4 +102,4 @@ const PolicyPage: React.FC = () => {
   );
 };
 
-export default PolicyPage;
+export default AboutUsPage;
