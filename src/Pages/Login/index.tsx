@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import  { useEffect, useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
@@ -20,6 +21,7 @@ import {
 import { useAppDispatch, useAppSelector } from "../../hooks/hook";
 import { login, selectAuth } from "../../store/userAuth/authSlice";
 import { adminLogin } from "../../store/adminAuth/authSlice";
+import AppAppBar from "../../_component/ui/AppBar";
 interface ILoginFormInput {
   mobileNumber: number;
   password: string;
@@ -34,6 +36,7 @@ const Login = () => {
   const [error, showError] = useState(false);
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_loginUser, setLoginUser] = useState<string>("");
   const [adminlogin, setAdminLogin] = useState<boolean>(false);
   // redux store
@@ -105,6 +108,7 @@ const Login = () => {
         padding: "0px",
       }}
     >
+      <AppAppBar />
       <Snackbar
         open={error}
         autoHideDuration={3000}

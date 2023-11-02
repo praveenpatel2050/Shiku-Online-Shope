@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export const addUserFormField = [
     {
       id: "1",
@@ -21,13 +22,13 @@ export const addUserFormField = [
     //     minLength: 3,
     //   },
     // },
-    // {
-    //   id: "3",
-    //   label: "Email",
-    //   name: "email",
-    //   errorLabel: "Please enter valid email",
-    //   type: "email",
-    // },
+    {
+      id: "3",
+      label: "Email",
+      name: "email",
+      errorLabel: "Please enter valid email",
+      type: "email",
+    },
     {
       id: "4",
       label: "Password",
@@ -81,17 +82,17 @@ export const addUserFormField = [
     //     shrink: true,
     //   },
     // },
-    // {
-    //   id: "9",
-    //   label: "Address",
-    //   name: "address",
-    //   errorLabel: "Please enter valid address",
-    //   type: "text",
-    //   inputProps: {
-    //     maxLength: 60,
-    //     minLength: 10,
-    //   },
-    // },
+    {
+      id: "9",
+      label: "Address",
+      name: "address",
+      errorLabel: "Please enter valid address",
+      type: "text",
+      inputProps: {
+        maxLength: 60,
+        minLength: 10,
+      },
+    },
     {
       id: "11",
       label: "Quantity",
@@ -148,8 +149,8 @@ export const addUserFormField = [
     userName: string;
     password: string;
     mobileNumber: number | null;
-    // gender: string;
-    // address: string;
+    email: string;
+    address: string;
     planAmount: number;
     totalItem: number;
     totalAmount: number;
@@ -163,3 +164,42 @@ export interface OrderData {
 export interface SignUpFormData extends FormData {
   referralCode: string;
 }
+export interface Plan {
+  _id: string;
+  productName: string;
+  imageUrl: string;
+  price: number;
+  mrp: string;
+  status: boolean;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
+
+export const initialState: any = {
+  userName: "",
+  password: "",
+  email: "",
+  address: "",
+  mobileNumber: "",
+  planAmount: 0,
+  planItemName: "",
+  totalAmount: 0,
+  totalItem: 0,
+  cartAmount: "0",
+  paymentStatus: "0",
+};
+export const registerInitialState: any = {
+  userName: "",
+  password: "",
+  email: "",
+  address: "",
+  mobileNumber: "",
+  planAmount: 0,
+  planItemName: "",
+  totalAmount: 0,
+  totalItem: 0,
+  cartAmount: "0",
+  paymentStatus: "0",
+  referralCode: ""
+};

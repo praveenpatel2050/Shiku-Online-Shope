@@ -6,6 +6,7 @@ import { Button } from '@mui/material';
 import Typography from './Typography';
 interface QRCodePopupProps {
     closeModal: () => void;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     amount: any
 }
   
@@ -22,7 +23,7 @@ interface QRCodePopupProps {
     <Dialog open={isOpen}>
       <DialogContent>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <img src={QrCodeImage} alt='payment qr code' style={{ maxWidth: '200px'}} />
+          <img src={QrCodeImage} alt='payment qr code' style={{ maxWidth: '200px', borderRadius: '20px'}} />
           <Typography sx={{ textTransform: 'capitalize'}} variant="h6">{qrText}</Typography>
           <Typography sx={{ textTransform: 'capitalize'}} variant="h6">After Payment Your Account Open With in 18 Hours</Typography>
           <Button variant="contained" color="success" sx={{ marginTop: '20px'}} onClick={handleCloseModal}>

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import  { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   Box,
   TextField,
@@ -12,19 +12,19 @@ import {
   Container,
 } from "@mui/material";
 import Typography from "../../_component/ui/Typography";
-import { Plan } from '../NewUser'
+import { Plan, registerInitialState } from "../NewUser/constant";
 import {
   FormData,
   SignUpFormData,
   addUserFormField,
 } from "../NewUser/constant";
 import { RegisterUserApi } from "../../Api/user";
-import { login, selectAuth } from "../../store/userAuth/authSlice";
-import { useAppDispatch, useAppSelector } from "../../hooks/hook";
+import { selectAuth } from "../../store/userAuth/authSlice";
+import { useAppSelector } from "../../hooks/hook";
 import { Navigate } from "react-router-dom";
-import Popup from "../../_component/ui/popup";
 import { productListApi } from "../../Api/plan";
 import QRCodePopup from "../../_component/ui/qrCodePopup";
+import AppAppBar from "../../_component/ui/AppBar";
 
 const Register = () => {
   const [referralBy, setReferralBy] = useState<string>("");
@@ -47,52 +47,47 @@ const Register = () => {
   }, [referralBy]);
 
   const handleChange = (name: keyof FormData, value: string) => {
-    // if (name === "planItemName") {
+    if (name === "planItemName") {
       const selectedPlan = plans.find((plan) => plan._id === value);
-      console.log('selectedPlan', selectedPlan)
-      const planAmount = selectedPlan?.price || 0;
-      console.log('planAmount', planAmount);
-
+      console.log("selectedPlan", selectedPlan);
+      const planAmounts = selectedPlan?.price || 0;
+      console.log("planAmount", planAmounts);
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+        planAmount: planAmounts,
+        referralCode: referralBy,
+      }));
+      console.log("formData.planAmount", formData.planAmount);
+    } else {
       const updatedFormData = {
         ...formData,
         [name]: value,
-        planAmount: planAmount,
       };
-      console.log('totalItem', updatedFormData.totalItem)
-      updatedFormData.totalAmount = planAmount * formData.totalItem,
-      setFormData(updatedFormData)
-      console.log('formData w', formData)
-    // }
-         
+
+      (updatedFormData.totalAmount =
+        formData.planAmount * updatedFormData.totalItem),
+        console.log("totalItem", updatedFormData.totalItem);
+      console.log("totalAmount", updatedFormData.totalAmount);
+      setAmount(updatedFormData.totalAmount);
+      console.log("updatedformData", updatedFormData);
+      setFormData(updatedFormData);
+    }
   };
 
-  const initialState: any = {
-    userName: "",
-    password: "",
-    // mobileNumber: undefined as number | undefined,
-    mobileNumber: null,
-    planAmount: "",
-    planItemName: "",
-    totalAmount: 0,
-    totalItem: 0,
-    cartAmount: "0",
-    paymentStatus: "0",
-    referralCode: `${referralBy}`,
-  };
-
-  const [formData, setFormData] = useState<SignUpFormData>(initialState);
+  const [formData, setFormData] =
+    useState<SignUpFormData>(registerInitialState);
   const [formErrors, setFormErrors] = useState<{ [key: string]: boolean }>({});
-  const [openPopup, setOpenPopup] = useState(false);
   const [amount, setAmount] = useState<number>(0);
-  const [mobileNumber] = useState<number | null >(null);
-  const [password ] = useState<string>("");
+  // const [mobileNumber] = useState<number | null>(null);
+  // const [password] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [userCreated, setUserCreated] = useState(false);
   const [isPaymentButtonDisabled, setPaymentButtonDisabled] = useState(
     localStorage.getItem("isButtonDisabled") === "true"
   );
   const [plans, setPlans] = useState<Plan[]>([]);
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   const auth: any = useAppSelector(selectAuth);
 
   useEffect(() => {
@@ -103,7 +98,7 @@ const Register = () => {
         const data = await response.json();
         console.log("data", data.productData);
         if (data) {
-          setPlans(data.productData); 
+          setPlans(data.productData);
         }
       } catch (error) {
         console.error("Error", error);
@@ -154,16 +149,16 @@ const Register = () => {
       const url = "/user/signup";
       const response: any = await RegisterUserApi(url, formData);
       const jsonData = await response.json();
-      console.log(jsonData);
-      setAmount(formData.totalAmount);
+      console.log(amount);
       if (jsonData.status == 201 || jsonData.status == 200) {
-        const url = "/user/login";
+        // const url = "/user/login";
         setPaymentButtonDisabled(false);
+        setAmount(formData.totalAmount);
         setUserCreated(true);
-        dispatch(login({ mobileNumber, password, url }));
+        // dispatch(login({ mobileNumber, password, url }));
+        openModal();
       } else if (jsonData.status == 409) {
         console.log("user already exits with this mobile number");
-        setOpenPopup(true);
       }
       console.log("formData", formData);
     } catch (error) {
@@ -178,8 +173,6 @@ const Register = () => {
     }
     return <Navigate to="/dashboard" replace />;
   }
-
-
 
   // async function displayRazorpay(amount: number) {
   //   const res = await loadScript(
@@ -216,33 +209,24 @@ const Register = () => {
 
   return (
     <>
+      <AppAppBar />
       <Container
+        component="main"
         sx={{
-          background: "#f5f5f5", // Average color of the background image.
-          backgroundPosition: "center",
-          marginBottom: "20px",
-          borderRadius: "5px", // Add a border radius to the container
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          margin: "10px",
-          width: "60%",
-          boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-          "@media (min-width: 200px)": {
-            maxWidth: "100%",
-          },
+          padding: "0px",
+          width: '50%',
           "@media (min-width: 200px) and (max-width: 560px)": {
-            padding: "10px",
             width: "99%",
             margin: "auto",
+            overflow: 'hidden',
+            boxShadow: "none",
           },
-          // Ensure the container takes the full height of the viewport
         }}
       >
         <Box
           sx={{
             padding: "10px",
+
             "& .MuiTextField-root": { m: 1, width: "25ch" },
             "@media (min-width: 200px) and (max-width: 560px)": {
               padding: "10px",
@@ -267,45 +251,46 @@ const Register = () => {
             }}
           >
             <Typography
-              component="div"
+              component="h1"
+              variant="h4"
               sx={{
-                flexGrow: 1,
-                fontSize: 25,
-                margin: "10px 10px",
-                "@media (min-width: 200px) and (max-width: 560px)": {
-                  fontSize: 18,
-                  alignText: "center",
+                marginBottom: "30px",
+                marginTop: '20px',
+                "@media (min-width: 200px) and (max-width: 600px)": {
+                  fontSize: 24,
+                marginTop: '10px',
+
                 },
               }}
             >
-              Add New User
+              Sign Up
             </Typography>
-            
+
             {addUserFormField.map((item: any, index: number) => {
               const { label, name, type, inputProps, sx, InputLabelProps } =
                 item;
               const error = formErrors[name] || false;
-                 
+
               if (type === "select") {
                 return (
                   <>
-                  <FormControl sx={{ width: "25ch", margin: "8px" }}>
-                  <InputLabel>{`plan`}</InputLabel>
-                <Select
-                sx={{ color: '#33333'}}
-                  value={formData.planId}
-                  name="planItemName"
-                  // onChange={(e: any) => handlePlanChange(e)}
-                  onChange={(event) =>
-                    handleChange('planItemName', event.target.value)
-                  }
-                >
-                  {plans.map((plan) => (
-                    <MenuItem key={plan._id} value={plan._id}>
-                      {plan.productName} of ₹{plan.price}
-                    </MenuItem>
-                  ))}
-                </Select> 
+                    <FormControl sx={{ width: "25ch", margin: "8px" }}>
+                      <InputLabel>{`plan`}</InputLabel>
+                      <Select
+                        sx={{ color: "#33333" }}
+                        value={formData.planId}
+                        name="planItemName"
+                        // onChange={(e: any) => handlePlanChange(e)}
+                        onChange={(event) =>
+                          handleChange("planItemName", event.target.value)
+                        }
+                      >
+                        {plans.map((plan) => (
+                          <MenuItem key={plan._id} value={plan._id}>
+                            {plan.productName} of ₹{plan.price}
+                          </MenuItem>
+                        ))}
+                      </Select>
                     </FormControl>
                     <FormControl
                       key={index}
@@ -343,9 +328,7 @@ const Register = () => {
                           }
                         )}
                       </Select>
-                
                     </FormControl>
-                    
                   </>
                 );
               }
@@ -371,16 +354,27 @@ const Register = () => {
                 />
               );
             })}
-            
+
             <Box className="footer-btn" sx={{ padding: "0px 8px" }}>
-              <Stack direction={"row"}>
+              <Stack
+                direction={"row"}
+                sx={{
+                  "@media (max-width: 560px)": {
+                    flexDirection: "column",
+                    width: "25ch",
+                  },
+                  "@media (min-width: 561px)": {
+                    "& > :not(:last-child)": {
+                      marginRight: "10px", // Add margin between buttons on larger screens
+                    },
+                  },
+                }}
+              >
                 <Button
                   variant="contained"
-                  color="success"
                   type="submit"
                   sx={{
                     margin: "8px 0px",
-                    width: "90px",
                     textTransform: "capitalize",
                   }}
                   onClick={handleSubmit}
@@ -391,35 +385,27 @@ const Register = () => {
                   variant="contained"
                   type="reset"
                   sx={{
-                    margin: "8px 20px",
+                    margin: "8px 0px",
                     textTransform: "capitalize",
-                    width: "90px",
                     color: "black",
                     backgroundColor: "#F88379",
                     "&:hover": {
                       backgroundColor: "#FA8072",
                     },
                   }}
-                  onClick={() => setFormData(initialState)}
+                  onClick={() => setFormData(registerInitialState)}
                 >
                   Reset
                 </Button>
-                <Popup
-                  open={openPopup}
-                  message="Data Added Successfully"
-                  onClose={() => setOpenPopup(false)}
-                  color="green"
-                />
+
                 {userCreated && (
                   <>
                     <Button
                       onClick={handlePaymentButtonClick}
                       variant="contained"
-                      color="success"
                       type="submit"
                       sx={{
                         margin: "8px 0px",
-                        width: "150px",
                         textTransform: "capitalize",
                       }}
                       disabled={isPaymentButtonDisabled}
@@ -431,8 +417,7 @@ const Register = () => {
                       color="success"
                       type="submit"
                       sx={{
-                        margin: "8px 20px",
-                        width: "160px",
+                        margin: "8px 0px",
                         backgroundColor: "#F88379",
                         textTransform: "capitalize",
                         "&:hover": {

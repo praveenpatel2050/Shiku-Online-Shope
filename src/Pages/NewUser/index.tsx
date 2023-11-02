@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { useEffect, useState } from "react";
 import {
   Box,
@@ -13,67 +12,38 @@ import {
   Container,
 } from "@mui/material";
 import Typography from "../../_component/ui/Typography";
-import { addUserFormField } from "./constant";
+import { addUserFormField, Plan, initialState } from "./constant";
 import { FormData } from "./constant";
 import { addUserApi } from "../../Api/user";
 import Popup from "../../_component/ui/popup";
 import QRCodePopup from "../../_component/ui/qrCodePopup";
 import { productListApi } from "../../Api/plan";
 
-const initialState: any = {
-  userName: "",
-  password: "",
-  mobileNumber: "",
-  planAmount: 0,
-  planItemName: "",
-  totalAmount: 0,
-  totalItem: 0,
-  cartAmount: "0",
-  paymentStatus: "0",
-};
-export interface Plan {
-  _id: string;
-  productName: string;
-  imageUrl: string;
-  price: number;
-  mrp: string;
-  status: boolean;
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
-}
-
 const NewUser = () => {
-
   const handleChange = (name: keyof FormData, value: string) => {
     if (name === "planItemName") {
       const selectedPlan = plans.find((plan) => plan._id === value);
-      console.log('selectedPlan', selectedPlan)
+      console.log("selectedPlan", selectedPlan);
       const planAmounts = selectedPlan?.price || 0;
-      console.log('planAmount', planAmounts);
+      console.log("planAmount", planAmounts);
       setFormData((prevData) => ({
         ...prevData,
         [name]: value,
         planAmount: planAmounts,
       }));
-      console.log("formData.planAmount", formData.planAmount)
-     } else {
-     
+      console.log("formData.planAmount", formData.planAmount);
+    } else {
       const updatedFormData = {
         ...formData,
         [name]: value,
       };
-      
-      // console.log("formData.totalAmount", formData.planAmount * formData.totalItem)
-      // console.log("formData.totalItem", formData.totalItem)
-      updatedFormData.totalAmount = formData.planAmount * updatedFormData.totalItem,
-      console.log('totalItem', updatedFormData.totalItem)
-      console.log('updatedformData', updatedFormData)
-      setFormData(updatedFormData)
-      
-   
-    }
 
+      (updatedFormData.totalAmount =
+        formData.planAmount * updatedFormData.totalItem),
+        console.log("totalItem", updatedFormData.totalItem);
+      console.log("updatedformData", updatedFormData);
+      setFormData(updatedFormData);
+    }
   };
 
   // scraping
@@ -97,7 +67,7 @@ const NewUser = () => {
         const data = await response.json();
         console.log("data", data.productData);
         if (data) {
-          setPlans(data.productData); 
+          setPlans(data.productData);
         }
       } catch (error) {
         console.error("Error", error);
@@ -149,11 +119,11 @@ const NewUser = () => {
       const response: any = await addUserApi(url, formData);
       console.log("amount", amount);
       setAmount(formData.totalAmount);
-       if (response) {
+      if (response) {
         openModal();
         setPaymentButtonDisabled(false);
         setUserCreated(true);
-       }
+      }
       // setFormData(response);
       console.log("formData", formData);
     } catch (error) {
@@ -164,17 +134,16 @@ const NewUser = () => {
   return (
     <>
       <Container
-        sx={{
-          background: "#f5f5f5", // Average color of the background image.
+        sx={{// Average color of the background image.
           backgroundPosition: "center",
           marginBottom: "20px",
-          borderRadius: "5px", // Add a border radius to the container
+          borderRadius: "20px", 
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          margin: "10px",
-          width: "60%",
+          marginTop: '30px',
+          width: "50%",
           boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
           "@media (min-width: 200px)": {
             maxWidth: "100%",
@@ -183,8 +152,9 @@ const NewUser = () => {
             padding: "10px",
             width: "99%",
             margin: "auto",
+            overflow: 'hidden',
+            boxShadow: "none",
           },
-          // Ensure the container takes the full height of the viewport
         }}
       >
         <Box
@@ -208,7 +178,6 @@ const NewUser = () => {
                 alignItems: "left",
                 maxWidth: "400px",
                 width: "100%",
-                padding: "20px",
                 borderRadius: "5px",
               },
             }}
@@ -227,32 +196,32 @@ const NewUser = () => {
             >
               Add New User
             </Typography>
-            
+
             {addUserFormField.map((item: any, index: number) => {
               const { label, name, type, inputProps, sx, InputLabelProps } =
                 item;
               const error = formErrors[name] || false;
-                 
+
               if (type === "select") {
                 return (
                   <>
-                  <FormControl sx={{ width: "25ch", margin: "8px" }}>
-                  <InputLabel>{`plan`}</InputLabel>
-                <Select
-                sx={{ color: '#33333'}}
-                  value={formData.planId}
-                  name="planItemName"
-                  // onChange={(e: any) => handlePlanChange(e)}
-                  onChange={(event) =>
-                    handleChange('planItemName', event.target.value)
-                  }
-                >
-                  {plans.map((plan) => (
-                    <MenuItem key={plan._id} value={plan._id}>
-                      {plan.productName} of ₹{plan.price}
-                    </MenuItem>
-                  ))}
-                </Select> 
+                    <FormControl sx={{ width: "25ch", margin: "8px" }}>
+                      <InputLabel>{`plan`}</InputLabel>
+                      <Select
+                        sx={{ color: "#33333" }}
+                        value={formData.planId}
+                        name="planItemName"
+                        // onChange={(e: any) => handlePlanChange(e)}
+                        onChange={(event) =>
+                          handleChange("planItemName", event.target.value)
+                        }
+                      >
+                        {plans.map((plan) => (
+                          <MenuItem key={plan._id} value={plan._id}>
+                            {plan.productName} of ₹{plan.price}
+                          </MenuItem>
+                        ))}
+                      </Select>
                     </FormControl>
                     <FormControl
                       key={index}
@@ -290,9 +259,7 @@ const NewUser = () => {
                           }
                         )}
                       </Select>
-                
                     </FormControl>
-                    
                   </>
                 );
               }
@@ -318,86 +285,95 @@ const NewUser = () => {
                 />
               );
             })}
-            
-            <Box className="footer-btn" sx={{ padding: "0px 8px" }}>
-              <Stack direction={"row"}>
-                <Button
-                  variant="contained"
-                  color="success"
-                  type="submit"
-                  sx={{
-                    margin: "8px 0px",
-                    width: "90px",
-                    textTransform: "capitalize",
-                  }}
-                  onClick={handleSubmit}
-                >
-                  Submit
-                </Button>
-                <Button
-                  variant="contained"
-                  type="reset"
-                  sx={{
-                    margin: "8px 20px",
-                    textTransform: "capitalize",
-                    width: "90px",
-                    color: "black",
-                    backgroundColor: "#F88379",
-                    "&:hover": {
-                      backgroundColor: "#FA8072",
-                    },
-                  }}
-                  onClick={() => setFormData(initialState)}
-                >
-                  Reset
-                </Button>
-                <Popup
+
+<Box className="footer-btn" sx={{ padding: "0px 8px" }}>
+<Stack
+    direction={"row"}
+    sx={{
+      "@media (max-width: 560px)": {
+        flexDirection: "column",
+        width: '25ch'
+      },
+      "@media (min-width: 561px)": {
+        "& > :not(:last-child)": {
+          marginRight: "10px", // Add margin between buttons on larger screens
+        },
+      },
+    }}
+  >
+    <Button
+      variant="contained"
+      type="submit"
+      sx={{
+        margin: "8px 0px",
+        textTransform: "capitalize",
+      }}
+      onClick={handleSubmit}
+    >
+      Submit
+    </Button>
+    <Button
+      variant="contained"
+      type="reset"
+      sx={{
+        margin: "8px 0px",
+        textTransform: "capitalize",
+        color: "black",
+        backgroundColor: "#F88379",
+        "&:hover": {
+          backgroundColor: "#FA8072",
+        },
+      }}
+      onClick={() => setFormData(initialState)}
+    >
+      Reset
+    </Button>
+
+    {userCreated && (
+      <>
+        <Button
+          onClick={handlePaymentButtonClick}
+          variant="contained"
+          type="submit"
+          sx={{
+            margin: "8px 0px",
+            textTransform: "capitalize"
+          }}
+          disabled={isPaymentButtonDisabled}
+        >
+          Payment Done
+        </Button>
+        <Button
+          variant="contained"
+          color="success"
+          type="submit"
+          sx={{
+            margin: "8px 0px",
+            backgroundColor: "#F88379",
+            textTransform: "capitalize",
+            "&:hover": {
+              backgroundColor: "#FA8072",
+            },
+          }}
+          onClick={openModal}
+        >
+          Retry Payment
+        </Button>
+      </>
+    )}
+  </Stack>
+</Box>
+
+          </Box>
+        </Box>
+      </Container>
+      {isModalOpen && <QRCodePopup amount={amount} closeModal={closeModal} />}
+      <Popup
                   open={openPopup}
                   message="Data Added Successfully"
                   onClose={() => setOpenPopup(false)}
                   color="green"
                 />
-                {userCreated && (
-                  <>
-                    <Button
-                      onClick={handlePaymentButtonClick}
-                      variant="contained"
-                      color="success"
-                      type="submit"
-                      sx={{
-                        margin: "8px 0px",
-                        width: "150px",
-                        textTransform: "capitalize",
-                      }}
-                      disabled={isPaymentButtonDisabled}
-                    >
-                      Payment Done
-                    </Button>
-                    <Button
-                      variant="contained"
-                      color="success"
-                      type="submit"
-                      sx={{
-                        margin: "8px 20px",
-                        width: "160px",
-                        backgroundColor: "#F88379",
-                        textTransform: "capitalize",
-                        "&:hover": {
-                          backgroundColor: "#FA8072",
-                        },
-                      }}
-                      onClick={openModal}
-                    >
-                      Retry Payment
-                    </Button>
-                  </>
-                )}
-              </Stack>
-            </Box>
-          </Box>
-        </Box>
-      </Container>
-      {isModalOpen && <QRCodePopup amount={amount} closeModal={closeModal} />}
     </>
   );
 };
